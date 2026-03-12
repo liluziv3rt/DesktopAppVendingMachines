@@ -15,21 +15,21 @@ public partial class User
 
     public string Patronymic { get; set; } = null!;
 
-    public bool IsManager { get; set; }
+    public bool? IsManager { get; set; }
 
-    public bool IsEngineer { get; set; }
+    public bool? IsEngineer { get; set; }
 
-    public string Phone { get; set; } = null!;
+    public string? Phone { get; set; }
 
-    public bool IsOperator { get; set; }
+    public bool? IsOperator { get; set; }
 
-    public int IdRole { get; set; }
+    public int? IdRole { get; set; }
 
-    public string Images { get; set; } = null!;
+    public string? Images { get; set; }
 
-    public string? Password { get; set; }
+    public string Password { get; set; } = null!;
 
-    public virtual Role IdRoleNavigation { get; set; } = null!;
+    public virtual Role? IdRoleNavigation { get; set; }
 
     public virtual ICollection<Maintenance> Maintenances { get; set; } = new List<Maintenance>();
 

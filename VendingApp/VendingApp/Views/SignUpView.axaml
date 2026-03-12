@@ -2,10 +2,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="using:VendingMachineApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="VendingApp.SignUpView"
+             x:Class="VendingMachineApp.Views.SignUpView"
              xmlns:vm="using:VendingApp.ViewModels"
-             x:DataType="vm:SignUpViewModel">
-    
-    
+             x:DataType="viewmodels:SignUpViewModel">
+
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+        <TextBlock Text="Регистрация" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   TextAlignment="Center" 
+                   Margin="0 0 0 20"/>
+
+        <TextBlock Text="Email" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Email}" Watermark="Введите email"/>
+
+        <TextBlock Text="Surname" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Surname}" Watermark="Введите фамилию"/>
+
+        <TextBlock Text="Firstname" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Firstname}" Watermark="Введите имя"/>
+
+        <TextBlock Text="Patronymic" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Patronymic}" Watermark="Введите отчество"/>
+
+        <TextBlock Text="Пароль" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Password}" 
+                 PasswordChar="*" 
+                 Watermark="Введите пароль"/>
+
+        <TextBlock Text="Подтверждение пароля" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding ConfirmPassword}" 
+                 PasswordChar="*" 
+                 Watermark="Подтвердите пароль"/>
+
+        <Button Content="Зарегистрироваться" 
+                HorizontalAlignment="Center" 
+                Margin="0 20 0 0" 
+                Command="{Binding Register}"/>
+
+        <Button Content="Назад к авторизации" 
+                HorizontalAlignment="Center" 
+                Margin="0 10 0 0" 
+                Command="{Binding GoToSignIn}"
+                Background="Gray"/>
+
+        <TextBlock Text="{Binding Message}" 
+                   Foreground="Red" 
+                   TextWrapping="Wrap"
+                   Margin="0 10 0 0"/>
+    </StackPanel>
 </UserControl>

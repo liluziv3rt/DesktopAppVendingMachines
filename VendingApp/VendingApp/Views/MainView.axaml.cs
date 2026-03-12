@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace VendingApp.Views;
+namespace VendingMachineApp.Views;
 
 public partial class MainView : UserControl
 {

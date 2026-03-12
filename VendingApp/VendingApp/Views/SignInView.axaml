@@ -3,18 +3,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="VendingApp.Views.SignInView"
-             xmlns:vm="using:VendingApp.ViewModels"
+             x:Class="VendingMachineApp.Views.SignInView"
+             xmlns:vm="using:VendingMachineApp.ViewModels"
              x:DataType="vm:SignInViewModel">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-				<TextBlock Text="�����" TextAlignment="Center"/>
-                <TextBox Text="{Binding Login}"/>
 
-                <TextBlock Text="������" TextAlignment="Center" Margin="0 10 0 0"/>
-                <TextBox Text="{Binding Password}" PasswordChar="*"/>
+              <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+        <TextBlock Text="Авторизация" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   TextAlignment="Center" 
+                   Margin="0 0 0 20"/>
 
-                <Button Content="�����" HorizontalAlignment="Center" Margin="0 10 0 0" Command="{Binding Enter}"/>
+        <TextBlock Text="Логин (Email)" Margin="0 5 0 0"/>
+        <TextBox Text="{Binding Email}" Watermark="Введите email"/>
 
-                <TextBlock Text="{Binding Message}" Foreground="Red"/>
-            </StackPanel>
+        <TextBlock Text="Пароль" Margin="0 10 0 0"/>
+        <TextBox Text="{Binding Password}" 
+                 PasswordChar="*" 
+                 Watermark="Введите пароль"/>
+
+        <Button Content="Войти" 
+                HorizontalAlignment="Center" 
+                Margin="0 20 0 0" 
+                Command="{Binding EnterCommand}"/>
+
+        <Button Content="Регистрация" 
+                HorizontalAlignment="Center" 
+                Margin="0 10 0 0" 
+                Command="{Binding GoToSignUpCommand}"
+                Background="LightBlue"/>
+
+        <TextBlock Text="{Binding Message}" 
+                   Foreground="Red" 
+                   TextWrapping="Wrap"
+                   Margin="0 10 0 0"/>
+    </StackPanel>
+            
 </UserControl>

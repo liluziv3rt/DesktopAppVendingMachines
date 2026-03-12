@@ -7,27 +7,39 @@ using System.Threading.Tasks;
 using Tmds.DBus.Protocol;
 using VendingApp.Models;
 
-namespace VendingApp.ViewModels
+namespace VendingMachineApp.ViewModels
 {
     internal partial class SignUpViewModel : ViewModelBase
     {
         [ObservableProperty]
-        private string? email;
+        private string email;
 
         [ObservableProperty]
-        private string? password;
+        private string password;
 
         [ObservableProperty]
-        private string? confirmPassword;
+        private string confirmPassword;
 
         [ObservableProperty]
-        private string? message;
+        private string message;
+
+        [ObservableProperty]
+        private string surname;
+
+        [ObservableProperty]
+        private string firstname;
+
+        [ObservableProperty]
+        private string patronymic;
+
 
         public void Register()
         {
-            // Валидация полей
             if (string.IsNullOrWhiteSpace(Email) ||
-                string.IsNullOrWhiteSpace(Password))
+                string.IsNullOrWhiteSpace(Password) ||
+                string.IsNullOrWhiteSpace(Surname) ||
+                string.IsNullOrWhiteSpace(Firstname) ||
+                string.IsNullOrWhiteSpace(Patronymic))
             {
                 Message = "Все поля должны быть заполнены";
                 return;
@@ -39,7 +51,6 @@ namespace VendingApp.ViewModels
                 return;
             }
 
-            // Проверка на существующего пользователя
             var existingUser = db.Users.FirstOrDefault(x => x.Email == Email);
             if (existingUser != null)
             {
@@ -47,11 +58,13 @@ namespace VendingApp.ViewModels
                 return;
             }
 
-            // Создание нового пользователя
             var newUser = new User
             {
                 Email = Email,
-                Password = Password // В реальном проекте пароль должен хешироваться!
+                Password = Password,
+                Name = Firstname,
+                Family = Surname,
+                Patronymic = Patronymic,
             };
 
             db.Users.Add(newUser);
@@ -66,4 +79,5 @@ namespace VendingApp.ViewModels
             MainWindowViewModel.Instance.PageSwitcher = new SignInViewModel();
         }
     }
+
 }

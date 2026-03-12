@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace VendingApp.Views
+namespace VendingMachineApp.Views
 {
     public partial class MainWindow : Window
     {

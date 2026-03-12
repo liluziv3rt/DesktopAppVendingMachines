@@ -5,7 +5,8 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using VendingApp.ViewModels;
-using VendingApp.Views;
+using VendingMachineApp.ViewModels;
+using VendingMachineApp.Views;
 
 namespace VendingApp
 {

@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using VendingApp.ViewModels;
+using VendingMachineApp.ViewModels;
 
 namespace VendingApp
 {
