@@ -45,7 +45,7 @@ namespace VendingApp.ViewModels
         private string networkStatus;
 
         [ObservableProperty]
-        private string userName; // Имя текущего пользователя
+        private string userName; 
 
         public MainViewModel()
         {
