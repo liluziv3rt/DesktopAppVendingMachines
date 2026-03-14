@@ -8,40 +8,40 @@
              x:DataType="vm:SignUpViewModel">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
-        <TextBlock Text="Ðåãèñòðàöèÿ" 
+        <TextBlock Text="Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ" 
                    FontSize="24" 
                    FontWeight="Bold" 
                    TextAlignment="Center" 
                    Margin="0 0 0 20"/>
 
         <TextBlock Text="Email" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Email}" Watermark="Ââåäèòå email"/>
+        <TextBox Text="{Binding Email}" Watermark="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ email"/>
 
         <TextBlock Text="Surname" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Surname}" Watermark="Ââåäèòå ôàìèëèþ"/>
+        <TextBox Text="{Binding Surname}" Watermark="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ„Ð°Ð¼Ð¸Ð»Ð¸ÑŽ"/>
 
         <TextBlock Text="Firstname" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Firstname}" Watermark="Ââåäèòå èìÿ"/>
+        <TextBox Text="{Binding Firstname}" Watermark="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ"/>
 
         <TextBlock Text="Patronymic" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Patronymic}" Watermark="Ââåäèòå îò÷åñòâî"/>
+        <TextBox Text="{Binding Patronymic}" Watermark="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‚Ñ‡ÐµÑÑ‚Ð²Ð¾"/>
 
-        <TextBlock Text="Ïàðîëü" Margin="0 10 0 0"/>
+        <TextBlock Text="ÐŸÐ°Ñ€Ð¾Ð»ÑŒ" Margin="0 10 0 0"/>
         <TextBox Text="{Binding Password}" 
                  PasswordChar="*" 
-                 Watermark="Ââåäèòå ïàðîëü"/>
+                 Watermark="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ"/>
 
-        <TextBlock Text="Ïîäòâåðæäåíèå ïàðîëÿ" Margin="0 10 0 0"/>
+        <TextBlock Text="ÐŸÐ¾Ð´Ñ‚Ð²ÐµÑ€Ð¶Ð´ÐµÐ½Ð¸Ðµ Ð¿Ð°Ñ€Ð¾Ð»Ñ" Margin="0 10 0 0"/>
         <TextBox Text="{Binding ConfirmPassword}" 
                  PasswordChar="*" 
-                 Watermark="Ïîäòâåðäèòå ïàðîëü"/>
+                 Watermark="ÐŸÐ¾Ð´Ñ‚Ð²ÐµÑ€Ð´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ"/>
 
-        <Button Content="Çàðåãèñòðèðîâàòüñÿ" 
+        <Button Content="Ð—Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒÑÑ" 
                 HorizontalAlignment="Center" 
                 Margin="0 20 0 0" 
                 Command="{Binding Register}"/>
 
-        <Button Content="Íàçàä ê àâòîðèçàöèè" 
+        <Button Content="ÐÐ°Ð·Ð°Ð´ Ðº Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸" 
                 HorizontalAlignment="Center" 
                 Margin="0 10 0 0" 
                 Command="{Binding GoToSignIn}"

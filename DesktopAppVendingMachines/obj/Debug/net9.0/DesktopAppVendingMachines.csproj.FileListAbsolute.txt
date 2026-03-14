@@ -30,6 +30,9 @@ C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Avalonia
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\CommunityToolkit.Mvvm.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\HarfBuzzSharp.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Humanizer.dll
+C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\LiveChartsCore.dll
+C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\LiveChartsCore.SkiaSharpView.dll
+C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\LiveChartsCore.SkiaSharpView.Avalonia.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\MicroCom.Runtime.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Microsoft.Build.Locator.dll
@@ -57,6 +60,7 @@ C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Mono.Tex
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Npgsql.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\SkiaSharp.dll
+C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\SkiaSharp.HarfBuzz.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\System.CodeDom.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\System.Composition.AttributedModel.dll
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\System.Composition.Convention.dll
@@ -171,7 +175,3 @@ C:\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\refint\D
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\DesktopAppVendingMachines.pdb
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\DesktopAppVendingMachines.genruntimeconfig.cache
 C:\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\ref\DesktopAppVendingMachines.dll
-C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\LiveChartsCore.dll
-C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\LiveChartsCore.SkiaSharpView.dll
-C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\LiveChartsCore.SkiaSharpView.Avalonia.dll
-C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\SkiaSharp.HarfBuzz.dll

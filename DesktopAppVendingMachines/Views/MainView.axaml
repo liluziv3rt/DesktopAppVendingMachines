@@ -1,4 +1,4 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -23,7 +23,6 @@
                 <!-- Блок пользователя -->
                 <Border Background="#2C3E50" CornerRadius="12" Padding="20">
                     <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, *">
-                        <!-- Фото пользователя (круглая рамка) -->
                         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
                                 Width="60" Height="60" CornerRadius="30" 
                                 Background="#3498DB" Margin="0 0 15 0"
@@ -32,16 +31,12 @@
                                    Width="60" Height="60" 
                                    Stretch="UniformToFill"/>
                         </Border>
-                        
-                        <!-- Имя пользователя -->
                         <TextBlock Grid.Row="0" Grid.Column="1" 
                                    Text="{Binding UserName}" 
                                    Foreground="White" 
                                    FontSize="18" 
                                    FontWeight="SemiBold"
                                    VerticalAlignment="Bottom"/>
-                        
-                        <!-- Роль (можно заменить на реальные данные) -->
                         <TextBlock Grid.Row="1" Grid.Column="1" 
                                    Text="Администратор" 
                                    Foreground="#BDC3C7" 
@@ -60,7 +55,6 @@
                             Padding="20 12"
                             CornerRadius="8"
                             BorderThickness="0"/>
-                    
                     <Button Content="📊 Монитор ТА" 
                             Background="Transparent" 
                             Foreground="#BDC3C7" 
@@ -69,7 +63,6 @@
                             Padding="20 12"
                             CornerRadius="8"
                             BorderThickness="0"/>
-                    
                     <Button Content="📈 Детальные отчеты" 
                             Background="Transparent" 
                             Foreground="#BDC3C7" 
@@ -78,7 +71,6 @@
                             Padding="20 12"
                             CornerRadius="8"
                             BorderThickness="0"/>
-                    
                     <Button Content="📦 Учет ТМЦ" 
                             Background="Transparent" 
                             Foreground="#BDC3C7" 
@@ -87,7 +79,6 @@
                             Padding="20 12"
                             CornerRadius="8"
                             BorderThickness="0"/>
-                    
                     <Button Content="⚙️ Администрирование" 
                             Background="Transparent" 
                             Foreground="#BDC3C7" 
@@ -111,7 +102,7 @@
             </StackPanel>
         </Border>
 
-        <!-- Основная область контента -->
+        <!-- Основная область -->
         <ScrollViewer Grid.Column="1" Background="#F5F7FA">
             <StackPanel Margin="30" Spacing="30">
                 <!-- Заголовок -->
@@ -120,73 +111,49 @@
                            FontWeight="SemiBold" 
                            Foreground="#2C3E50"/>
 
-                <!-- Блок эффективности сети -->
-<Border Background="White" 
-        CornerRadius="16" 
-        Padding="30"
-        BoxShadow="0 4 12 #14000000">
+                <!-- Блок эффективности сети (два сектора) -->
+                <Border Background="White" 
+                        CornerRadius="16" 
+                        Padding="30"
+                        BoxShadow="0 4 12 #14000000">
                     <StackPanel>
                         <TextBlock Text="Эффективность сети" 
                                    FontSize="22" 
                                    FontWeight="Bold" 
                                    Foreground="#2C3E50"
                                    Margin="0 0 0 20"/>
-
-                        <Grid ColumnDefinitions="Auto, *">
-                            <!-- Круг с общим количеством -->
-                            <Border Grid.Column="0" 
-                                    Width="220" Height="220" 
-                                    Background="#E0E0E0"
-                                    CornerRadius="110"
-                                    Margin="0 0 40 0">
-                                <Border Background="White" 
-                                        Width="130" Height="130" 
-                                        CornerRadius="65"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
-                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding TotalMachinesCount}" 
-                                                   FontSize="32" 
-                                                   FontWeight="Bold" 
-                                                   Foreground="#2C3E50"
-                                                   HorizontalAlignment="Center"/>
-                                        <TextBlock Text="всего ТА" 
-                                                   FontSize="13" 
-                                                   Foreground="#7F8C8D"
-                                                   HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Border>
-                            </Border>
-
-                            <!-- Легенда с процентами (исправленный StringFormat) -->
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="15">
-                                <Grid ColumnDefinitions="24, Auto, *">
-                                    <Border Grid.Column="0" Width="24" Height="24" Background="#27AE60" CornerRadius="6"/>
-                                    <TextBlock Grid.Column="1" Text="Работают" Margin="12 0 0 0" Foreground="#2C3E50" FontSize="16" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="2" Text="{Binding WorkingMachinesPercent, StringFormat={}{0}%}" 
-                                               Foreground="#2C3E50" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                </Grid>
-                                <Grid ColumnDefinitions="24, Auto, *">
-                                    <Border Grid.Column="0" Width="24" Height="24" Background="#F39C12" CornerRadius="6"/>
-                                    <TextBlock Grid.Column="1" Text="Обслуживаются" Margin="12 0 0 0" Foreground="#2C3E50" FontSize="16" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="2" Text="{Binding ServicingMachinesPercent, StringFormat={}{0}%}" 
-                                               Foreground="#2C3E50" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                </Grid>
-                                <Grid ColumnDefinitions="24, Auto, *">
-                                    <Border Grid.Column="0" Width="24" Height="24" Background="#E74C3C" CornerRadius="6"/>
-                                    <TextBlock Grid.Column="1" Text="Сломаны" Margin="12 0 0 0" Foreground="#2C3E50" FontSize="16" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="2" Text="{Binding BrokenMachinesPercent, StringFormat={}{0}%}" 
-                                               Foreground="#2C3E50" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                </Grid>
-                            </StackPanel>
-                        </Grid>
+                        <lvc:PieChart
+                            Series="{Binding EfficiencySeries}"
+                            Height="250"
+                            TooltipPosition="Top"
+                            LegendPosition="Hidden"/>
                     </StackPanel>
                 </Border>
 
+                <!-- Блок состояния сети (три сектора) -->
                 <Border Background="White" 
-        CornerRadius="16" 
-        Padding="30"
-        BoxShadow="0 4 12 #14000000">
+                        CornerRadius="16" 
+                        Padding="30"
+                        BoxShadow="0 4 12 #14000000">
+                    <StackPanel>
+                        <TextBlock Text="Состояние сети" 
+                                   FontSize="22" 
+                                   FontWeight="Bold" 
+                                   Foreground="#2C3E50"
+                                   Margin="0 0 0 20"/>
+                        <lvc:PieChart
+                            Series="{Binding StateSeries}"
+                            Height="250"
+                            TooltipPosition="Top"
+                            LegendPosition="Hidden"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Динамика продаж (график) -->
+                <Border Background="White" 
+                        CornerRadius="16" 
+                        Padding="30"
+                        BoxShadow="0 4 12 #14000000">
                     <StackPanel>
                         <TextBlock Text="Динамика продаж за последние 10 дней" 
                                    FontSize="22" 
@@ -197,7 +164,7 @@
                                    Foreground="#7F8C8D" 
                                    Margin="0 5 0 15"/>
 
-                        <!-- Кнопки переключения режимов -->
+                        <!-- Кнопки переключения -->
                         <Grid ColumnDefinitions="Auto, Auto, *" Margin="0 0 0 20">
                             <Button Grid.Column="0" 
                                     Content="По сумме" 
@@ -215,9 +182,8 @@
                                     Command="{Binding ShowQuantityCommand}"/>
                         </Grid>
 
-                        <!-- Сам график -->
                         <lvc:CartesianChart
-                            Series="{Binding Series}"
+                            Series="{Binding SalesSeries}"
                             XAxes="{Binding XAxes}"
                             Height="300"
                             TooltipPosition="Top"
@@ -227,16 +193,15 @@
 
                 <!-- Сводка (заглушка) -->
                 <Border Background="White" 
-        CornerRadius="16" 
-        Padding="30"
-        BoxShadow="0 4 12 #14000000">
+                        CornerRadius="16" 
+                        Padding="30"
+                        BoxShadow="0 4 12 #14000000">
                     <StackPanel>
                         <TextBlock Text="Сводка" 
                                    FontSize="22" 
                                    FontWeight="Bold" 
                                    Foreground="#2C3E50"
                                    Margin="0 0 0 20"/>
-                        
                         <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20">
                             <Border Background="#F8F9F9" CornerRadius="12" Padding="20">
                                 <StackPanel>
@@ -271,7 +236,6 @@
                                    FontWeight="Bold" 
                                    Foreground="#2C3E50"
                                    Margin="0 0 0 20"/>
-                        
                         <StackPanel Spacing="10">
                             <Border Background="#F0F7FF" CornerRadius="8" Padding="15">
                                 <TextBlock Text="• Терминалы КЗРи получают экзайнер от Cobra" Foreground="#2C3E50" FontSize="15"/>
