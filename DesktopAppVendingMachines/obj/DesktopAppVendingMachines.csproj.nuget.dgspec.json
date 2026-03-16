@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj": {}
+    "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj": {}
   },
   "projects": {
-    "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj": {
+    "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
+        "projectUniqueName": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
         "projectName": "DesktopAppVendingMachines",
-        "projectPath": "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
-        "packagesPath": "C:\\Users\\ГусевИА\\.nuget\\packages\\",
-        "outputPath": "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\obj\\",
+        "projectPath": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
+        "packagesPath": "C:\\Users\\Guslik\\.nuget\\packages\\",
+        "outputPath": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ГусевИА\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Guslik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -115,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

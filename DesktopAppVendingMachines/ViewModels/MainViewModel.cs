@@ -17,6 +17,12 @@ namespace DesktopAppVendingMachines.ViewModels
         private string userName;
 
         [ObservableProperty]
+        private string efficiencyPercent;
+
+        [ObservableProperty]
+        private string salesDateRange;
+
+        [ObservableProperty]
         private string userPhotoPath = "avares://DesktopAppVendingMachines/Assets/default-avatar.png";
 
         [ObservableProperty]
@@ -56,11 +62,11 @@ namespace DesktopAppVendingMachines.ViewModels
         {
             if (currentLogin != null)
             {
-                var fullName = $"{currentLogin.Family} {currentLogin.Patronymic}".Trim();
+                // Собираем ФИО - подставьте свои названия полей
+                var fullName = $"{currentLogin.Family} {currentLogin.Name} {currentLogin.Patronymic}".Trim();
                 if (string.IsNullOrWhiteSpace(fullName))
                     fullName = currentLogin.Email ?? "Пользователь";
                 UserName = fullName;
-                // если есть фото: UserPhotoPath = currentLogin.PhotoPath ?? ...
             }
             else
             {
@@ -69,156 +75,145 @@ namespace DesktopAppVendingMachines.ViewModels
         }
 
         private void LoadMachineStats()
-{
-    try
-    {
-        // Общее количество автоматов
-        totalMachinesCount = db.VendingMachines.Count();
-        System.Diagnostics.Debug.WriteLine($"=== Загрузка статистики ===");
-        System.Diagnostics.Debug.WriteLine($"Всего автоматов в БД: {totalMachinesCount}");
-
-        // Получаем все записи из dictionary с ключом "status"
-        var statusEntries = db.Dictionaries
-            .Where(d => d.Key == "status")
-            .Select(d => new { d.Id, d.Value })
-            .ToList();
-        System.Diagnostics.Debug.WriteLine($"Найдено записей в dictionary с key='status': {statusEntries.Count}");
-        foreach (var se in statusEntries)
-            System.Diagnostics.Debug.WriteLine($"  ID: {se.Id}, Value: '{se.Value}'");
-
-        // Если нет статусов, выходим
-        if (statusEntries.Count == 0)
         {
-            System.Diagnostics.Debug.WriteLine("ВНИМАНИЕ: нет статусов в dictionary!");
-            EfficiencySeries = Array.Empty<ISeries>();
-            StateSeries = Array.Empty<ISeries>();
-            return;
-        }
-
-        // Строим словарь ID -> значение
-        var statusIdMap = statusEntries.ToDictionary(s => s.Value, s => s.Id);
-        var statusIds = statusIdMap.Values.Select(id => (int?)id).ToList();
-
-        // Получаем все связи из machine_dictionary
-        var allLinks = db.MachineDictionaries
-            .Where(md => statusIds.Contains(md.IdValue))
-            .ToList();
-        System.Diagnostics.Debug.WriteLine($"Всего связей в machine_dictionary для этих статусов: {allLinks.Count}");
-
-        // Группируем по IdValue
-        var machineStatusCounts = allLinks
-            .GroupBy(md => md.IdValue)
-            .ToDictionary(g => g.Key, g => g.Count());
-
-        // Вспомогательная функция
-        int GetCount(string statusName)
-        {
-            if (statusIdMap.TryGetValue(statusName, out int id))
+            try
             {
-                int? nullableId = id;
-                if (machineStatusCounts.TryGetValue(nullableId, out int count))
-                    return count;
-                else
+                // Общее количество автоматов
+                totalMachinesCount = db.VendingMachines.Count();
+                System.Diagnostics.Debug.WriteLine($"=== Загрузка статистики ===");
+                System.Diagnostics.Debug.WriteLine($"Всего автоматов в БД: {totalMachinesCount}");
+
+                // Получаем все записи из dictionary с ключом "status"
+                var statusEntries = db.Dictionaries
+                    .Where(d => d.Key == "status")
+                    .Select(d => new { d.Id, d.Value })
+                    .ToList();
+                System.Diagnostics.Debug.WriteLine($"Найдено записей в dictionary с key='status': {statusEntries.Count}");
+                foreach (var se in statusEntries)
+                    System.Diagnostics.Debug.WriteLine($"  ID: {se.Id}, Value: '{se.Value}'");
+
+                // Если нет статусов, выходим
+                if (statusEntries.Count == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("ВНИМАНИЕ: нет статусов в dictionary!");
+                    EfficiencySeries = Array.Empty<ISeries>();
+                    StateSeries = Array.Empty<ISeries>();
+                    return;
+                }
+
+                // Строим словарь ID -> значение
+                var statusIdMap = statusEntries.ToDictionary(s => s.Value, s => s.Id);
+                var statusIds = statusIdMap.Values.Select(id => (int?)id).ToList();
+
+                // Получаем все связи из machine_dictionary
+                var allLinks = db.MachineDictionaries
+                    .Where(md => statusIds.Contains(md.IdValue))
+                    .ToList();
+                System.Diagnostics.Debug.WriteLine($"Всего связей в machine_dictionary для этих статусов: {allLinks.Count}");
+
+                // Группируем по IdValue
+                var machineStatusCounts = allLinks
+                    .GroupBy(md => md.IdValue)
+                    .ToDictionary(g => g.Key, g => g.Count());
+
+                // Вспомогательная функция
+                int GetCount(string statusName)
+                {
+                    if (statusIdMap.TryGetValue(statusName, out int id))
+                    {
+                        int? nullableId = id;
+                        if (machineStatusCounts.TryGetValue(nullableId, out int count))
+                            return count;
+                        else
+                            return 0;
+                    }
                     return 0;
-            }
-            return 0;
-        }
+                }
 
-        _workingCount = GetCount("Работает");
-        _servicingCount = GetCount("Обслуживается");
-        _brokenCount = GetCount("Сломан");
-        _totalMachines = totalMachinesCount;
+                _workingCount = GetCount("Работает");
+                _servicingCount = GetCount("Обслуживается");
+                _brokenCount = GetCount("Сломан");
+                _totalMachines = totalMachinesCount;
 
-        System.Diagnostics.Debug.WriteLine($"Подсчитано: Работает={_workingCount}, Обслуживается={_servicingCount}, Сломано={_brokenCount}");
-        System.Diagnostics.Debug.WriteLine($"Сумма статусов: {_workingCount + _servicingCount + _brokenCount} (должна равняться общему количеству автоматов, если у всех есть статус)");
+                System.Diagnostics.Debug.WriteLine($"Подсчитано: Работает={_workingCount}, Обслуживается={_servicingCount}, Сломано={_brokenCount}");
+                System.Diagnostics.Debug.WriteLine($"Сумма статусов: {_workingCount + _servicingCount + _brokenCount} (должна равняться общему количеству автоматов, если у всех есть статус)");
 
-        // Создаём серии
-        int nonWorking = _servicingCount + _brokenCount;
-        EfficiencySeries = new PieSeries<int>[]
-        {
-            new PieSeries<int>
-            {
-                Name = "Работают",
-                Values = new[] { _workingCount },
-                Fill = new SolidColorPaint(SKColor.Parse("#27AE60")),
-                DataLabelsSize = 14,
-                DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                DataLabelsFormatter = point =>
-                {
-                    int val = (int)point.Coordinate.PrimaryValue;
-                    double percent = (double)val / _totalMachines * 100;
-                    return $"{val} ({percent:F0}%)";
-                }
-            },
-            new PieSeries<int>
-            {
-                Name = "Не работают",
-                Values = new[] { nonWorking },
-                Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
-                DataLabelsSize = 14,
-                DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                DataLabelsFormatter = point =>
-                {
-                    int val = (int)point.Coordinate.PrimaryValue;
-                    double percent = (double)val / _totalMachines * 100;
-                    return $"{val} ({percent:F0}%)";
-                }
-            }
-        };
+                // Создаём серии
+                int nonWorking = _servicingCount + _brokenCount;
 
-        StateSeries = new PieSeries<int>[]
-        {
-            new PieSeries<int>
-            {
-                Name = "Работают",
-                Values = new[] { _workingCount },
-                Fill = new SolidColorPaint(SKColor.Parse("#27AE60")),
-                DataLabelsSize = 14,
-                DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                DataLabelsFormatter = point =>
+                double percent = _totalMachines == 0
+                    ? 0
+                    : (double)_workingCount / _totalMachines * 100;
+
+                EfficiencyPercent = $"{percent:F0}%";
+
+                EfficiencySeries = new ISeries[]
                 {
-                    int val = (int)point.Coordinate.PrimaryValue;
-                    double percent = (double)val / _totalMachines * 100;
-                    return $"{val} ({percent:F0}%)";
-                }
-            },
-            new PieSeries<int>
-            {
-                Name = "Обслуживаются",
-                Values = new[] { _servicingCount },
-                Fill = new SolidColorPaint(SKColor.Parse("#F39C12")),
-                DataLabelsSize = 14,
-                DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                DataLabelsFormatter = point =>
-                {
-                    int val = (int)point.Coordinate.PrimaryValue;
-                    double percent = (double)val / _totalMachines * 100;
-                    return $"{val} ({percent:F0}%)";
-                }
-            },
-            new PieSeries<int>
-            {
-                Name = "Сломаны",
-                Values = new[] { _brokenCount },
-                Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
-                DataLabelsSize = 14,
-                DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                DataLabelsFormatter = point =>
-                {
-                    int val = (int)point.Coordinate.PrimaryValue;
-                    double percent = (double)val / _totalMachines * 100;
-                    return $"{val} ({percent:F0}%)";
-                }
-            }
-        };
-    }
-    catch (Exception ex)
+    new PieSeries<int>
     {
-        System.Diagnostics.Debug.WriteLine($"ОШИБКА LoadMachineStats: {ex.Message}");
-        EfficiencySeries = Array.Empty<ISeries>();
-        StateSeries = Array.Empty<ISeries>();
+        Values = new[]{ _workingCount },
+        Fill = new SolidColorPaint(SKColor.Parse("#2ECC71")),
+        InnerRadius = 70,
+        MaxRadialColumnWidth = 40,
+        TooltipLabelFormatter = chartPoint =>
+            $"{chartPoint.PrimaryValue} автоматов"
+    },
+
+    new PieSeries<int>
+    {
+        Values = new[]{ nonWorking },
+        Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
+        InnerRadius = 70,
+        MaxRadialColumnWidth = 40,
+        TooltipLabelFormatter = chartPoint =>
+            $"{chartPoint.PrimaryValue} автоматов"
     }
-}
+                };
+
+                StateSeries = new ISeries[]
+                {
+    new PieSeries<int>
+    {
+        Values = new[]{ _workingCount },
+        Fill = new SolidColorPaint(SKColor.Parse("#2ECC71")),
+        InnerRadius = 70,
+        TooltipLabelFormatter = chartPoint =>
+            $"Работают: {chartPoint.PrimaryValue}"
+    },
+
+    new PieSeries<int>
+    {
+        Values = new[]{ _servicingCount },
+        Fill = new SolidColorPaint(SKColor.Parse("#F39C12")),
+        InnerRadius = 70,
+        TooltipLabelFormatter = chartPoint =>
+            $"Обслуживаются: {chartPoint.PrimaryValue}"
+    },
+
+    new PieSeries<int>
+    {
+        Values = new[]{ _brokenCount },
+        Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
+        InnerRadius = 70,
+        TooltipLabelFormatter = chartPoint =>
+            $"Сломаны: {chartPoint.PrimaryValue}"
+    }
+                };
+
+                OnPropertyChanged(nameof(EfficiencySeries));
+                OnPropertyChanged(nameof(StateSeries));
+                OnPropertyChanged(nameof(EfficiencyPercent));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ОШИБКА LoadMachineStats: {ex.Message}");
+                EfficiencySeries = Array.Empty<ISeries>();
+                StateSeries = Array.Empty<ISeries>();
+                OnPropertyChanged(nameof(EfficiencySeries));
+                OnPropertyChanged(nameof(StateSeries));
+
+            }
+        }
 
         private void LoadSalesChart()
         {
@@ -226,6 +221,9 @@ namespace DesktopAppVendingMachines.ViewModels
             {
                 var endDate = DateTime.Today;
                 var startDate = endDate.AddDays(-9);
+
+                SalesDateRange = $"Данные по продажам с {startDate:dd.MM.yyyy} по {endDate:dd.MM.yyyy}";
+
 
                 var salesData = db.Sales
                     .Where(s => s.TimeSale.Date >= startDate && s.TimeSale.Date <= endDate)

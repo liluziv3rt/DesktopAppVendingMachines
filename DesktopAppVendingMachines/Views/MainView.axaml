@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
              x:Class="DesktopAppVendingMachines.Views.MainView"
              x:DataType="vm:MainViewModel">
-    
+
     <Grid ColumnDefinitions="280, *">
         <!-- Левое меню -->
         <Border Grid.Column="0" Background="#1E2A3A">
@@ -45,211 +45,232 @@
                     </Grid>
                 </Border>
 
-                <!-- Навигационное меню -->
+                <!-- Навигация -->
                 <StackPanel Spacing="8">
-                    <Button Content="🏠 Главная" 
-                            Background="#3498DB" 
-                            Foreground="White" 
-                            HorizontalAlignment="Stretch" 
-                            HorizontalContentAlignment="Left"
-                            Padding="20 12"
-                            CornerRadius="8"
-                            BorderThickness="0"/>
-                    <Button Content="📊 Монитор ТА" 
-                            Background="Transparent" 
-                            Foreground="#BDC3C7" 
-                            HorizontalAlignment="Stretch" 
-                            HorizontalContentAlignment="Left"
-                            Padding="20 12"
-                            CornerRadius="8"
-                            BorderThickness="0"/>
-                    <Button Content="📈 Детальные отчеты" 
-                            Background="Transparent" 
-                            Foreground="#BDC3C7" 
-                            HorizontalAlignment="Stretch" 
-                            HorizontalContentAlignment="Left"
-                            Padding="20 12"
-                            CornerRadius="8"
-                            BorderThickness="0"/>
-                    <Button Content="📦 Учет ТМЦ" 
-                            Background="Transparent" 
-                            Foreground="#BDC3C7" 
-                            HorizontalAlignment="Stretch" 
-                            HorizontalContentAlignment="Left"
-                            Padding="20 12"
-                            CornerRadius="8"
-                            BorderThickness="0"/>
-                    <Button Content="⚙️ Администрирование" 
-                            Background="Transparent" 
-                            Foreground="#BDC3C7" 
-                            HorizontalAlignment="Stretch" 
-                            HorizontalContentAlignment="Left"
-                            Padding="20 12"
-                            CornerRadius="8"
-                            BorderThickness="0"/>
+                    <Button Content="🏠 Главная" Background="#3498DB" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="20 12" CornerRadius="8" BorderThickness="0"/>
+                    <Button Content="📊 Монитор ТА" Background="Transparent" Foreground="#BDC3C7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="20 12" CornerRadius="8" BorderThickness="0"/>
+                    <Button Content="📈 Детальные отчеты" Background="Transparent" Foreground="#BDC3C7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="20 12" CornerRadius="8" BorderThickness="0"/>
+                    <Button Content="📦 Учет ТМЦ" Background="Transparent" Foreground="#BDC3C7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="20 12" CornerRadius="8" BorderThickness="0"/>
+                    <Button Content="⚙️ Администрирование" Background="Transparent" Foreground="#BDC3C7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="20 12" CornerRadius="8" BorderThickness="0"/>
                 </StackPanel>
 
-                <!-- Кнопка выхода -->
-                <Button Content="🚪 Выход" 
-                        Background="Transparent" 
-                        Foreground="#E74C3C" 
-                        HorizontalAlignment="Stretch" 
-                        HorizontalContentAlignment="Left"
-                        Padding="20 12"
-                        CornerRadius="8"
-                        BorderThickness="0"
-                        Margin="0 20 0 0"/>
+                <Button Content="🚪 Выход" Background="Transparent" Foreground="#E74C3C" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="20 12" CornerRadius="8" BorderThickness="0" Margin="0 20 0 0"/>
             </StackPanel>
         </Border>
 
-        <!-- Основная область -->
-        <ScrollViewer Grid.Column="1" Background="#F5F7FA">
-            <StackPanel Margin="30" Spacing="30">
-                <!-- Заголовок -->
-                <TextBlock Text="Личный кабинет. Главная" 
-                           FontSize="30" 
-                           FontWeight="SemiBold" 
-                           Foreground="#2C3E50"/>
+        <!-- Основная область (правая часть) разделена на две колонки: левая (графики), правая (сводка+новости) -->
+        <Grid Grid.Column="1" ColumnDefinitions="2*, 1*" Background="#F5F7FA">
+            <!-- Левая колонка: графики и динамика -->
+            <ScrollViewer Grid.Column="0" Background="#F5F7FA">
+                <StackPanel Margin="20" Spacing="25">
+                    <!-- Заголовок -->
+                    <TextBlock Text="Личный кабинет. Главная" FontSize="28" FontWeight="SemiBold" Foreground="#2C3E50"/>
 
-                <!-- Блок эффективности сети (два сектора) -->
-                <Border Background="White" 
-                        CornerRadius="16" 
-                        Padding="30"
-                        BoxShadow="0 4 12 #14000000">
-                    <StackPanel>
-                        <TextBlock Text="Эффективность сети" 
-                                   FontSize="22" 
-                                   FontWeight="Bold" 
-                                   Foreground="#2C3E50"
-                                   Margin="0 0 0 20"/>
-                        <lvc:PieChart
-                            Series="{Binding EfficiencySeries}"
-                            Height="250"
-                            TooltipPosition="Top"
-                            LegendPosition="Hidden"/>
-                    </StackPanel>
-                </Border>
+                    <!-- Два графика в ряд -->
+                  <Grid ColumnDefinitions="1*,1*" ColumnSpacing="20">
 
-                <!-- Блок состояния сети (три сектора) -->
-                <Border Background="White" 
-                        CornerRadius="16" 
-                        Padding="30"
-                        BoxShadow="0 4 12 #14000000">
-                    <StackPanel>
-                        <TextBlock Text="Состояние сети" 
-                                   FontSize="22" 
-                                   FontWeight="Bold" 
-                                   Foreground="#2C3E50"
-                                   Margin="0 0 0 20"/>
-                        <lvc:PieChart
-                            Series="{Binding StateSeries}"
-                            Height="250"
-                            TooltipPosition="Top"
-                            LegendPosition="Hidden"/>
-                    </StackPanel>
-                </Border>
+    <!-- Эффективность сети -->
+    <Border Grid.Column="0"
+            Background="White"
+            CornerRadius="16"
+            Padding="20"
+            BoxShadow="0 4 12 #14000000">
 
-                <!-- Динамика продаж (график) -->
-                <Border Background="White" 
-                        CornerRadius="16" 
-                        Padding="30"
-                        BoxShadow="0 4 12 #14000000">
-                    <StackPanel>
-                        <TextBlock Text="Динамика продаж за последние 10 дней" 
-                                   FontSize="22" 
-                                   FontWeight="Bold" 
-                                   Foreground="#2C3E50"/>
-                        <TextBlock Text="Данные по продажам с 01.03.2025 по 10.03.2025" 
-                                   FontSize="13" 
-                                   Foreground="#7F8C8D" 
-                                   Margin="0 5 0 15"/>
+        <StackPanel Spacing="10">
 
-                        <!-- Кнопки переключения -->
-                        <Grid ColumnDefinitions="Auto, Auto, *" Margin="0 0 0 20">
-                            <Button Grid.Column="0" 
-                                    Content="По сумме" 
-                                    Background="{Binding IsSumMode, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#3498DB,#BDC3C7'}"
-                                    Foreground="White"
-                                    Padding="20 10"
-                                    CornerRadius="8 0 0 8"
-                                    Command="{Binding ShowSumCommand}"/>
-                            <Button Grid.Column="1" 
-                                    Content="По количеству" 
-                                    Background="{Binding IsSumMode, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#BDC3C7,#3498DB'}"
-                                    Foreground="White"
-                                    Padding="20 10"
-                                    CornerRadius="0 8 8 0"
-                                    Command="{Binding ShowQuantityCommand}"/>
-                        </Grid>
+            <TextBlock Text="Эффективность сети"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#2C3E50"/>
 
-                        <lvc:CartesianChart
-                            Series="{Binding SalesSeries}"
-                            XAxes="{Binding XAxes}"
-                            Height="300"
-                            TooltipPosition="Top"
-                            LegendPosition="Hidden"/>
-                    </StackPanel>
-                </Border>
+            <Grid Height="220">
 
-                <!-- Сводка (заглушка) -->
-                <Border Background="White" 
-                        CornerRadius="16" 
-                        Padding="30"
-                        BoxShadow="0 4 12 #14000000">
-                    <StackPanel>
-                        <TextBlock Text="Сводка" 
-                                   FontSize="22" 
-                                   FontWeight="Bold" 
-                                   Foreground="#2C3E50"
-                                   Margin="0 0 0 20"/>
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20">
-                            <Border Background="#F8F9F9" CornerRadius="12" Padding="20">
-                                <StackPanel>
-                                    <TextBlock Text="Денег в ТА" Foreground="#7F8C8D" FontSize="15"/>
-                                    <TextBlock Text="27 959 ₽" FontSize="28" FontWeight="Bold" Foreground="#2C3E50"/>
-                                </StackPanel>
-                            </Border>
-                            <Border Background="#F8F9F9" CornerRadius="12" Padding="20">
-                                <StackPanel>
-                                    <TextBlock Text="Сдача в ТА" Foreground="#7F8C8D" FontSize="15"/>
-                                    <TextBlock Text="12 729 ₽" FontSize="28" FontWeight="Bold" Foreground="#2C3E50"/>
-                                </StackPanel>
-                            </Border>
-                            <Border Background="#F8F9F9" CornerRadius="12" Padding="20">
-                                <StackPanel>
-                                    <TextBlock Text="Выручка сегодня" Foreground="#7F8C8D" FontSize="15"/>
-                                    <TextBlock Text="11 870 ₽" FontSize="28" FontWeight="Bold" Foreground="#27AE60"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </StackPanel>
-                </Border>
+                <lvc:PieChart
+                    Series="{Binding EfficiencySeries}"
+                    InitialRotation="180"
+                    MaxAngle="180"
+                    LegendPosition="Hidden"
+                    AnimationsSpeed="0:0:0.8"/>
 
-                <!-- Новости (заглушка) -->
-                <Border Background="White" 
-                        CornerRadius="16" 
-                        Padding="30"
-                        BoxShadow="0 4 12 #14000000">
-                    <StackPanel>
-                        <TextBlock Text="Новости" 
-                                   FontSize="22" 
-                                   FontWeight="Bold" 
-                                   Foreground="#2C3E50"
-                                   Margin="0 0 0 20"/>
-                        <StackPanel Spacing="10">
-                            <Border Background="#F0F7FF" CornerRadius="8" Padding="15">
-                                <TextBlock Text="• Терминалы КЗРи получают экзайнер от Cobra" Foreground="#2C3E50" FontSize="15"/>
-                            </Border>
-                            <Border Background="#F0F7FF" CornerRadius="8" Padding="15">
-                                <TextBlock Text="• Релиз новой CRM-системы KIT Shop" Foreground="#2C3E50" FontSize="15"/>
-                            </Border>
-                            <Border Background="#FFF4E6" CornerRadius="8" Padding="15">
-                                <TextBlock Text="• Ставки НДС 35% и 7% для УСН" Foreground="#2C3E50" FontSize="15"/>
-                            </Border>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
+                <!-- Текст в центре -->
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+
+                    <TextBlock Text="{Binding EfficiencyPercent}"
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Foreground="#2C3E50"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="работающих автоматов"
+                               FontSize="13"
+                               Foreground="#7F8C8D"
+                               HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Grid>
+
+            <!-- Легенда -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Spacing="20">
+
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Border Width="12" Height="12" Background="#2ECC71" CornerRadius="6"/>
+                    <TextBlock Text="Работают" FontSize="12"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Border Width="12" Height="12" Background="#E74C3C" CornerRadius="6"/>
+                    <TextBlock Text="Не работают" FontSize="12"/>
+                </StackPanel>
+
             </StackPanel>
-        </ScrollViewer>
+
+        </StackPanel>
+
+    </Border>
+
+
+    <!-- Состояние сети -->
+    <Border Grid.Column="1"
+            Background="White"
+            CornerRadius="16"
+            Padding="20"
+            BoxShadow="0 4 12 #14000000">
+
+        <StackPanel Spacing="10">
+
+            <TextBlock Text="Состояние сети"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#2C3E50"/>
+
+            <Grid Height="240">
+
+                <lvc:PieChart
+                    Series="{Binding StateSeries}"
+                    LegendPosition="Hidden"
+                    AnimationsSpeed="0:0:0.8"/>
+
+                <!-- Центр donut -->
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+
+                    <TextBlock Text="{Binding TotalMachinesCount}"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               Foreground="#2C3E50"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="автоматов"
+                               FontSize="13"
+                               Foreground="#7F8C8D"
+                               HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Grid>
+
+            <!-- Легенда -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Spacing="18">
+
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Border Width="12" Height="12" Background="#2ECC71" CornerRadius="6"/>
+                    <TextBlock Text="Работает" FontSize="12"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Border Width="12" Height="12" Background="#F39C12" CornerRadius="6"/>
+                    <TextBlock Text="Обслуживается" FontSize="12"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Border Width="12" Height="12" Background="#E74C3C" CornerRadius="6"/>
+                    <TextBlock Text="Сломан" FontSize="12"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </StackPanel>
+
+    </Border>
+
+</Grid>
+                    <!-- Динамика продаж -->
+                    <Border Background="White" CornerRadius="16" Padding="20" BoxShadow="0 4 12 #14000000">
+                        <StackPanel>
+                            <TextBlock Text="Динамика продаж за последние 10 дней" FontSize="20" FontWeight="Bold" Foreground="#2C3E50"/>
+                            <TextBlock Text="{Binding SalesDateRange}" FontSize="13" Foreground="#7F8C8D" Margin="0 5 0 15"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0 0 0 15">
+                                <Button Content="По сумме" Background="{Binding IsSumMode, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#3498DB,#BDC3C7'}" Foreground="White" Padding="15 8" CornerRadius="5" Command="{Binding ShowSumCommand}"/>
+                                <Button Content="По количеству" Background="{Binding IsSumMode, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#BDC3C7,#3498DB'}" Foreground="White" Padding="15 8" CornerRadius="5" Command="{Binding ShowQuantityCommand}"/>
+                            </StackPanel>
+                            <lvc:CartesianChart Series="{Binding SalesSeries}" XAxes="{Binding XAxes}" Height="250" TooltipPosition="Top" LegendPosition="Hidden"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Правая колонка: сводка и новости -->
+            <ScrollViewer Grid.Column="1" Background="#F5F7FA">
+                <StackPanel Margin="20" Spacing="25">
+                    <!-- Сводка -->
+                    <Border Background="White" CornerRadius="16" Padding="20" BoxShadow="0 4 12 #14000000">
+                        <StackPanel>
+                            <TextBlock Text="Сводка" FontSize="22" FontWeight="Bold" Foreground="#2C3E50" Margin="0 0 0 20"/>
+                            <StackPanel Spacing="10">
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <TextBlock Text="Денег в ТА:" Foreground="#7F8C8D" FontSize="15"/>
+                                    <TextBlock Grid.Column="1" Text="27 959 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <TextBlock Text="Сдача в ТА:" Foreground="#7F8C8D" FontSize="15"/>
+                                    <TextBlock Grid.Column="1" Text="12 729 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <TextBlock Text="Выручка, сегодня:" Foreground="#7F8C8D" FontSize="15"/>
+                                    <TextBlock Grid.Column="1" Text="11 870 ₽" Foreground="#27AE60" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <TextBlock Text="Выручка, вчера:" Foreground="#7F8C8D" FontSize="15"/>
+                                    <TextBlock Grid.Column="1" Text="13 360 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <TextBlock Text="Инкассировано, сегодня:" Foreground="#7F8C8D" FontSize="15"/>
+                                    <TextBlock Grid.Column="1" Text="8 145 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <TextBlock Text="Инкассировано, вчера:" Foreground="#7F8C8D" FontSize="15"/>
+                                    <TextBlock Grid.Column="1" Text="9 690 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <TextBlock Text="Обслуживаю ТА, сел./через:" Foreground="#7F8C8D" FontSize="15"/>
+                                    <TextBlock Grid.Column="1" Text="2/2" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Новости (заглушка) -->
+                    <Border Background="White" CornerRadius="16" Padding="20" BoxShadow="0 4 12 #14000000">
+                        <StackPanel>
+                            <TextBlock Text="Новости" FontSize="22" FontWeight="Bold" Foreground="#2C3E50" Margin="0 0 0 15"/>
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="• Терминалы КЗРи получают экзайнер от Cobra" Foreground="#2C3E50" FontSize="14" TextWrapping="Wrap"/>
+                                <TextBlock Text="• Неопределенное подразделение от KIT Vending / KIT Shop" Foreground="#2C3E50" FontSize="14" TextWrapping="Wrap"/>
+                                <TextBlock Text="• Ставки НДС 35% и 7% для УСН" Foreground="#2C3E50" FontSize="14" TextWrapping="Wrap"/>
+                                <TextBlock Text="• Релиз новой CRM-системы KIT Shop" Foreground="#2C3E50" FontSize="14" TextWrapping="Wrap"/>
+                                <TextBlock Text="• Новые модули смежных автоматов от KIT Vending" Foreground="#2C3E50" FontSize="14" TextWrapping="Wrap"/>
+                                <TextBlock Text="• Получение сертификата PCI DSS 4.0" Foreground="#2C3E50" FontSize="14" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </UserControl>

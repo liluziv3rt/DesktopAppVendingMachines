@@ -18,16 +18,14 @@ namespace DesktopAppVendingMachines.ViewModels
         [RelayCommand]
         public void Enter()
         {
-            currentLogin = db.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
-
-            if (currentLogin == null)
-
+            var user = db.Users.FirstOrDefault(x => x.Email == Email && x.Password == Password);
+            if (user == null)
             {
-                Message = "Пользователь отсутсвует";
+                Message = "Неверный логин или пароль";
             }
-
             else
             {
+                currentLogin = user; // это ключевая строка!
                 MainWindowViewModel.Instance.PageSwitcher = new MainViewModel();
             }
         }
