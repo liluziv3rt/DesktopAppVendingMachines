@@ -1,42 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\",
+  "WorkspaceRootPath": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\viewmodels\\vendingmachinesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\desktopappvendingmachines\\viewmodels\\vendingmachinesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\viewmodels\\vendingmachinesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\converters\\pagetocolorconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\converters\\pagetocolorconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\views\\vendingmachinesview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\desktopappvendingmachines\\views\\vendingmachinesview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
       "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\vendingmachinesview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\views\\vendingmachinesview.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\vendingmachinesview.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\views\\mainview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\mainview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\views\\mainviewcontent.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\mainviewcontent.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\views\\mainviewcontent.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\mainviewcontent.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|c:\\praktikaavalonia\\desktopappvendingmachines\\desktopappvendingmachines\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,119 +18,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "VendingMachinesView.axaml.cs",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml.cs",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml.cs",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml.cs",
-              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAWwAoAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T14:53:58.774Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MainViewContent.axaml",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainViewContent.axaml",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\MainViewContent.axaml",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainViewContent.axaml",
-              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\MainViewContent.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-17T14:40:50.521Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MainViewContent.axaml.cs",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainViewContent.axaml.cs",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\MainViewContent.axaml.cs",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainViewContent.axaml.cs",
-              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\MainViewContent.axaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T14:40:50.338Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{73068c07-fba1-453f-99ae-6edf972119b2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "App.axaml",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\App.axaml",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\App.axaml",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\App.axaml",
-              "RelativeToolTip": "DesktopAppVendingMachines\\App.axaml",
+              "Title": "VendingMachinesView.axaml",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-17T14:32:30.413Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PageToColorConverter.cs",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\PageToColorConverter.cs",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Converters\\PageToColorConverter.cs",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\PageToColorConverter.cs",
-              "RelativeToolTip": "DesktopAppVendingMachines\\Converters\\PageToColorConverter.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAADwv2cAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T14:32:03.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MainViewModel.cs",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
-              "RelativeToolTip": "DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
-              "ViewState": "AgIAAM0BAAAAAAAAAAAmwOIBAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T14:29:23.008Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MainView.axaml",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainView.axaml",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\MainView.axaml",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainView.axaml",
-              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\MainView.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-17T14:28:51.789Z",
+              "WhenOpened": "2026-03-17T14:53:58.934Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "VendingMachinesViewModel.cs",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
               "RelativeDocumentMoniker": "DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
               "RelativeToolTip": "DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
-              "ViewState": "AgIAAM8AAAAAAAAAAAAlwNQAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAuwKwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-17T14:08:03.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VendingMachinesView.axaml",
-              "DocumentMoniker": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
-              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
-              "ToolTip": "C:\\PraktikaAvalonia\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
-              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-17T14:53:58.934Z",
               "EditorCaption": ""
             }
           ]

@@ -28,19 +28,14 @@
                 
                 <Grid ColumnDefinitions="Auto, Auto, *, Auto, Auto" ColumnSpacing="10" Margin="0 10 0 0">
                     <TextBlock Grid.Column="0" 
-                               Text="Показать" 
+                               Text="  " 
                                VerticalAlignment="Center"
                                Foreground="#7F8C8D"/>
                     
-                    <ComboBox Grid.Column="1" 
-                              Width="80"
+                    <ComboBox Width="80"
+                              ItemsSource="{Binding PageSizes}"
                               SelectedItem="{Binding PageSize}"
-                              VerticalAlignment="Center">
-                        <ComboBoxItem Content="10"/>
-                        <ComboBoxItem Content="25"/>
-                        <ComboBoxItem Content="50"/>
-                        <ComboBoxItem Content="100"/>
-                    </ComboBox>
+                              VerticalAlignment="Center"/>
                     
                     <TextBlock Grid.Column="2" 
                                Text="записей" 

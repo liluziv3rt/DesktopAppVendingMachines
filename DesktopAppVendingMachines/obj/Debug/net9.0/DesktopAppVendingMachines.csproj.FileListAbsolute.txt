@@ -530,3 +530,4 @@ C:\PraktikaAvalonia\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debu
 C:\PraktikaAvalonia\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\DesktopAppVendingMachines.genruntimeconfig.cache
 C:\PraktikaAvalonia\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\ref\DesktopAppVendingMachines.dll
 C:\PraktikaAvalonia\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Avalonia.Controls.DataGrid.dll
+E:\DesktopAppVendingMachines\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Avalonia.Controls.DataGrid.dll

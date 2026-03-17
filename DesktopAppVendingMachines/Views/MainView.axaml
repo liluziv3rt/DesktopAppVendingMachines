@@ -21,8 +21,8 @@
                 <!-- Логотип слева -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                     <Image Source="/Assets/Logo.png" 
-                                   Width="40" Height="40" 
-                                   Stretch="UniformToFill"/>
+                                   Width="160" Height="60" 
+                                   Stretch="Fill"/>
                     </StackPanel>
                 
                 <!-- Пустое место по центру -->

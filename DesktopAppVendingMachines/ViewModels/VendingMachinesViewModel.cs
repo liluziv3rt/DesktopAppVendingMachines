@@ -29,6 +29,8 @@ namespace DesktopAppVendingMachines.ViewModels
         [ObservableProperty]
         private bool isLoading;
 
+        public List<int> PageSizes { get; } = new() { 10, 25, 50, 100 };
+
         // Кэш для словарей
         private Dictionary<string, Dictionary<int, string>> _dictionaryCache = new();
 
@@ -168,6 +170,11 @@ namespace DesktopAppVendingMachines.ViewModels
                 CurrentPage--;
                 LoadVendingMachines();
             }
+        }
+        partial void OnPageSizeChanged(int value)
+        {
+            CurrentPage = 1;          // сброс на первую страницу
+            LoadVendingMachines();    // перезагрузка данных
         }
 
         [RelayCommand]

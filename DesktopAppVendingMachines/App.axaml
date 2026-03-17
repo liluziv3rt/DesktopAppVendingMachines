@@ -3,7 +3,7 @@
              x:Class="DesktopAppVendingMachines.App"
              xmlns:local="using:DesktopAppVendingMachines"
              xmlns:converters="using:DesktopAppVendingMachines.Converters"
-             RequestedThemeVariant="Default">
+             RequestedThemeVariant="Light">
     <Application.Resources>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
         <converters:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
