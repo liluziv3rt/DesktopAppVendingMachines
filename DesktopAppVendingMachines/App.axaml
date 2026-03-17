@@ -6,6 +6,7 @@
              RequestedThemeVariant="Default">
     <Application.Resources>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        <converters:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
     </Application.Resources>
 
     <Application.DataTemplates>

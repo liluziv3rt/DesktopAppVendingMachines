@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DesktopAppVendingMachines.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +13,30 @@ namespace DesktopAppVendingMachines.ViewModels
 {
     internal partial class SignInViewModel : ViewModelBase
     {
-        [ObservableProperty] string email;
-        [ObservableProperty] string password;
-        [ObservableProperty] string message;
+        [ObservableProperty]
+        private string email;
+
+        [ObservableProperty]
+        private string password;
+
+        [ObservableProperty]
+        private string message;
 
         [RelayCommand]
         public void Enter()
         {
-            var user = db.Users.FirstOrDefault(x => x.Email == Email && x.Password == Password);
+            // Загружаем пользователя вместе с ролью через правильное навигационное свойство
+            var user = db.Users
+                .Include(u => u.IdRoleNavigation)  // Важно! Используем IdRoleNavigation, а не Role
+                .FirstOrDefault(x => x.Email == Email && x.Password == Password);
+
             if (user == null)
             {
                 Message = "Неверный логин или пароль";
             }
             else
             {
-                currentLogin = user; // это ключевая строка!
+                SessionManager.CurrentUser = user;
                 MainWindowViewModel.Instance.PageSwitcher = new MainViewModel();
             }
         }
@@ -35,6 +46,7 @@ namespace DesktopAppVendingMachines.ViewModels
         {
             MainWindowViewModel.Instance.PageSwitcher = new SignUpViewModel();
         }
-
     }
+
+
 }

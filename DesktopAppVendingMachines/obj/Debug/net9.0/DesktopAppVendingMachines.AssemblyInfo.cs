@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DesktopAppVendingMachines")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51009a5419c159ff1391a538ddd5f853dc4a80d1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53b48601007955c06a68f90729b7fdc97d868b83")]
 [assembly: System.Reflection.AssemblyProductAttribute("DesktopAppVendingMachines")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DesktopAppVendingMachines")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

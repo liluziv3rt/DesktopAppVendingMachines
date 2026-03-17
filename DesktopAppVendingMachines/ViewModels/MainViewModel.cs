@@ -7,7 +7,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DesktopAppVendingMachines.Models; // ваши модели
+using DesktopAppVendingMachines.Models;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
@@ -17,13 +17,16 @@ namespace DesktopAppVendingMachines.ViewModels
         private string userName;
 
         [ObservableProperty]
+        private string userRole;
+
+        [ObservableProperty]
+        private string userPhotoPath = "avares://DesktopAppVendingMachines/Assets/Flag.png";
+
+        [ObservableProperty]
         private string efficiencyPercent;
 
         [ObservableProperty]
         private string salesDateRange;
-
-        [ObservableProperty]
-        private string userPhotoPath = "avares://DesktopAppVendingMachines/Assets/default-avatar.png";
 
         [ObservableProperty]
         private int totalMachinesCount;
@@ -45,33 +48,88 @@ namespace DesktopAppVendingMachines.ViewModels
         [ObservableProperty]
         private Axis[] xAxes;
 
-        // Поля для хранения количеств, чтобы использовать в DataLabelsFormatter
+        // Поля для хранения количеств
         private int _workingCount;
         private int _servicingCount;
         private int _brokenCount;
-        private int _totalMachines;
+
+        // Данные для сводки
+        [ObservableProperty]
+        private string moneyInMachines = "27 959 ₽";
+
+        [ObservableProperty]
+        private string changeInMachines = "12 729 ₽";
+
+        [ObservableProperty]
+        private string revenueToday = "11 870 ₽";
+
+        [ObservableProperty]
+        private string revenueYesterday = "13 360 ₽";
+
+        [ObservableProperty]
+        private string collectedToday = "8 145 ₽";
+
+        [ObservableProperty]
+        private string collectedYesterday = "9 690 ₽";
+
+        [ObservableProperty]
+        private string serviceInfo = "2/2";
 
         public MainViewModel()
         {
             LoadUserInfo();
             LoadMachineStats();
             LoadSalesChart();
+            LoadSummaryData();
         }
 
         private void LoadUserInfo()
         {
-            if (currentLogin != null)
+            var currentUser = SessionManager.CurrentUser;
+
+            if (currentUser != null)
             {
-                // Собираем ФИО - подставьте свои названия полей
-                var fullName = $"{currentLogin.Family} {currentLogin.Name} {currentLogin.Patronymic}".Trim();
+                // Собираем ФИО
+                var fullName = $"{currentUser.Family} {currentUser.Name} {currentUser.Patronymic}".Trim();
                 if (string.IsNullOrWhiteSpace(fullName))
-                    fullName = currentLogin.Email ?? "Пользователь";
+                    fullName = currentUser.Email ?? "Пользователь";
+
                 UserName = fullName;
+
+                // Определяем роль пользователя
+                if (currentUser.IdRoleNavigation != null)
+                {
+                    UserRole = currentUser.IdRoleNavigation.Name; // Используем IdRoleNavigation.Name
+                }
+                else if (currentUser.IsManager == true)
+                {
+                    UserRole = "Менеджер";
+                }
+                else if (currentUser.IsEngineer == true)
+                {
+                    UserRole = "Инженер";
+                }
+                else if (currentUser.IsOperator == true)
+                {
+                    UserRole = "Оператор";
+                }
+                else
+                {
+                    UserRole = "Пользователь";
+                }
+
+                // Загружаем фото пользователя, если есть
+                if (!string.IsNullOrEmpty(currentUser.Images))
+                {
+                    UserPhotoPath = currentUser.Images;
+                }
             }
             else
             {
                 UserName = "Гость";
+                UserRole = "Администратор";
             }
+
         }
 
         private void LoadMachineStats()
@@ -80,22 +138,15 @@ namespace DesktopAppVendingMachines.ViewModels
             {
                 // Общее количество автоматов
                 totalMachinesCount = db.VendingMachines.Count();
-                System.Diagnostics.Debug.WriteLine($"=== Загрузка статистики ===");
-                System.Diagnostics.Debug.WriteLine($"Всего автоматов в БД: {totalMachinesCount}");
 
                 // Получаем все записи из dictionary с ключом "status"
                 var statusEntries = db.Dictionaries
                     .Where(d => d.Key == "status")
                     .Select(d => new { d.Id, d.Value })
                     .ToList();
-                System.Diagnostics.Debug.WriteLine($"Найдено записей в dictionary с key='status': {statusEntries.Count}");
-                foreach (var se in statusEntries)
-                    System.Diagnostics.Debug.WriteLine($"  ID: {se.Id}, Value: '{se.Value}'");
 
-                // Если нет статусов, выходим
                 if (statusEntries.Count == 0)
                 {
-                    System.Diagnostics.Debug.WriteLine("ВНИМАНИЕ: нет статусов в dictionary!");
                     EfficiencySeries = Array.Empty<ISeries>();
                     StateSeries = Array.Empty<ISeries>();
                     return;
@@ -109,7 +160,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 var allLinks = db.MachineDictionaries
                     .Where(md => statusIds.Contains(md.IdValue))
                     .ToList();
-                System.Diagnostics.Debug.WriteLine($"Всего связей в machine_dictionary для этих статусов: {allLinks.Count}");
 
                 // Группируем по IdValue
                 var machineStatusCounts = allLinks
@@ -124,8 +174,6 @@ namespace DesktopAppVendingMachines.ViewModels
                         int? nullableId = id;
                         if (machineStatusCounts.TryGetValue(nullableId, out int count))
                             return count;
-                        else
-                            return 0;
                     }
                     return 0;
                 }
@@ -133,71 +181,64 @@ namespace DesktopAppVendingMachines.ViewModels
                 _workingCount = GetCount("Работает");
                 _servicingCount = GetCount("Обслуживается");
                 _brokenCount = GetCount("Сломан");
-                _totalMachines = totalMachinesCount;
-
-                System.Diagnostics.Debug.WriteLine($"Подсчитано: Работает={_workingCount}, Обслуживается={_servicingCount}, Сломано={_brokenCount}");
-                System.Diagnostics.Debug.WriteLine($"Сумма статусов: {_workingCount + _servicingCount + _brokenCount} (должна равняться общему количеству автоматов, если у всех есть статус)");
 
                 // Создаём серии
                 int nonWorking = _servicingCount + _brokenCount;
 
-                double percent = _totalMachines == 0
+                double percent = totalMachinesCount == 0
                     ? 0
-                    : (double)_workingCount / _totalMachines * 100;
+                    : (double)_workingCount / totalMachinesCount * 100;
 
                 EfficiencyPercent = $"{percent:F0}%";
 
                 EfficiencySeries = new ISeries[]
                 {
-    new PieSeries<int>
-    {
-        Values = new[]{ _workingCount },
-        Fill = new SolidColorPaint(SKColor.Parse("#2ECC71")),
-        InnerRadius = 70,
-        MaxRadialColumnWidth = 40,
-        TooltipLabelFormatter = chartPoint =>
-            $"{chartPoint.PrimaryValue} автоматов"
-    },
-
-    new PieSeries<int>
-    {
-        Values = new[]{ nonWorking },
-        Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
-        InnerRadius = 70,
-        MaxRadialColumnWidth = 40,
-        TooltipLabelFormatter = chartPoint =>
-            $"{chartPoint.PrimaryValue} автоматов"
-    }
+                    new PieSeries<int>
+                    {
+                        Values = new[]{ _workingCount },
+                        Fill = new SolidColorPaint(SKColor.Parse("#2ECC71")),
+                        InnerRadius = 70,
+                        MaxRadialColumnWidth = 40,
+                        TooltipLabelFormatter = chartPoint =>
+                            $"{chartPoint.PrimaryValue} автоматов"
+                    },
+                    new PieSeries<int>
+                    {
+                        Values = new[]{ nonWorking },
+                        Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
+                        InnerRadius = 70,
+                        MaxRadialColumnWidth = 40,
+                        TooltipLabelFormatter = chartPoint =>
+                            $"{chartPoint.PrimaryValue} автоматов"
+                    }
                 };
 
                 StateSeries = new ISeries[]
                 {
-    new PieSeries<int>
-    {
-        Values = new[]{ _workingCount },
-        Fill = new SolidColorPaint(SKColor.Parse("#2ECC71")),
-        InnerRadius = 70,
-        TooltipLabelFormatter = chartPoint =>
-            $"Работают: {chartPoint.PrimaryValue}"
-    },
-
-    new PieSeries<int>
-    {
-        Values = new[]{ _servicingCount },
-        Fill = new SolidColorPaint(SKColor.Parse("#F39C12")),
-        InnerRadius = 70,
-        TooltipLabelFormatter = chartPoint =>
-            $"Обслуживаются: {chartPoint.PrimaryValue}"
-    },
-
-    new PieSeries<int>
-    {
-        Values = new[]{ _brokenCount },
-        Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
-        InnerRadius = 70,
-        TooltipLabelFormatter = chartPoint =>
-            $"Сломаны: {chartPoint.PrimaryValue}"
-    }
+                    new PieSeries<int>
+                    {
+                        Values = new[]{ _workingCount },
+                        Fill = new SolidColorPaint(SKColor.Parse("#2ECC71")),
+                        InnerRadius = 70,
+                        TooltipLabelFormatter = chartPoint =>
+                            $"Работают: {chartPoint.PrimaryValue}"
+                    },
+                    new PieSeries<int>
+                    {
+                        Values = new[]{ _servicingCount },
+                        Fill = new SolidColorPaint(SKColor.Parse("#F39C12")),
+                        InnerRadius = 70,
+                        TooltipLabelFormatter = chartPoint =>
+                            $"Обслуживаются: {chartPoint.PrimaryValue}"
+                    },
+                    new PieSeries<int>
+                    {
+                        Values = new[]{ _brokenCount },
+                        Fill = new SolidColorPaint(SKColor.Parse("#E74C3C")),
+                        InnerRadius = 70,
+                        TooltipLabelFormatter = chartPoint =>
+                            $"Сломаны: {chartPoint.PrimaryValue}"
+                    }
                 };
 
                 OnPropertyChanged(nameof(EfficiencySeries));
@@ -209,9 +250,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 System.Diagnostics.Debug.WriteLine($"ОШИБКА LoadMachineStats: {ex.Message}");
                 EfficiencySeries = Array.Empty<ISeries>();
                 StateSeries = Array.Empty<ISeries>();
-                OnPropertyChanged(nameof(EfficiencySeries));
-                OnPropertyChanged(nameof(StateSeries));
-
             }
         }
 
@@ -223,7 +261,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 var startDate = endDate.AddDays(-9);
 
                 SalesDateRange = $"Данные по продажам с {startDate:dd.MM.yyyy} по {endDate:dd.MM.yyyy}";
-
 
                 var salesData = db.Sales
                     .Where(s => s.TimeSale.Date >= startDate && s.TimeSale.Date <= endDate)
@@ -303,6 +340,22 @@ namespace DesktopAppVendingMachines.ViewModels
             }
         }
 
+        private void LoadSummaryData()
+        {
+            try
+            {
+                var today = DateTime.Today;
+                var yesterday = today.AddDays(-1);
+
+                // Здесь должна быть логика получения реальных данных из БД
+                // Пока оставляем тестовые данные как в макете
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка LoadSummaryData: {ex.Message}");
+            }
+        }
+
         private void SetDummyChartData()
         {
             var dates = Enumerable.Range(0, 10).Select(i => DateTime.Today.AddDays(-9 + i)).ToArray();
@@ -366,6 +419,19 @@ namespace DesktopAppVendingMachines.ViewModels
                 SalesSeries[0].IsVisible = false;
                 SalesSeries[1].IsVisible = true;
             }
+        }
+
+        [RelayCommand]
+        private void Logout()
+        {
+            SessionManager.ClearSession();
+            MainWindowViewModel.Instance.PageSwitcher = new SignInViewModel();
+        }
+
+        [RelayCommand]
+        private void NavigateTo(string page)
+        {
+            // Здесь будет навигация по пунктам меню
         }
     }
 }
