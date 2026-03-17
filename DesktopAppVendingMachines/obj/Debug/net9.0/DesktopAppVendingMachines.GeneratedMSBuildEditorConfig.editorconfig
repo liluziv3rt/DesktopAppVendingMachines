@@ -35,6 +35,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/PraktikaAvalonia/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/PraktikaAvalonia/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainViewContent.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/PraktikaAvalonia/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
@@ -42,4 +45,7 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/PraktikaAvalonia/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/SignUpView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/PraktikaAvalonia/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/VendingMachinesView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

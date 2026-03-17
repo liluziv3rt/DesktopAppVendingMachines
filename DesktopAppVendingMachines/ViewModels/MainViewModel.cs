@@ -17,6 +17,15 @@ namespace DesktopAppVendingMachines.ViewModels
         private string userName;
 
         [ObservableProperty]
+        private object? currentPage;
+
+        [ObservableProperty]
+        private string currentPageTitle = "Главная";
+
+        [ObservableProperty]
+        private bool isAdminMenuExpanded = false;
+
+        [ObservableProperty]
         private string userRole;
 
         [ObservableProperty]
@@ -81,6 +90,8 @@ namespace DesktopAppVendingMachines.ViewModels
             LoadMachineStats();
             LoadSalesChart();
             LoadSummaryData();
+
+            NavigateTo("Main");
         }
 
         private void LoadUserInfo()
@@ -99,7 +110,7 @@ namespace DesktopAppVendingMachines.ViewModels
                 // Определяем роль пользователя
                 if (currentUser.IdRoleNavigation != null)
                 {
-                    UserRole = currentUser.IdRoleNavigation.Name; // Используем IdRoleNavigation.Name
+                    UserRole = currentUser.IdRoleNavigation.Name;
                 }
                 else if (currentUser.IsManager == true)
                 {
@@ -129,7 +140,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 UserName = "Гость";
                 UserRole = "Администратор";
             }
-
         }
 
         private void LoadMachineStats()
@@ -421,17 +431,73 @@ namespace DesktopAppVendingMachines.ViewModels
             }
         }
 
+
+        [RelayCommand]
+        private void NavigateTo(string page)
+        {
+            switch (page)
+            {
+                case "Main":
+                    CurrentPage = null; // null значит показываем исходный MainView
+                    CurrentPageTitle = "Главная";
+                    IsAdminMenuExpanded = false;
+                    break;
+
+                case "Monitor":
+                    // CurrentPage = new MonitorViewModel();
+                    CurrentPageTitle = "Монитор ТА";
+                    IsAdminMenuExpanded = false;
+                    break;
+
+                case "Reports":
+                    // CurrentPage = new ReportsViewModel();
+                    CurrentPageTitle = "Детальные отчеты";
+                    IsAdminMenuExpanded = false;
+                    break;
+
+                case "Inventory":
+                    // CurrentPage = new InventoryViewModel();
+                    CurrentPageTitle = "Учет ТМЦ";
+                    IsAdminMenuExpanded = false;
+                    break;
+
+                case "VendingMachines":
+                    CurrentPage = new VendingMachinesViewModel(); // Открываем экран с торговыми автоматами
+                    CurrentPageTitle = "Торговые автоматы";
+                    IsAdminMenuExpanded = true;
+                    break;
+
+                case "Companies":
+                    // CurrentPage = new CompaniesViewModel();
+                    CurrentPageTitle = "Компании";
+                    IsAdminMenuExpanded = true;
+                    break;
+
+                case "Users":
+                    // CurrentPage = new UsersViewModel();
+                    CurrentPageTitle = "Пользователи";
+                    IsAdminMenuExpanded = true;
+                    break;
+
+                case "Modems":
+                    // CurrentPage = new ModemsViewModel();
+                    CurrentPageTitle = "Модемы";
+                    IsAdminMenuExpanded = true;
+                    break;
+
+                case "Additional":
+                    // CurrentPage = new AdditionalViewModel();
+                    CurrentPageTitle = "Дополнительные";
+                    IsAdminMenuExpanded = true;
+                    break;
+            }
+        }
+
         [RelayCommand]
         private void Logout()
         {
             SessionManager.ClearSession();
             MainWindowViewModel.Instance.PageSwitcher = new SignInViewModel();
-        }
-
-        [RelayCommand]
-        private void NavigateTo(string page)
-        {
-            // Здесь будет навигация по пунктам меню
         }
     }
 }

@@ -9,6 +9,7 @@
       "DesktopAppVendingMachines/1.0.0": {
         "dependencies": {
           "Avalonia": "11.3.4",
+          "Avalonia.Controls.DataGrid": "11.2.3",
           "Avalonia.Desktop": "11.3.4",
           "Avalonia.Diagnostics": "11.3.4",
           "Avalonia.Fonts.Inter": "11.3.4",
@@ -106,6 +107,18 @@
           "lib/net8.0/Avalonia.Controls.ColorPicker.dll": {
             "assemblyVersion": "11.3.4.0",
             "fileVersion": "11.3.4.0"
+          }
+        }
+      },
+      "Avalonia.Controls.DataGrid/11.2.3": {
+        "dependencies": {
+          "Avalonia": "11.3.4",
+          "Avalonia.Remote.Protocol": "11.3.4"
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Controls.DataGrid.dll": {
+            "assemblyVersion": "11.2.3.0",
+            "fileVersion": "11.2.3.0"
           }
         }
       },
@@ -1127,6 +1140,13 @@
       "sha512": "sha512-9ZDFgEPLKGTvsyVgqcExSN1XzvRDqfzHILC3tQU08QL0o3p62w1PR008+D5YvbVPiZIlp2ugcT14dF1/n2+Eug==",
       "path": "avalonia.controls.colorpicker/11.3.4",
       "hashPath": "avalonia.controls.colorpicker.11.3.4.nupkg.sha512"
+    },
+    "Avalonia.Controls.DataGrid/11.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ul6oWEoqs4eTQZIb4Hzf0+ajhgrCX9ypOj8TahKbkKoIznJkUoka3iV90Vpj/AuoT5AZsN6f+1+62SVPpeMApA==",
+      "path": "avalonia.controls.datagrid/11.2.3",
+      "hashPath": "avalonia.controls.datagrid.11.2.3.nupkg.sha512"
     },
     "Avalonia.Desktop/11.3.4": {
       "type": "package",

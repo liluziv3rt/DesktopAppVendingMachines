@@ -1,0 +1,220 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DesktopAppVendingMachines.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+             x:Class="DesktopAppVendingMachines.Views.VendingMachinesView"
+             x:DataType="vm:VendingMachinesViewModel">
+
+    <Grid RowDefinitions="Auto, *, Auto" Background="#F5F7FA" Margin="20" RowSpacing="20">
+        
+        <!-- Верхняя панель с заголовком и поиском -->
+        <Border Grid.Row="0" 
+                Background="White" 
+                CornerRadius="16" 
+                Padding="20" 
+                BoxShadow="0 4 12 #14000000">
+            
+            <StackPanel Spacing="15">
+                <TextBlock Text="Торговые автоматы" 
+                           FontSize="28" 
+                           FontWeight="SemiBold" 
+                           Foreground="#2C3E50"/>
+                
+                <TextBlock Text="{Binding TotalCount, StringFormat='Всего найдено {0} шт.'}" 
+                           FontSize="16" 
+                           Foreground="#7F8C8D"/>
+                
+                <Grid ColumnDefinitions="Auto, Auto, *, Auto, Auto" ColumnSpacing="10" Margin="0 10 0 0">
+                    <TextBlock Grid.Column="0" 
+                               Text="Показать" 
+                               VerticalAlignment="Center"
+                               Foreground="#7F8C8D"/>
+                    
+                    <ComboBox Grid.Column="1" 
+                              Width="80"
+                              SelectedItem="{Binding PageSize}"
+                              VerticalAlignment="Center">
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="25"/>
+                        <ComboBoxItem Content="50"/>
+                        <ComboBoxItem Content="100"/>
+                    </ComboBox>
+                    
+                    <TextBlock Grid.Column="2" 
+                               Text="записей" 
+                               VerticalAlignment="Center"
+                               Foreground="#7F8C8D"
+                               Margin="0 0 20 0"/>
+                    
+                    <TextBox Grid.Column="3" 
+                             Watermark="Поиск по названию или адресу..."
+                             Text="{Binding SearchText}"
+                             Width="300"
+                             VerticalAlignment="Center"/>
+                    
+                    <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="10">
+                        <Button Content="Найти"
+                                Command="{Binding SearchCommand}"
+                                Background="#3498DB"
+                                Foreground="White"
+                                Padding="15 8"
+                                CornerRadius="5"/>
+                        
+                        <Button Content="Сброс"
+                                Command="{Binding ClearSearchCommand}"
+                                Background="#95A5A6"
+                                Foreground="White"
+                                Padding="15 8"
+                                CornerRadius="5"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Таблица с автоматами -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                CornerRadius="16" 
+                Padding="20" 
+                BoxShadow="0 4 12 #14000000">
+            
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <DataGrid ItemsSource="{Binding VendingMachines}"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          RowHeight="45"
+                          GridLinesVisibility="None"
+                          Margin="0">
+                    
+                    <DataGrid.Columns>
+                        <!-- ID -->
+                        <DataGridTextColumn Header="ID" 
+                                           Binding="{Binding DisplayId}"
+                                           Width="80"/>
+                        
+                        <!-- Название автомата -->
+                        <DataGridTextColumn Header="Название автомата" 
+                                           Binding="{Binding Name}"
+                                           Width="200"/>
+                        
+                        <!-- Модель -->
+                        <DataGridTextColumn Header="Модель" 
+                                           Binding="{Binding ModelName}"
+                                           Width="180"/>
+                        
+                        <!-- Компания -->
+                        <DataGridTextColumn Header="Компания" 
+                                           Binding="{Binding Company}"
+                                           Width="300"/>
+                        
+                        <!-- Модем -->
+                        <DataGridTextColumn Header="Модем" 
+                                           Binding="{Binding Modem}"
+                                           Width="120"/>
+                        
+                        <!-- Адрес / Место -->
+                        <DataGridTextColumn Header="Адрес / Место" 
+                                           Binding="{Binding Address}"
+                                           Width="250"/>
+                        
+                        <!-- В работе с -->
+                        <DataGridTextColumn Header="В работе с" 
+                                           Binding="{Binding WorkingSince}"
+                                           Width="100"/>
+                        
+                        <!-- Действия -->
+                        <DataGridTemplateColumn Header="Действия" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                                        <Button Content="✏️" 
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Foreground="#3498DB"
+                                                FontSize="16"
+                                                Command="{Binding $parent[DataGrid].DataContext.EditMachineCommand}"
+                                                CommandParameter="{Binding Id}"
+                                                ToolTip.Tip="Редактировать"/>
+                                        
+                                        <Button Content="🗑️" 
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Foreground="#E74C3C"
+                                                FontSize="16"
+                                                Command="{Binding $parent[DataGrid].DataContext.DeleteMachineCommand}"
+                                                CommandParameter="{Binding Id}"
+                                                ToolTip.Tip="Удалить"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Нижняя панель с пагинацией -->
+        <Border Grid.Row="2" 
+                Background="White" 
+                CornerRadius="16" 
+                Padding="20"
+                BoxShadow="0 4 12 #14000000">
+            
+            <Grid ColumnDefinitions="*, Auto, *">
+                <!-- Информация о записях -->
+                <TextBlock Grid.Column="0" 
+                           Text="{Binding PageInfo}"
+                           VerticalAlignment="Center"
+                           Foreground="#7F8C8D"/>
+                
+                <!-- Кнопки пагинации -->
+                <StackPanel Grid.Column="1" 
+                           Orientation="Horizontal" 
+                           Spacing="10"
+                           HorizontalAlignment="Center">
+                    
+                    <Button Content="◀ Предыдущая" 
+                            Command="{Binding PreviousPageCommand}"
+                            Background="#3498DB"
+                            Foreground="White"
+                            Padding="15 8"
+                            CornerRadius="5"
+                            IsEnabled="{Binding CurrentPage, Converter={StaticResource IsGreaterThanOne}}"/>
+                    
+                    <TextBlock Text="{Binding CurrentPage}" 
+                               VerticalAlignment="Center"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="#2C3E50"
+                               Margin="10 0"/>
+                    
+                    <TextBlock Text="из" 
+                               VerticalAlignment="Center"
+                               Foreground="#7F8C8D"/>
+                    
+                    <TextBlock Text="{Binding TotalPages}" 
+                               VerticalAlignment="Center"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="#2C3E50"
+                               Margin="10 0"/>
+                    
+                    <Button Content="Следующая ▶" 
+                            Command="{Binding NextPageCommand}"
+                            Background="#3498DB"
+                            Foreground="White"
+                            Padding="15 8"
+                            CornerRadius="5"
+                            IsEnabled="{Binding CurrentPage, Converter={StaticResource IsLessThanTotalPages}, ConverterParameter={Binding TotalPages}}"/>
+                </StackPanel>
+                
+                <!-- Пустое место справа -->
+                <TextBlock Grid.Column="2" Text=""/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
