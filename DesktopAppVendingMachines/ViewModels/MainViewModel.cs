@@ -447,6 +447,12 @@ namespace DesktopAppVendingMachines.ViewModels
             CurrentPageTitle = "Редактирование торгового автомата";
         }
 
+        public void NavigateToAddMachine()
+        {
+            CurrentPage = new AddVendingMachineViewModel();
+            CurrentPageTitle = "Создание торгового автомата";
+        }
+
         [RelayCommand]
         private void NavigateTo(string page)
         {

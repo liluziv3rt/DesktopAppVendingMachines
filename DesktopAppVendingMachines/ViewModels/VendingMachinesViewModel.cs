@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using DesktopAppVendingMachines.Services;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
@@ -177,6 +179,13 @@ namespace DesktopAppVendingMachines.ViewModels
                 LoadVendingMachines();
             }
         }
+
+        [RelayCommand]
+        private void AddMachine()
+        {
+            NavigationService.GoToAddMachine();
+        }
+
         partial void OnPageSizeChanged(int value)
         {
             CurrentPage = 1;          // сброс на первую страницу
@@ -190,9 +199,70 @@ namespace DesktopAppVendingMachines.ViewModels
         }
 
         [RelayCommand]
-        private void DeleteMachine(Guid id)
+        private async Task DeleteMachine(Guid id)
         {
-            // TODO: Подтверждение и удаление
+            try
+            {
+                // Показываем диалог подтверждения
+                var result = await ShowConfirmationDialog(
+                    "Подтверждение удаления",
+                    "Вы уверены, что хотите удалить этот торговый автомат?\nВсе связанные данные также будут удалены.",
+                    "Да",
+                    "Нет");
+
+                if (!result) return;
+
+                IsLoading = true;
+
+                // Начинаем транзакцию для обеспечения целостности данных
+                using var transaction = await db.Database.BeginTransactionAsync();
+
+                // 1. Удаляем связанные MachineDictionary
+                var machineDicts = db.MachineDictionaries
+                    .Where(md => md.IdMachine == id)
+                    .ToList();
+                db.MachineDictionaries.RemoveRange(machineDicts);
+
+                // 2. Удаляем связанные Maintenance записи
+                var maintenances = db.Maintenances
+                    .Where(m => m.IdVendingMachine == id)
+                    .ToList();
+                db.Maintenances.RemoveRange(maintenances);
+
+                // 3. Удаляем сам автомат
+                var machine = db.VendingMachines.Find(id);
+                if (machine != null)
+                {
+                    db.VendingMachines.Remove(machine);
+                }
+
+                // Сохраняем изменения
+                await db.SaveChangesAsync();
+
+                // Подтверждаем транзакцию
+                await transaction.CommitAsync();
+
+                // Обновляем кэш MachineDictionary после удаления
+                if (_machineDictionaryCache.ContainsKey(id))
+                {
+                    _machineDictionaryCache.Remove(id);
+                }
+
+                // Перезагружаем список
+                LoadVendingMachines();
+
+                // Показываем сообщение об успехе
+                await ShowMessage("Успешно", "Торговый автомат успешно удалён");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при удалении: {ex.Message}");
+                await ShowMessage("Ошибка", $"Не удалось удалить автомат: {ex.Message}");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
@@ -289,6 +359,9 @@ namespace DesktopAppVendingMachines.ViewModels
 
             return "—";
         }
+
+
+
 
         // Информация о менеджере, инженере, технике
         public string Manager => _machine.IdManagerNavigation?.Family ?? "";

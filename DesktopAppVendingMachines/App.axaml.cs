@@ -1,20 +1,25 @@
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using DesktopAppVendingMachines.Services;
 using DesktopAppVendingMachines.ViewModels;
 using DesktopAppVendingMachines.Views;
+using System.Linq;
 
 namespace DesktopAppVendingMachines
 {
     public partial class App : Application
     {
+
+        public static IDialogService DialogService { get; } = new DialogService();
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
         }
+
 
         public override void OnFrameworkInitializationCompleted()
         {

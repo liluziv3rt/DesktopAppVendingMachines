@@ -20,7 +20,11 @@ namespace DesktopAppVendingMachines.Services
         {
             MainVM?.NavigateToEditMachine(id);
         }
+
+        public static void GoToAddMachine()
+        {
+            MainVM?.NavigateToAddMachine();
+        }
+
     }
-
-
 }

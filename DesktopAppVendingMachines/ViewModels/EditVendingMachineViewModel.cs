@@ -156,6 +156,8 @@ namespace DesktopAppVendingMachines.ViewModels
                 .Where(md => md.IdMachine == _machineId)
                 .ToList();
 
+
+
             foreach (var md in machineDicts)
             {
                 if (md.IdValueNavigation == null) continue;
