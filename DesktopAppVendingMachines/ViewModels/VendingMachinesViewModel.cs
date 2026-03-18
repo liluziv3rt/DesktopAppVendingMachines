@@ -2,13 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using DesktopAppVendingMachines.Models;
 using DesktopAppVendingMachines.Services;
+using DesktopAppVendingMachines.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using DesktopAppVendingMachines.Services;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
@@ -34,22 +35,37 @@ namespace DesktopAppVendingMachines.ViewModels
 
         public List<int> PageSizes { get; } = new() { 10, 25, 50, 100 };
 
-        // Кэш для словарей
+        // Кэши
         private Dictionary<string, Dictionary<int, string>> _dictionaryCache = new();
-
-        // Кэш для связей машин со словарями
         private Dictionary<Guid, List<MachineDictionary>> _machineDictionaryCache = new();
 
         private readonly Action<Guid> _onEditRequest;
+        private CancellationTokenSource _searchDebounceCts;
 
         public VendingMachinesViewModel(Action<Guid> onEditRequest = null)
         {
             _onEditRequest = onEditRequest;
-            System.Diagnostics.Debug.WriteLine($"VendingMachinesViewModel created: _onEditRequest is {(_onEditRequest == null ? "null" : "not null")}");
-
             LoadDictionaryCache();
             LoadMachineDictionaryCache();
             LoadVendingMachines();
+        }
+
+        partial void OnSearchTextChanged(string value)
+        {
+            // Отменяем предыдущий отложенный вызов
+            _searchDebounceCts?.Cancel();
+            _searchDebounceCts = new CancellationTokenSource();
+            var token = _searchDebounceCts.Token;
+
+            Task.Delay(300, token).ContinueWith(t =>
+            {
+                if (t.IsCanceled) return;
+                Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+                {
+                    CurrentPage = 1; // сбрасываем на первую страницу
+                    LoadVendingMachines();
+                });
+            }, token);
         }
 
         private void LoadDictionaryCache()
@@ -57,13 +73,9 @@ namespace DesktopAppVendingMachines.ViewModels
             try
             {
                 var allDictionaries = db.Dictionaries.ToList();
-
                 _dictionaryCache = allDictionaries
                     .GroupBy(d => d.Key)
-                    .ToDictionary(
-                        g => g.Key,
-                        g => g.ToDictionary(d => d.Id, d => d.Value)
-                    );
+                    .ToDictionary(g => g.Key, g => g.ToDictionary(d => d.Id, d => d.Value));
             }
             catch (Exception ex)
             {
@@ -78,13 +90,9 @@ namespace DesktopAppVendingMachines.ViewModels
                 var allMachineDictionaries = db.MachineDictionaries
                     .Include(md => md.IdValueNavigation)
                     .ToList();
-
                 _machineDictionaryCache = allMachineDictionaries
                     .GroupBy(md => md.IdMachine)
-                    .ToDictionary(
-                        g => g.Key,
-                        g => g.ToList()
-                    );
+                    .ToDictionary(g => g.Key, g => g.ToList());
             }
             catch (Exception ex)
             {
@@ -107,17 +115,14 @@ namespace DesktopAppVendingMachines.ViewModels
                     .Include(v => v.IdTechnicianNavigation)
                     .AsQueryable();
 
-                // Поиск по названию или адресу
                 if (!string.IsNullOrWhiteSpace(SearchText))
                 {
                     query = query.Where(v =>
-                        v.Name.Contains(SearchText) ||
-                        v.Location.Contains(SearchText));
+                        v.Name.Contains(SearchText));
                 }
 
                 TotalCount = query.Count();
 
-                // Пагинация
                 var machines = query
                     .OrderBy(v => v.Name)
                     .Skip((CurrentPage - 1) * PageSize)
@@ -127,7 +132,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 VendingMachines.Clear();
                 foreach (var machine in machines)
                 {
-                    // Получаем словари для этой машины из кэша
                     var machineDictionaries = _machineDictionaryCache.ContainsKey(machine.Id)
                         ? _machineDictionaryCache[machine.Id]
                         : new List<MachineDictionary>();
@@ -146,28 +150,15 @@ namespace DesktopAppVendingMachines.ViewModels
         }
 
         [RelayCommand]
-        private void Search()
+        private void AddMachine()
+        {
+            NavigationService.GoToAddMachine();
+        }
+
+        partial void OnPageSizeChanged(int value)
         {
             CurrentPage = 1;
             LoadVendingMachines();
-        }
-
-        [RelayCommand]
-        private void ClearSearch()
-        {
-            SearchText = "";
-            CurrentPage = 1;
-            LoadVendingMachines();
-        }
-
-        [RelayCommand]
-        private void NextPage()
-        {
-            if (CurrentPage < TotalPages)
-            {
-                CurrentPage++;
-                LoadVendingMachines();
-            }
         }
 
         [RelayCommand]
@@ -181,15 +172,13 @@ namespace DesktopAppVendingMachines.ViewModels
         }
 
         [RelayCommand]
-        private void AddMachine()
+        private void NextPage()
         {
-            NavigationService.GoToAddMachine();
-        }
-
-        partial void OnPageSizeChanged(int value)
-        {
-            CurrentPage = 1;          // сброс на первую страницу
-            LoadVendingMachines();    // перезагрузка данных
+            if (CurrentPage < TotalPages)
+            {
+                CurrentPage++;
+                LoadVendingMachines();
+            }
         }
 
         [RelayCommand]
@@ -201,57 +190,33 @@ namespace DesktopAppVendingMachines.ViewModels
         [RelayCommand]
         private async Task DeleteMachine(Guid id)
         {
+            var result = await ShowConfirmationDialog(
+                "Подтверждение удаления",
+                "Вы уверены, что хотите удалить этот торговый автомат?\nВсе связанные данные также будут удалены.",
+                "Да", "Нет");
+            if (!result) return;
+
             try
             {
-                // Показываем диалог подтверждения
-                var result = await ShowConfirmationDialog(
-                    "Подтверждение удаления",
-                    "Вы уверены, что хотите удалить этот торговый автомат?\nВсе связанные данные также будут удалены.",
-                    "Да",
-                    "Нет");
-
-                if (!result) return;
-
                 IsLoading = true;
-
-                // Начинаем транзакцию для обеспечения целостности данных
                 using var transaction = await db.Database.BeginTransactionAsync();
 
-                // 1. Удаляем связанные MachineDictionary
-                var machineDicts = db.MachineDictionaries
-                    .Where(md => md.IdMachine == id)
-                    .ToList();
+                var machineDicts = db.MachineDictionaries.Where(md => md.IdMachine == id).ToList();
                 db.MachineDictionaries.RemoveRange(machineDicts);
 
-                // 2. Удаляем связанные Maintenance записи
-                var maintenances = db.Maintenances
-                    .Where(m => m.IdVendingMachine == id)
-                    .ToList();
+                var maintenances = db.Maintenances.Where(m => m.IdVendingMachine == id).ToList();
                 db.Maintenances.RemoveRange(maintenances);
 
-                // 3. Удаляем сам автомат
                 var machine = db.VendingMachines.Find(id);
-                if (machine != null)
-                {
-                    db.VendingMachines.Remove(machine);
-                }
+                if (machine != null) db.VendingMachines.Remove(machine);
 
-                // Сохраняем изменения
                 await db.SaveChangesAsync();
-
-                // Подтверждаем транзакцию
                 await transaction.CommitAsync();
 
-                // Обновляем кэш MachineDictionary после удаления
                 if (_machineDictionaryCache.ContainsKey(id))
-                {
                     _machineDictionaryCache.Remove(id);
-                }
 
-                // Перезагружаем список
                 LoadVendingMachines();
-
-                // Показываем сообщение об успехе
                 await ShowMessage("Успешно", "Торговый автомат успешно удалён");
             }
             catch (Exception ex)
@@ -266,11 +231,12 @@ namespace DesktopAppVendingMachines.ViewModels
         }
 
         public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
-
         public string PageInfo => $"Запись с {((CurrentPage - 1) * PageSize) + 1} до {Math.Min(CurrentPage * PageSize, TotalCount)} из {TotalCount} записей";
     }
 
-    public class VendingMachineViewModel
+
+
+public class VendingMachineViewModel
     {
         private readonly VendingMachine _machine;
         private readonly List<MachineDictionary> _machineDictionaries;
