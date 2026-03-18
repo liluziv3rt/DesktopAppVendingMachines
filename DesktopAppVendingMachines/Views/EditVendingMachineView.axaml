@@ -48,32 +48,17 @@
                                           SelectedItem="{Binding SelectedWorkMode}"/>
                             </StackPanel>
 
-                            <!-- Производитель Slave и модель Slave -->
-                            <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="10">
-                                <StackPanel>
-                                    <TextBlock Text="Производитель ТА (Slave)" FontSize="14" Foreground="#2C3E50"/>
-                                    <ComboBox ItemsSource="{Binding Manufactures}"
-                                              SelectedItem="{Binding SelectedSlaveManufacture}"
-                                              DisplayMemberBinding="{Binding Name}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock Text="Модель ТА (Slave)" FontSize="14" Foreground="#2C3E50"/>
-                                    <ComboBox ItemsSource="{Binding Models}"
-                                              SelectedItem="{Binding SelectedSlaveModel}"
-                                              DisplayMemberBinding="{Binding Model1}"/>
-                                </StackPanel>
-                            </Grid>
-
                             <!-- Адрес -->
                             <StackPanel>
                                 <TextBlock Text="Адрес *" FontSize="14" Foreground="#2C3E50"/>
                                 <TextBox Text="{Binding Location}" Watermark="Введите адрес"/>
                             </StackPanel>
 
-                            <!-- Место -->
+                            <!-- Место (теперь ComboBox) -->
                             <StackPanel>
                                 <TextBlock Text="Место *" FontSize="14" Foreground="#2C3E50"/>
-                                <TextBox Text="{Binding Place}" Watermark="Введите место"/>
+                                <ComboBox ItemsSource="{Binding Places}" 
+                                          SelectedItem="{Binding SelectedPlace}"/>
                             </StackPanel>
 
                             <!-- Координаты -->
@@ -101,8 +86,6 @@
                                           SelectedItem="{Binding SelectedTimezone}"/>
                             </StackPanel>
 
-                           
-
                             <!-- Шаблон крит. значений -->
                             <StackPanel>
                                 <TextBlock Text="Шаблон крит. значений" FontSize="14" Foreground="#2C3E50"/>
@@ -120,36 +103,56 @@
 
                         <!-- Правая колонка -->
                         <StackPanel Grid.Column="1" Spacing="15">
-                            <!-- Клиент -->
+                            <!-- Клиент (все пользователи) -->
                             <StackPanel>
                                 <TextBlock Text="Клиент" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Clients}"
-                                          SelectedItem="{Binding SelectedClient}"
-                                          DisplayMemberBinding="{Binding Name}"/>
+                                          SelectedItem="{Binding SelectedClient}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Family}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </StackPanel>
 
-                            <!-- Менеджер -->
+                            <!-- Менеджер (только IsManager = true) -->
                             <StackPanel>
                                 <TextBlock Text="Менеджер" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Managers}"
-                                          SelectedItem="{Binding SelectedManager}"
-                                          DisplayMemberBinding="{Binding Name}"/>
+                                          SelectedItem="{Binding SelectedManager}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Family}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </StackPanel>
 
-                            <!-- Инженер -->
+                            <!-- Инженер (только IsEngineer = true) -->
                             <StackPanel>
                                 <TextBlock Text="Инженер" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Engineers}"
-                                          SelectedItem="{Binding SelectedEngineer}"
-                                          DisplayMemberBinding="{Binding Name}"/>
+                                          SelectedItem="{Binding SelectedEngineer}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Family}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </StackPanel>
 
-                            <!-- Техник-оператор -->
+                            <!-- Техник-оператор (только IsOperator = true) -->
                             <StackPanel>
                                 <TextBlock Text="Техник-оператор" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Technicians}"
-                                          SelectedItem="{Binding SelectedTechnician}"
-                                          DisplayMemberBinding="{Binding Name}"/>
+                                          SelectedItem="{Binding SelectedTechnician}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Family}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </StackPanel>
 
                             <!-- Платежные системы -->

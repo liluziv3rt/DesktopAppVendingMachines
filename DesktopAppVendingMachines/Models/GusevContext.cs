@@ -340,7 +340,12 @@ public partial class GusevContext : DbContext
                 .HasConstraintName("vending_machines_user_id_fkey");
         });
 
+        modelBuilder.Entity<MachineDictionary>()
+        .HasKey(md => new { md.IdMachine, md.IdValue });
+
         OnModelCreatingPartial(modelBuilder);
+        base.OnModelCreating(modelBuilder);
+
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

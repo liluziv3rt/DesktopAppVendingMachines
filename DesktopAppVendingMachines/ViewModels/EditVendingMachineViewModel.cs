@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using DesktopAppVendingMachines.Models;
+using DesktopAppVendingMachines.Services;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
@@ -13,7 +14,6 @@ namespace DesktopAppVendingMachines.ViewModels
     {
         private readonly Guid _machineId;
 
-        // Основные поля
         [ObservableProperty]
         private string name;
 
@@ -27,16 +27,10 @@ namespace DesktopAppVendingMachines.ViewModels
         private string selectedWorkMode;
 
         [ObservableProperty]
-        private Manufacture selectedSlaveManufacture;
-
-        [ObservableProperty]
-        private Model selectedSlaveModel;
-
-        [ObservableProperty]
         private string location;
 
         [ObservableProperty]
-        private string place;
+        private string selectedPlace; // теперь ComboBox для выбора места
 
         [ObservableProperty]
         private string coordinates;
@@ -51,48 +45,53 @@ namespace DesktopAppVendingMachines.ViewModels
         private string selectedTimezone;
 
         [ObservableProperty]
-        private string selectedProductMatrix; // строка названия модели или сам объект?
-
-        [ObservableProperty]
         private string selectedCriticalThresholdTemplate;
 
         [ObservableProperty]
         private string selectedNotificationTemplate;
 
         [ObservableProperty]
-        private User selectedClient;
+        private User selectedClient; // Клиент (обычный пользователь)
 
         [ObservableProperty]
-        private User selectedManager;
+        private User selectedManager; // Только пользователи с IsManager = true
 
         [ObservableProperty]
-        private User selectedEngineer;
+        private User selectedEngineer; // Только пользователи с IsEngineer = true
 
         [ObservableProperty]
-        private User selectedTechnician;
+        private User selectedTechnician; // Только пользователи с IsOperator = true (техник-оператор)
 
         [ObservableProperty]
         private bool coinAcceptorEnabled;
+
         [ObservableProperty]
         private bool billAcceptorEnabled;
+
         [ObservableProperty]
         private bool cashlessModuleEnabled;
+
         [ObservableProperty]
-        private bool qrPaymentsEnabled; // исправлено имя
+        private bool qrPaymentsEnabled;
 
         [ObservableProperty]
         private string rfidService;
+
         [ObservableProperty]
         private string rfidCashCollection;
+
         [ObservableProperty]
         private string rfidLoading;
+
         [ObservableProperty]
         private string kitOnlineId;
 
         [ObservableProperty]
         private string selectedServicePriority;
+
         [ObservableProperty]
         private string selectedModem;
+
         [ObservableProperty]
         private string notes;
 
@@ -101,12 +100,13 @@ namespace DesktopAppVendingMachines.ViewModels
         public ObservableCollection<Model> Models { get; } = new();
         public ObservableCollection<string> WorkModes { get; } = new();
         public ObservableCollection<string> Timezones { get; } = new();
+        public ObservableCollection<string> Places { get; } = new(); // для выбора места
         public ObservableCollection<string> CriticalThresholdTemplates { get; } = new();
         public ObservableCollection<string> NotificationTemplates { get; } = new();
-        public ObservableCollection<User> Clients { get; } = new();
-        public ObservableCollection<User> Managers { get; } = new();
-        public ObservableCollection<User> Engineers { get; } = new();
-        public ObservableCollection<User> Technicians { get; } = new();
+        public ObservableCollection<User> Clients { get; } = new(); // все пользователи
+        public ObservableCollection<User> Managers { get; } = new(); // только IsManager = true
+        public ObservableCollection<User> Engineers { get; } = new(); // только IsEngineer = true
+        public ObservableCollection<User> Technicians { get; } = new(); // только IsOperator = true
         public ObservableCollection<string> ServicePriorities { get; } = new();
         public ObservableCollection<string> Modems { get; } = new();
 
@@ -165,7 +165,7 @@ namespace DesktopAppVendingMachines.ViewModels
                         SelectedWorkMode = md.IdValueNavigation.Value;
                         break;
                     case "place":
-                        Place = md.IdValueNavigation.Value;
+                        SelectedPlace = md.IdValueNavigation.Value; 
                         break;
                     case "timezone":
                         SelectedTimezone = md.IdValueNavigation.Value;
@@ -181,12 +181,6 @@ namespace DesktopAppVendingMachines.ViewModels
                         break;
                     case "operator":
                         SelectedModem = md.IdValueNavigation.Value;
-                        break;
-                    case "payment_type":
-                        // Для платежных систем значений может быть несколько, поэтому проще хранить флаги
-                        // Мы будем устанавливать флаги в зависимости от наличия соответствующих значений в MachineDictionary
-                        // Но поскольку платежные системы могут быть множественными, лучше обрабатывать их в отдельном цикле
-                        // Сделаем это ниже.
                         break;
                 }
             }
@@ -224,6 +218,9 @@ namespace DesktopAppVendingMachines.ViewModels
                     case "work_mode":
                         WorkModes.Add(d.Value);
                         break;
+                    case "place":
+                        Places.Add(d.Value); // добавляем места в отдельную коллекцию
+                        break;
                     case "timezone":
                         Timezones.Add(d.Value);
                         break;
@@ -242,19 +239,38 @@ namespace DesktopAppVendingMachines.ViewModels
                 }
             }
 
-            // Пользователи (можно отфильтровать по ролям позже)
+            // Пользователи с фильтрацией по ролям
             var users = db.Users.ToList();
+
             Clients.Clear();
             Managers.Clear();
             Engineers.Clear();
             Technicians.Clear();
+
             foreach (var u in users)
             {
+                // Все пользователи для клиентов
                 Clients.Add(u);
-                Managers.Add(u);
-                Engineers.Add(u);
-                Technicians.Add(u);
+
+                // Только менеджеры
+                if (u.IsManager == true)
+                    Managers.Add(u);
+
+                // Только инженеры
+                if (u.IsEngineer == true)
+                    Engineers.Add(u);
+
+                // Только операторы (техники)
+                if (u.IsOperator == true)
+                    Technicians.Add(u);
             }
+        }
+
+        // Формирование ФИО для отображения
+        private string GetFullName(User user)
+        {
+            if (user == null) return "";
+            return $"{user.Family} {user.Name} {user.Patronymic}".Trim();
         }
 
         [RelayCommand]
@@ -299,7 +315,7 @@ namespace DesktopAppVendingMachines.ViewModels
 
             // Добавляем новые
             AddDictEntry("work_mode", SelectedWorkMode);
-            AddDictEntry("place", Place);
+            AddDictEntry("place", SelectedPlace); // теперь сохраняем выбранное место
             AddDictEntry("timezone", SelectedTimezone);
             AddDictEntry("critical_threshold_template", SelectedCriticalThresholdTemplate);
             AddDictEntry("notification_template", SelectedNotificationTemplate);
@@ -319,19 +335,13 @@ namespace DesktopAppVendingMachines.ViewModels
             db.SaveChanges();
 
             // Возврат к списку
-            if (MainWindowViewModel.Instance.PageSwitcher is MainViewModel mainVM)
-            {
-                mainVM.NavigateToVendingMachines();
-            }
+            NavigationService.GoToVendingMachines();
         }
 
         [RelayCommand]
         private void Cancel()
         {
-            if (MainWindowViewModel.Instance.PageSwitcher is MainViewModel mainVM)
-            {
-                mainVM.NavigateToVendingMachines();
-            }
+            NavigationService.GoToVendingMachines();
         }
     }
 }

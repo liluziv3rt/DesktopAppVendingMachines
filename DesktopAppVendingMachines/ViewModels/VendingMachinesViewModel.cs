@@ -1,11 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DesktopAppVendingMachines.Models;
+using DesktopAppVendingMachines.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using DesktopAppVendingMachines.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
@@ -185,7 +186,7 @@ namespace DesktopAppVendingMachines.ViewModels
         [RelayCommand]
         private void EditMachine(Guid id)
         {
-            _onEditRequest?.Invoke(id); 
+            NavigationService.GoToEditMachine(id);
         }
 
         [RelayCommand]

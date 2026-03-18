@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DesktopAppVendingMachines.Models;
+using DesktopAppVendingMachines.Services;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -7,7 +9,6 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DesktopAppVendingMachines.Models;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
@@ -86,6 +87,8 @@ namespace DesktopAppVendingMachines.ViewModels
 
         public MainViewModel()
         {
+            NavigationService.MainVM = this;
+
             LoadUserInfo();
             LoadMachineStats();
             LoadSalesChart();
@@ -438,7 +441,7 @@ namespace DesktopAppVendingMachines.ViewModels
             CurrentPageTitle = "Торговые автоматы";
         }
 
-        private void NavigateToEditMachine(Guid id)
+        public void NavigateToEditMachine(Guid id)
         {
             CurrentPage = new EditVendingMachineViewModel(id);
             CurrentPageTitle = "Редактирование торгового автомата";
