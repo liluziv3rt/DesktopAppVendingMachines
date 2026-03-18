@@ -432,6 +432,18 @@ namespace DesktopAppVendingMachines.ViewModels
         }
 
 
+        public void NavigateToVendingMachines()
+        {
+            CurrentPage = new VendingMachinesViewModel(id => NavigateToEditMachine(id)); 
+            CurrentPageTitle = "Торговые автоматы";
+        }
+
+        private void NavigateToEditMachine(Guid id)
+        {
+            CurrentPage = new EditVendingMachineViewModel(id);
+            CurrentPageTitle = "Редактирование торгового автомата";
+        }
+
         [RelayCommand]
         private void NavigateTo(string page)
         {
@@ -462,8 +474,7 @@ namespace DesktopAppVendingMachines.ViewModels
                     break;
 
                 case "VendingMachines":
-                    CurrentPage = new VendingMachinesViewModel(); // Открываем экран с торговыми автоматами
-                    CurrentPageTitle = "Торговые автоматы";
+                    NavigateToVendingMachines();
                     IsAdminMenuExpanded = true;
                     break;
 

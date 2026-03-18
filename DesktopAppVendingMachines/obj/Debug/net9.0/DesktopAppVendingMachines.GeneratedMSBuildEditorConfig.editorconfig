@@ -32,6 +32,9 @@ build_property.EnableCodeStyleSeverity =
 [E:/DesktopAppVendingMachines/DesktopAppVendingMachines/DesktopAppVendingMachines/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/EditVendingMachineView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [E:/DesktopAppVendingMachines/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

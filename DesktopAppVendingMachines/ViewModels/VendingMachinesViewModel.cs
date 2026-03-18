@@ -37,8 +37,13 @@ namespace DesktopAppVendingMachines.ViewModels
         // Кэш для связей машин со словарями
         private Dictionary<Guid, List<MachineDictionary>> _machineDictionaryCache = new();
 
-        public VendingMachinesViewModel()
+        private readonly Action<Guid> _onEditRequest;
+
+        public VendingMachinesViewModel(Action<Guid> onEditRequest = null)
         {
+            _onEditRequest = onEditRequest;
+            System.Diagnostics.Debug.WriteLine($"VendingMachinesViewModel created: _onEditRequest is {(_onEditRequest == null ? "null" : "not null")}");
+
             LoadDictionaryCache();
             LoadMachineDictionaryCache();
             LoadVendingMachines();
@@ -180,7 +185,7 @@ namespace DesktopAppVendingMachines.ViewModels
         [RelayCommand]
         private void EditMachine(Guid id)
         {
-            // TODO: Открыть редактирование
+            _onEditRequest?.Invoke(id); 
         }
 
         [RelayCommand]

@@ -112,37 +112,48 @@
                                            Width="120"/>
                         
                         <!-- Адрес / Место -->
-                        <DataGridTextColumn Header="Адрес / Место" 
-                                           Binding="{Binding Address}"
-                                           Width="250"/>
+                        <DataGridTemplateColumn Header="Адрес / Место" Width="250">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Address}"
+                                                   TextWrapping="Wrap"
+                                                   MaxHeight="60"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         
                         <!-- В работе с -->
-                        <DataGridTextColumn Header="В работе с" 
-                                           Binding="{Binding WorkingSince}"
-                                           Width="100"/>
+                        <DataGridTemplateColumn Header="В работе с" Width="120">
+    <DataGridTemplateColumn.CellTemplate>
+        <DataTemplate>
+            <TextBlock Text="{Binding WorkingSince}"
+                       HorizontalAlignment="Center"/>
+        </DataTemplate>
+    </DataGridTemplateColumn.CellTemplate>
+</DataGridTemplateColumn>
                         
                         <!-- Действия -->
-                        <DataGridTemplateColumn Header="Действия" Width="100">
+                        <DataGridTemplateColumn Header="Действия" Width="140">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
                                         <Button Content="✏️" 
-                                                Background="Transparent"
-                                                BorderThickness="0"
-                                                Foreground="#3498DB"
-                                                FontSize="16"
-                                                Command="{Binding $parent[DataGrid].DataContext.EditMachineCommand}"
-                                                CommandParameter="{Binding Id}"
-                                                ToolTip.Tip="Редактировать"/>
-                                        
-                                        <Button Content="🗑️" 
-                                                Background="Transparent"
-                                                BorderThickness="0"
-                                                Foreground="#E74C3C"
-                                                FontSize="16"
-                                                Command="{Binding $parent[DataGrid].DataContext.DeleteMachineCommand}"
-                                                CommandParameter="{Binding Id}"
-                                                ToolTip.Tip="Удалить"/>
+                                            Width="32"
+                                            Height="32"
+                                            Background="#ECF0F1"
+                                            CornerRadius="6"
+                                            BorderThickness="0"
+                                             Command="{Binding $parent[DataGrid].DataContext.EditMachineCommand}"
+                                            CommandParameter="{Binding Id}"/>
+
+                                    <Button Content="🗑️" 
+                                            Width="32"
+                                            Height="32"
+                                            Background="#FDECEA"
+                                            CornerRadius="6"
+                                            BorderThickness="0"
+                                            Command="{Binding $parent[DataGrid].DataContext.DeleteMachineCommand}"
+                                            CommandParameter="{Binding Id}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
