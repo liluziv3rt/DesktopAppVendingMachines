@@ -26,5 +26,19 @@ namespace DesktopAppVendingMachines.Services
             MainVM?.NavigateToAddMachine();
         }
 
+        public static void GoToCompanies()
+        {
+            MainVM?.NavigateToCompanies();
+        }
+
+        public static void GoToAddCompany()
+        {
+            MainVM?.NavigateToAddCompany();
+        }
+
+        public static void GoToEditCompany(int id)
+        {
+            MainVM?.NavigateToEditCompany(id);
+        }
     }
 }

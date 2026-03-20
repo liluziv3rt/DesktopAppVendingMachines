@@ -358,6 +358,19 @@
           "buildTransitive/netstandard2.1/CommunityToolkit.Mvvm.targets": {}
         }
       },
+      "CsvHelper/33.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/CsvHelper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/CsvHelper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "HarfBuzzSharp/8.3.1.1": {
         "type": "package",
         "dependencies": {
@@ -2058,6 +2071,32 @@
         "lib/netstandard2.1/CommunityToolkit.Mvvm.dll",
         "lib/netstandard2.1/CommunityToolkit.Mvvm.pdb",
         "lib/netstandard2.1/CommunityToolkit.Mvvm.xml"
+      ]
+    },
+    "CsvHelper/33.1.0": {
+      "sha512": "kqfTOZGrn7NarNeXgjh86JcpTHUoeQDMB8t9NVa/ZtlSYiV1rxfRnQ49WaJsob4AiGrbK0XDzpyKkBwai4F8eg==",
+      "type": "package",
+      "path": "csvhelper/33.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.33.1.0.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net462/CsvHelper.dll",
+        "lib/net462/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/net48/CsvHelper.dll",
+        "lib/net48/CsvHelper.xml",
+        "lib/net8.0/CsvHelper.dll",
+        "lib/net8.0/CsvHelper.xml",
+        "lib/net9.0/CsvHelper.dll",
+        "lib/net9.0/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
       ]
     },
     "HarfBuzzSharp/8.3.1.1": {
@@ -4418,6 +4457,7 @@
       "Avalonia.Fonts.Inter >= 11.3.4",
       "Avalonia.Themes.Fluent >= 11.3.4",
       "CommunityToolkit.Mvvm >= 8.2.1",
+      "CsvHelper >= 33.1.0",
       "LiveChartsCore.SkiaSharpView.Avalonia >= 2.0.0-rc2",
       "Microsoft.EntityFrameworkCore >= 9.0.14",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.14",
@@ -4426,24 +4466,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\гусевиа\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Guslik\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
+      "projectUniqueName": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
       "projectName": "DesktopAppVendingMachines",
-      "projectPath": "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
-      "packagesPath": "C:\\Users\\гусевиа\\.nuget\\packages\\",
-      "outputPath": "C:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\obj\\",
+      "projectPath": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj",
+      "packagesPath": "C:\\Users\\Guslik\\.nuget\\packages\\",
+      "outputPath": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\гусевиа\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Guslik\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4503,6 +4538,10 @@
             "target": "Package",
             "version": "[8.2.1, )"
           },
+          "CsvHelper": {
+            "target": "Package",
+            "version": "[33.1.0, )"
+          },
           "LiveChartsCore.SkiaSharpView.Avalonia": {
             "target": "Package",
             "version": "[2.0.0-rc2, )"
@@ -4544,7 +4583,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -30,7 +30,7 @@ namespace DesktopAppVendingMachines.ViewModels
         private string location;
 
         [ObservableProperty]
-        private string selectedPlace; // теперь ComboBox для выбора места
+        private string selectedPlace; 
 
         [ObservableProperty]
         private string coordinates;
@@ -51,16 +51,16 @@ namespace DesktopAppVendingMachines.ViewModels
         private string selectedNotificationTemplate;
 
         [ObservableProperty]
-        private User selectedClient; // Клиент (обычный пользователь)
+        private User selectedClient; 
 
         [ObservableProperty]
-        private User selectedManager; // Только пользователи с IsManager = true
+        private User selectedManager;  
 
         [ObservableProperty]
-        private User selectedEngineer; // Только пользователи с IsEngineer = true
+        private User selectedEngineer; 
 
         [ObservableProperty]
-        private User selectedTechnician; // Только пользователи с IsOperator = true (техник-оператор)
+        private User selectedTechnician; 
 
         [ObservableProperty]
         private bool coinAcceptorEnabled;
@@ -95,18 +95,17 @@ namespace DesktopAppVendingMachines.ViewModels
         [ObservableProperty]
         private string notes;
 
-        // Коллекции
         public ObservableCollection<Manufacture> Manufactures { get; } = new();
         public ObservableCollection<Model> Models { get; } = new();
         public ObservableCollection<string> WorkModes { get; } = new();
         public ObservableCollection<string> Timezones { get; } = new();
-        public ObservableCollection<string> Places { get; } = new(); // для выбора места
+        public ObservableCollection<string> Places { get; } = new(); 
         public ObservableCollection<string> CriticalThresholdTemplates { get; } = new();
         public ObservableCollection<string> NotificationTemplates { get; } = new();
-        public ObservableCollection<User> Clients { get; } = new(); // все пользователи
-        public ObservableCollection<User> Managers { get; } = new(); // только IsManager = true
-        public ObservableCollection<User> Engineers { get; } = new(); // только IsEngineer = true
-        public ObservableCollection<User> Technicians { get; } = new(); // только IsOperator = true
+        public ObservableCollection<User> Clients { get; } = new(); 
+        public ObservableCollection<User> Managers { get; } = new(); 
+        public ObservableCollection<User> Engineers { get; } = new(); 
+        public ObservableCollection<User> Technicians { get; } = new(); 
         public ObservableCollection<string> ServicePriorities { get; } = new();
         public ObservableCollection<string> Modems { get; } = new();
 
@@ -131,7 +130,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
             if (machine == null) return;
 
-            // Основные поля
             Name = machine.Name;
             Location = machine.Location;
             Coordinates = machine.Coordinates;
@@ -142,7 +140,6 @@ namespace DesktopAppVendingMachines.ViewModels
             RfidCashCollection = machine.RfidCashCollection;
             RfidLoading = machine.RfidLoading;
 
-            // Выбранные объекты
             SelectedManufacture = machine.IdModelNavigation?.IdManufactureNavigation;
             SelectedModel = machine.IdModelNavigation;
             SelectedClient = machine.User;
@@ -150,7 +147,6 @@ namespace DesktopAppVendingMachines.ViewModels
             SelectedEngineer = machine.IdEngineerNavigation;
             SelectedTechnician = machine.IdTechnicianNavigation;
 
-            // Загрузка MachineDictionary
             var machineDicts = db.MachineDictionaries
                 .Include(md => md.IdValueNavigation)
                 .Where(md => md.IdMachine == _machineId)
@@ -187,7 +183,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 }
             }
 
-            // Обработка платежных систем (payment_type)
             var paymentValues = machineDicts
                 .Where(md => md.IdValueNavigation?.Key?.ToLower() == "payment_type")
                 .Select(md => md.IdValueNavigation.Value)
@@ -201,17 +196,14 @@ namespace DesktopAppVendingMachines.ViewModels
 
         private void LoadReferenceData()
         {
-            // Производители
             Manufactures.Clear();
             foreach (var m in db.Manufactures.OrderBy(x => x.Name))
                 Manufactures.Add(m);
 
-            // Модели
             Models.Clear();
             foreach (var m in db.Models.Include(x => x.IdManufactureNavigation).OrderBy(x => x.Model1))
                 Models.Add(m);
 
-            // Словари
             var dicts = db.Dictionaries.ToList();
             foreach (var d in dicts)
             {
@@ -221,7 +213,7 @@ namespace DesktopAppVendingMachines.ViewModels
                         WorkModes.Add(d.Value);
                         break;
                     case "place":
-                        Places.Add(d.Value); // добавляем места в отдельную коллекцию
+                        Places.Add(d.Value); 
                         break;
                     case "timezone":
                         Timezones.Add(d.Value);
@@ -241,7 +233,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 }
             }
 
-            // Пользователи с фильтрацией по ролям
             var users = db.Users.ToList();
 
             Clients.Clear();
@@ -251,24 +242,19 @@ namespace DesktopAppVendingMachines.ViewModels
 
             foreach (var u in users)
             {
-                // Все пользователи для клиентов
                 Clients.Add(u);
 
-                // Только менеджеры
                 if (u.IsManager == true)
                     Managers.Add(u);
 
-                // Только инженеры
                 if (u.IsEngineer == true)
                     Engineers.Add(u);
 
-                // Только операторы (техники)
                 if (u.IsOperator == true)
                     Technicians.Add(u);
             }
         }
 
-        // Формирование ФИО для отображения
         private string GetFullName(User user)
         {
             if (user == null) return "";
@@ -281,7 +267,6 @@ namespace DesktopAppVendingMachines.ViewModels
             var machine = db.VendingMachines.FirstOrDefault(v => v.Id == _machineId);
             if (machine == null) return;
 
-            // Обновление полей
             machine.Name = Name;
             machine.IdModel = SelectedModel?.Id ?? 0;
             machine.Location = Location;
@@ -297,7 +282,6 @@ namespace DesktopAppVendingMachines.ViewModels
             machine.IdEngineer = SelectedEngineer?.Id ?? Guid.Empty;
             machine.IdTechnician = SelectedTechnician?.Id ?? Guid.Empty;
 
-            // Удаляем старые MachineDictionary
             var oldDicts = db.MachineDictionaries.Where(md => md.IdMachine == _machineId).ToList();
             db.MachineDictionaries.RemoveRange(oldDicts);
 
@@ -315,16 +299,14 @@ namespace DesktopAppVendingMachines.ViewModels
                 }
             }
 
-            // Добавляем новые
             AddDictEntry("work_mode", SelectedWorkMode);
-            AddDictEntry("place", SelectedPlace); // теперь сохраняем выбранное место
+            AddDictEntry("place", SelectedPlace); 
             AddDictEntry("timezone", SelectedTimezone);
             AddDictEntry("critical_threshold_template", SelectedCriticalThresholdTemplate);
             AddDictEntry("notification_template", SelectedNotificationTemplate);
             AddDictEntry("service_priority", SelectedServicePriority);
             AddDictEntry("operator", SelectedModem);
 
-            // Платежные системы
             if (CoinAcceptorEnabled)
                 AddDictEntry("payment_type", "Монетоприемник");
             if (BillAcceptorEnabled)
@@ -336,7 +318,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
             db.SaveChanges();
 
-            // Возврат к списку
             NavigationService.GoToVendingMachines();
         }
 

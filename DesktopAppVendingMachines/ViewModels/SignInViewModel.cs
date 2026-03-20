@@ -25,9 +25,8 @@ namespace DesktopAppVendingMachines.ViewModels
         [RelayCommand]
         public void Enter()
         {
-            // Загружаем пользователя вместе с ролью через правильное навигационное свойство
             var user = db.Users
-                .Include(u => u.IdRoleNavigation)  // Важно! Используем IdRoleNavigation, а не Role
+                .Include(u => u.IdRoleNavigation) 
                 .FirstOrDefault(x => x.Email == Email && x.Password == Password);
 
             if (user == null)

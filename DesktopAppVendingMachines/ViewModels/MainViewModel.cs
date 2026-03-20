@@ -440,12 +440,30 @@ namespace DesktopAppVendingMachines.ViewModels
             }
         }
 
+        public void NavigateToAddCompany()
+        {
+            CurrentPage = new AddCompanyViewModel();
+            CurrentPageTitle = "Добавление компании";
+        }
+
+        public void NavigateToEditCompany(int id)
+        {
+            CurrentPage = new EditCompanyViewModel(id);
+            CurrentPageTitle = "Редактирование компании";
+        }
+
 
         public void NavigateToVendingMachines()
         {
             CurrentPage = new VendingMachinesViewModel(id => NavigateToEditMachine(id)); 
             CurrentPageTitle = "Торговые автоматы";
         }
+
+        public void NavigateToCompanies()
+        {
+            CurrentPage = new CompaniesViewModel();
+        }
+
 
         public void NavigateToEditMachine(Guid id)
         {
@@ -494,8 +512,7 @@ namespace DesktopAppVendingMachines.ViewModels
                     break;
 
                 case "Companies":
-                    // CurrentPage = new CompaniesViewModel();
-                    CurrentPageTitle = "Компании";
+                    NavigateToCompanies();
                     IsAdminMenuExpanded = true;
                     break;
 

@@ -15,6 +15,8 @@ public partial class GusevContext : DbContext
     {
     }
 
+    public virtual DbSet<Company> Companies { get; set; }
+
     public virtual DbSet<Dictionary> Dictionaries { get; set; }
 
     public virtual DbSet<IssuesFound> IssuesFounds { get; set; }
@@ -46,6 +48,26 @@ public partial class GusevContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("C");
+
+        modelBuilder.Entity<Company>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("companies_pkey");
+
+            entity.ToTable("companies", "praktika");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Adress).HasColumnName("adress");
+            entity.Property(e => e.Contacts).HasColumnName("contacts");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("now()")
+                .HasColumnName("created_date");
+            entity.Property(e => e.IdParentCompany).HasColumnName("id_parent_company");
+            entity.Property(e => e.Name).HasColumnName("name");
+
+            entity.HasOne(d => d.IdParentCompanyNavigation).WithMany(p => p.InverseIdParentCompanyNavigation)
+                .HasForeignKey(d => d.IdParentCompany)
+                .HasConstraintName("companies_id_parent_company_fkey");
+        });
 
         modelBuilder.Entity<Dictionary>(entity =>
         {
@@ -340,12 +362,7 @@ public partial class GusevContext : DbContext
                 .HasConstraintName("vending_machines_user_id_fkey");
         });
 
-        modelBuilder.Entity<MachineDictionary>()
-        .HasKey(md => new { md.IdMachine, md.IdValue });
-
         OnModelCreatingPartial(modelBuilder);
-        base.OnModelCreating(modelBuilder);
-
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

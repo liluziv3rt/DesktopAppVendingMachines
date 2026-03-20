@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using DesktopAppVendingMachines.Models;
 using DesktopAppVendingMachines.Services;
-using DesktopAppVendingMachines.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CsvHelper;
+using CsvHelper.Configuration;
+
+using Avalonia.Controls.ApplicationLifetimes;
+using System.Globalization;
+using System.IO;
+using System.Text;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
@@ -241,9 +247,136 @@ namespace DesktopAppVendingMachines.ViewModels
 
         public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
         public string PageInfo => $"Запись с {((CurrentPage - 1) * PageSize) + 1} до {Math.Min(CurrentPage * PageSize, TotalCount)} из {TotalCount} записей";
+
+        [RelayCommand]
+        private async Task Export()
+        {
+            try
+            {
+                IsLoading = true;
+
+                // Получаем все автоматы с нужными включениями
+                var allMachines = await db.VendingMachines
+                    .Include(v => v.IdModelNavigation)
+                        .ThenInclude(m => m.IdManufactureNavigation)
+                    .Include(v => v.User)
+                    .Include(v => v.IdManagerNavigation)
+                    .Include(v => v.IdEngineerNavigation)
+                    .Include(v => v.IdTechnicianNavigation)
+                    .OrderBy(v => v.Name)
+                    .ToListAsync();
+
+                if (!allMachines.Any())
+                {
+                    await ShowMessage("Экспорт", "Нет данных для экспорта");
+                    return;
+                }
+
+                // Создаем диалог выбора места сохранения
+                var saveFileDialog = new Avalonia.Controls.SaveFileDialog
+                {
+                    Title = "Сохранить CSV файл",
+                    DefaultExtension = "csv",
+                    Filters = new List<Avalonia.Controls.FileDialogFilter>
+            {
+                new Avalonia.Controls.FileDialogFilter
+                {
+                    Name = "CSV файлы",
+                    Extensions = new List<string> { "csv" }
+                }
+            },
+                    InitialFileName = $"Торговые_автоматы_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+                };
+
+                // Получаем главное окно
+                Avalonia.Controls.Window? mainWindow = null;
+
+                if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    mainWindow = desktop.MainWindow;
+                }
+
+                if (mainWindow == null)
+                {
+                    await ShowMessage("Ошибка", "Не удалось открыть диалог сохранения");
+                    return;
+                }
+
+                var filePath = await saveFileDialog.ShowAsync(mainWindow);
+
+                if (string.IsNullOrEmpty(filePath))
+                {
+                    return;
+                }
+
+                // Генерируем CSV
+                var csv = GenerateMachinesCsv(allMachines);
+
+                // Сохраняем файл
+                var encoding = new UTF8Encoding(true);
+                await File.WriteAllTextAsync(filePath, csv, encoding);
+
+                await ShowMessage("Успешно", $"Данные успешно экспортированы в файл:\n{filePath}");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при экспорте: {ex.Message}");
+                await ShowMessage("Ошибка", $"Не удалось экспортировать данные: {ex.Message}");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        private string GenerateMachinesCsv(List<VendingMachine> machines)
+        {
+            using var writer = new StringWriter();
+            using var csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = ";",
+                Encoding = Encoding.UTF8
+            });
+
+            // Заголовки
+            csv.WriteField("ID");
+            csv.WriteField("Название");
+            csv.WriteField("Модель");
+            csv.WriteField("Производитель");
+            csv.WriteField("Адрес");
+            csv.WriteField("Компания");
+            csv.WriteField("Модем");
+            csv.WriteField("Дата установки");
+            csv.WriteField("Менеджер");
+            csv.WriteField("Инженер");
+            csv.WriteField("Техник");
+            csv.NextRecord();
+
+            // Данные
+            foreach (var machine in machines)
+            {
+                var modelName = machine.IdModelNavigation?.Model1 ?? "";
+                var manufactureName = machine.IdModelNavigation?.IdManufactureNavigation?.Name ?? "";
+
+                csv.WriteField(machine.SerialNumber);
+                csv.WriteField(machine.Name);
+                csv.WriteField(modelName);
+                csv.WriteField(manufactureName);
+                csv.WriteField(machine.Location);
+                csv.WriteField(""); // Компания - нужно получить из MachineDictionary
+                csv.WriteField(machine.KitOnlineId);
+                csv.WriteField(machine.InstallDate.ToString("dd.MM.yyyy"));
+                csv.WriteField(machine.IdManagerNavigation?.Family ?? "");
+                csv.WriteField(machine.IdEngineerNavigation?.Family ?? "");
+                csv.WriteField(machine.IdTechnicianNavigation?.Family ?? "");
+                csv.NextRecord();
+            }
+
+            return writer.ToString();
+        }
+
+
     }
-
-
 
 public class VendingMachineViewModel
     {
