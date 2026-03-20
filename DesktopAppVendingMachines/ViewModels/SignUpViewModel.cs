@@ -51,6 +51,18 @@ namespace DesktopAppVendingMachines.ViewModels
                 return;
             }
 
+            if (!Email.Contains('@'))
+            {
+                Message = "Введите корректный email (должен содержать '@')";
+                return;
+            }
+
+            if (Password.Length < 3)
+            {
+                Message = "Пароль должен содержать минимум 3 символа";
+                return;
+            }
+
             var existingUser = db.Users.FirstOrDefault(x => x.Email == Email);
             if (existingUser != null)
             {
@@ -70,7 +82,6 @@ namespace DesktopAppVendingMachines.ViewModels
             db.Users.Add(newUser);
             db.SaveChanges();
 
-            // Возврат на страницу авторизации после успешной регистрации
             MainWindowViewModel.Instance.PageSwitcher = new SignInViewModel();
         }
 

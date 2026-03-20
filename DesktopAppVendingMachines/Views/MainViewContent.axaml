@@ -10,17 +10,13 @@
 
     <Grid ColumnDefinitions="2*, 1*" Background="#F5F7FA">
         
-        <!-- Левая колонка: графики и динамика -->
         <ScrollViewer Grid.Column="0" Background="#F5F7FA">
             <StackPanel Margin="20" Spacing="25">
                 
-                <!-- Заголовок -->
-                <TextBlock Text="Личный кабинет. Главная" FontSize="28" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                <TextBlock Text="Личный кабинет. Главная" FontSize="28" FontWeight="Normal" Foreground="Black"/>
 
-                <!-- Два графика в ряд -->
                 <Grid ColumnDefinitions="1*,1*" ColumnSpacing="20">
 
-                    <!-- Эффективность сети -->
                     <Border Grid.Column="0"
                             Background="White"
                             CornerRadius="16"
@@ -41,7 +37,6 @@
                                     LegendPosition="Hidden"
                                     AnimationsSpeed="0:0:0.8"/>
 
-                                <!-- Текст в центре -->
                                 <StackPanel VerticalAlignment="Center"
                                             HorizontalAlignment="Center">
                                     <TextBlock Text="{Binding EfficiencyPercent}"
@@ -56,7 +51,6 @@
                                 </StackPanel>
                             </Grid>
 
-                            <!-- Легенда -->
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center"
                                         Spacing="20">
@@ -72,7 +66,6 @@
                         </StackPanel>
                     </Border>
 
-                    <!-- Состояние сети -->
                     <Border Grid.Column="1"
                             Background="White"
                             CornerRadius="16"
@@ -91,7 +84,6 @@
                                     LegendPosition="Hidden"
                                     AnimationsSpeed="0:0:0.8"/>
 
-                                <!-- Центр donut -->
                                 <StackPanel VerticalAlignment="Center"
                                             HorizontalAlignment="Center">
                                     <TextBlock Text="{Binding TotalMachinesCount}"
@@ -106,7 +98,6 @@
                                 </StackPanel>
                             </Grid>
 
-                            <!-- Легенда -->
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center"
                                         Spacing="18">
@@ -127,7 +118,6 @@
                     </Border>
                 </Grid>
                 
-                <!-- Динамика продаж -->
                 <Border Background="White" CornerRadius="16" Padding="20" BoxShadow="0 4 12 #14000000">
                     <StackPanel>
                         <TextBlock Text="Динамика продаж за последние 10 дней" FontSize="20" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -142,7 +132,6 @@
             </StackPanel>
         </ScrollViewer>
 
-        <!-- Правая колонка: сводка и новости -->
         <ScrollViewer Grid.Column="1" Background="#F5F7FA">
             <StackPanel Margin="20" Spacing="25">
                 
@@ -153,7 +142,7 @@
                         <StackPanel Spacing="10">
                             <Grid ColumnDefinitions="Auto, *">
                                 <TextBlock Text="Денег в ТА:" Foreground="#7F8C8D" FontSize="15"/>
-                                <TextBlock Grid.Column="1" Text="27 959 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="1" Text="{Binding MoneyInMachines}" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
                             </Grid>
                             <Grid ColumnDefinitions="Auto, *">
                                 <TextBlock Text="Сдача в ТА:" Foreground="#7F8C8D" FontSize="15"/>
@@ -161,11 +150,11 @@
                             </Grid>
                             <Grid ColumnDefinitions="Auto, *">
                                 <TextBlock Text="Выручка, сегодня:" Foreground="#7F8C8D" FontSize="15"/>
-                                <TextBlock Grid.Column="1" Text="11 870 ₽" Foreground="#27AE60" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="1" Text="{Binding CollectedToday}" Foreground="#27AE60" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right"/>
                             </Grid>
                             <Grid ColumnDefinitions="Auto, *">
                                 <TextBlock Text="Выручка, вчера:" Foreground="#7F8C8D" FontSize="15"/>
-                                <TextBlock Grid.Column="1" Text="13 360 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
+                                <TextBlock Grid.Column="1" Text="{Binding CollectedYesterday}" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
                             </Grid>
                             <Grid ColumnDefinitions="Auto, *">
                                 <TextBlock Text="Инкассировано, сегодня:" Foreground="#7F8C8D" FontSize="15"/>
@@ -176,14 +165,13 @@
                                 <TextBlock Grid.Column="1" Text="9 690 ₽" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
                             </Grid>
                             <Grid ColumnDefinitions="Auto, *">
-                                <TextBlock Text="Обслуживаю ТА, сел./через:" Foreground="#7F8C8D" FontSize="15"/>
+                                <TextBlock Text="Обслужено ТА, сег./вчера:" Foreground="#7F8C8D" FontSize="15"/>
                                 <TextBlock Grid.Column="1" Text="2/2" Foreground="#2C3E50" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>
                 </Border>
 
-                <!-- Новости -->
                 <Border Background="White" CornerRadius="16" Padding="20" BoxShadow="0 4 12 #14000000">
                     <StackPanel>
                         <TextBlock Text="Новости" FontSize="22" FontWeight="Bold" Foreground="#2C3E50" Margin="0 0 0 15"/>

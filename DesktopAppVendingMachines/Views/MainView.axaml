@@ -211,26 +211,20 @@
             </ScrollViewer>
         </Border>
 
-        <!-- Второй бар (темно-синий) с названием компании и страницы -->
         <Border Grid.Row="1" Grid.Column="1" Background="#2C3E50" Padding="20 0">
             <Grid ColumnDefinitions="Auto, Auto, *">
                 <TextBlock Text="ООО Торговые Автоматы" 
-                           FontSize="16" 
-                           FontWeight="SemiBold"
+                           FontSize="23" 
+                           FontWeight="Normal"
                            Foreground="White" 
                            VerticalAlignment="Center"/>
                 
-                <TextBlock Grid.Column="1" 
-                           Text="|" 
-                           FontSize="16"
-                           Foreground="#BDC3C7" 
-                           Margin="15 0"
-                           VerticalAlignment="Center"/>
                 
                 <TextBlock Grid.Column="2" 
                            Text="{Binding CurrentPageTitle}" 
                            FontSize="16"
                            Foreground="#BDC3C7" 
+                           HorizontalAlignment="Right"
                            VerticalAlignment="Center"/>
             </Grid>
         </Border>

@@ -65,16 +65,16 @@ namespace DesktopAppVendingMachines.ViewModels
 
         // Данные для сводки
         [ObservableProperty]
-        private string moneyInMachines = "27 959 ₽";
+        private string moneyInMachines;
 
         [ObservableProperty]
         private string changeInMachines = "12 729 ₽";
 
         [ObservableProperty]
-        private string revenueToday = "11 870 ₽";
+        private string revenueToday;
 
         [ObservableProperty]
-        private string revenueYesterday = "13 360 ₽";
+        private string revenueYesterday;
 
         [ObservableProperty]
         private string collectedToday = "8 145 ₽";
@@ -103,14 +103,12 @@ namespace DesktopAppVendingMachines.ViewModels
 
             if (currentUser != null)
             {
-                // Собираем ФИО
                 var fullName = $"{currentUser.Family} {currentUser.Name} {currentUser.Patronymic}".Trim();
                 if (string.IsNullOrWhiteSpace(fullName))
                     fullName = currentUser.Email ?? "Пользователь";
 
                 UserName = fullName;
 
-                // Определяем роль пользователя
                 if (currentUser.IdRoleNavigation != null)
                 {
                     UserRole = currentUser.IdRoleNavigation.Name;
@@ -132,7 +130,6 @@ namespace DesktopAppVendingMachines.ViewModels
                     UserRole = "Пользователь";
                 }
 
-                // Загружаем фото пользователя, если есть
                 if (!string.IsNullOrEmpty(currentUser.Images))
                 {
                     UserPhotoPath = currentUser.Images;
@@ -149,10 +146,8 @@ namespace DesktopAppVendingMachines.ViewModels
         {
             try
             {
-                // Общее количество автоматов
                 totalMachinesCount = db.VendingMachines.Count();
 
-                // Получаем все записи из dictionary с ключом "status"
                 var statusEntries = db.Dictionaries
                     .Where(d => d.Key == "status")
                     .Select(d => new { d.Id, d.Value })
@@ -165,21 +160,17 @@ namespace DesktopAppVendingMachines.ViewModels
                     return;
                 }
 
-                // Строим словарь ID -> значение
                 var statusIdMap = statusEntries.ToDictionary(s => s.Value, s => s.Id);
                 var statusIds = statusIdMap.Values.Select(id => (int?)id).ToList();
 
-                // Получаем все связи из machine_dictionary
                 var allLinks = db.MachineDictionaries
                     .Where(md => statusIds.Contains(md.IdValue))
                     .ToList();
 
-                // Группируем по IdValue
                 var machineStatusCounts = allLinks
                     .GroupBy(md => md.IdValue)
                     .ToDictionary(g => g.Key, g => g.Count());
 
-                // Вспомогательная функция
                 int GetCount(string statusName)
                 {
                     if (statusIdMap.TryGetValue(statusName, out int id))
@@ -195,7 +186,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 _servicingCount = GetCount("Обслуживается");
                 _brokenCount = GetCount("Сломан");
 
-                // Создаём серии
                 int nonWorking = _servicingCount + _brokenCount;
 
                 double percent = totalMachinesCount == 0
@@ -313,7 +303,7 @@ namespace DesktopAppVendingMachines.ViewModels
                         DayOfWeek.Saturday => "Сб",
                         _ => ""
                     };
-                    labels.Add($"{dayLabel}\n{weekDay}");
+                    labels.Add($"{dayLabel} {weekDay}");
                 }
 
                 XAxes = new Axis[]
@@ -357,18 +347,34 @@ namespace DesktopAppVendingMachines.ViewModels
         {
             try
             {
-                var today = DateTime.Today;
-                var yesterday = today.AddDays(-1);
+                decimal totalIncome = db.VendingMachines.Sum(v => v.TotalIncome);
+                MoneyInMachines = $"{totalIncome:N0} ₽";
 
-                // Здесь должна быть логика получения реальных данных из БД
-                // Пока оставляем тестовые данные как в макете
+                ChangeInMachines = "12 729 ₽";
+
+                var today = DateTime.Today;
+                var tomorrow = today.AddDays(1);
+                decimal revenueTodayValue = db.Sales
+                    .Where(s => s.TimeSale >= today && s.TimeSale < tomorrow)
+                    .Sum(s => s.TotalPrice);
+                RevenueToday = $"{revenueTodayValue:N0} ₽";
+
+                var yesterday = today.AddDays(-1);
+                decimal revenueYesterdayValue = db.Sales
+                    .Where(s => s.TimeSale >= yesterday && s.TimeSale < today)
+                    .Sum(s => s.TotalPrice);
+                RevenueYesterday = $"{revenueYesterdayValue:N0} ₽";
+
+                CollectedToday = "8 145 ₽";
+                CollectedYesterday = "9 690 ₽";
+
+                ServiceInfo = $"{_servicingCount}/{totalMachinesCount}";
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Ошибка LoadSummaryData: {ex.Message}");
             }
         }
-
         private void SetDummyChartData()
         {
             var dates = Enumerable.Range(0, 10).Select(i => DateTime.Today.AddDays(-9 + i)).ToArray();
@@ -459,7 +465,7 @@ namespace DesktopAppVendingMachines.ViewModels
             switch (page)
             {
                 case "Main":
-                    CurrentPage = null; // null значит показываем исходный MainView
+                    CurrentPage = null;
                     CurrentPageTitle = "Главная";
                     IsAdminMenuExpanded = false;
                     break;
