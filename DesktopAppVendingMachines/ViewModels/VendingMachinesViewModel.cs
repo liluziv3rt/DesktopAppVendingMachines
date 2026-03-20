@@ -52,7 +52,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
         partial void OnSearchTextChanged(string value)
         {
-            // Отменяем предыдущий отложенный вызов
             _searchDebounceCts?.Cancel();
             _searchDebounceCts = new CancellationTokenSource();
             var token = _searchDebounceCts.Token;
@@ -100,11 +99,18 @@ namespace DesktopAppVendingMachines.ViewModels
             }
         }
 
+        public bool CanGoPrevious => CurrentPage > 1;
+        public bool CanGoNext => CurrentPage < TotalPages;
+
         private void LoadVendingMachines()
         {
             try
             {
                 IsLoading = true;
+
+                OnPropertyChanged(nameof(TotalPages));
+                OnPropertyChanged(nameof(CanGoPrevious));
+                OnPropertyChanged(nameof(CanGoNext));
 
                 var query = db.VendingMachines
                     .Include(v => v.IdModelNavigation)
@@ -138,6 +144,9 @@ namespace DesktopAppVendingMachines.ViewModels
 
                     VendingMachines.Add(new VendingMachineViewModel(machine, machineDictionaries, _dictionaryCache));
                 }
+
+                OnPropertyChanged(nameof(TotalPages));
+
             }
             catch (Exception ex)
             {

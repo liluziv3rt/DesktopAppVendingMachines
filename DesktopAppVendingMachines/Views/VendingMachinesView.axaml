@@ -158,7 +158,6 @@
             </ScrollViewer>
         </Border>
 
-        <!-- Нижняя панель с пагинацией -->
         <Border Grid.Row="2" 
                 Background="White" 
                 CornerRadius="16" 
@@ -166,25 +165,23 @@
                 BoxShadow="0 4 12 #14000000">
             
             <Grid ColumnDefinitions="*, Auto, *">
-                <!-- Информация о записях -->
                 <TextBlock Grid.Column="0" 
                            Text="{Binding PageInfo}"
                            VerticalAlignment="Center"
                            Foreground="#7F8C8D"/>
                 
-                <!-- Кнопки пагинации -->
                 <StackPanel Grid.Column="1" 
                            Orientation="Horizontal" 
                            Spacing="10"
                            HorizontalAlignment="Center">
                     
-                    <Button Content="◀ Предыдущая" 
-                            Command="{Binding PreviousPageCommand}"
-                            Background="#3498DB"
-                            Foreground="White"
-                            Padding="15 8"
-                            CornerRadius="5"
-                            IsEnabled="{Binding CurrentPage, Converter={StaticResource IsGreaterThanOne}}"/>
+                   <Button Content="◀ Предыдущая" 
+        Command="{Binding PreviousPageCommand}"
+        Background="#3498DB"
+        Foreground="White"
+        Padding="15 8"
+        CornerRadius="5"
+        IsEnabled="{Binding CanGoPrevious}"/>
                     
                     <TextBlock Text="{Binding CurrentPage}" 
                                VerticalAlignment="Center"
@@ -204,13 +201,13 @@
                                Foreground="#2C3E50"
                                Margin="10 0"/>
                     
-                    <Button Content="Следующая ▶" 
-                            Command="{Binding NextPageCommand}"
-                            Background="#3498DB"
-                            Foreground="White"
-                            Padding="15 8"
-                            CornerRadius="5"
-                            IsEnabled="{Binding CurrentPage, Converter={StaticResource IsLessThanTotalPages}, ConverterParameter={Binding TotalPages}}"/>
+                   <Button Content="Следующая ▶" 
+        Command="{Binding NextPageCommand}"
+        Background="#3498DB"
+        Foreground="White"
+        Padding="15 8"
+        CornerRadius="5"
+        IsEnabled="{Binding CanGoNext}"/>
                 </StackPanel>
                 
                 <!-- Пустое место справа -->
