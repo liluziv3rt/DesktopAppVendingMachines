@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "E:\\DesktopAppVendingMachines\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\viewmodels\\signupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\viewmodels\\signupviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\views\\signupview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\signupview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\app.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\converters\\booltocharconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\converters\\booltocharconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\converters\\booltoeyeconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\converters\\booltoeyeconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\converters\\booltoborderbrushconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\converters\\booltoborderbrushconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\views\\mainview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\mainview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\converters\\booltoopacityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\converters\\booltoopacityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\converters\\booltocolorconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\converters\\booltocolorconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|e:\\desktopappvendingmachines\\desktopappvendingmachines\\views\\vendingmachinesview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
       "RelativeMoniker": "D:0:0:{C7004941-3E80-4C5F-84B2-BAF87511B346}|DesktopAppVendingMachines\\DesktopAppVendingMachines.csproj|solutionrelative:desktopappvendingmachines\\views\\vendingmachinesview.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
     },
@@ -34,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,19 +82,136 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BoolToCharConverter.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToCharConverter.cs",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Converters\\BoolToCharConverter.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToCharConverter.cs",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Converters\\BoolToCharConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T23:04:48.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BoolToEyeConverter.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToEyeConverter.cs",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Converters\\BoolToEyeConverter.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToEyeConverter.cs",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Converters\\BoolToEyeConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T23:04:37.006Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.axaml",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\App.axaml",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\App.axaml",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\App.axaml",
+              "RelativeToolTip": "DesktopAppVendingMachines\\App.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-20T23:03:29.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BoolToBorderBrushConverter.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToBorderBrushConverter.cs",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Converters\\BoolToBorderBrushConverter.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToBorderBrushConverter.cs",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Converters\\BoolToBorderBrushConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T23:03:20.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SignUpView.axaml",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\SignUpView.axaml",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\SignUpView.axaml",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\SignUpView.axaml",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\SignUpView.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-20T23:02:46.949Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SignUpViewModel.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\SignUpViewModel.cs",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\ViewModels\\SignUpViewModel.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\SignUpViewModel.cs",
+              "RelativeToolTip": "DesktopAppVendingMachines\\ViewModels\\SignUpViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T22:49:52.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BoolToOpacityConverter.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToOpacityConverter.cs",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Converters\\BoolToOpacityConverter.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToOpacityConverter.cs",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Converters\\BoolToOpacityConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T22:42:18.541Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BoolToColorConverter.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToColorConverter.cs",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Converters\\BoolToColorConverter.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Converters\\BoolToColorConverter.cs",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Converters\\BoolToColorConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T22:42:13.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainView.axaml",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainView.axaml",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\MainView.axaml",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\MainView.axaml",
+              "RelativeToolTip": "DesktopAppVendingMachines\\Views\\MainView.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-20T22:26:11.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "DesktopAppVendingMachines\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T22:26:08.086Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "VendingMachinesView.axaml",
               "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
               "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
               "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
               "RelativeToolTip": "DesktopAppVendingMachines\\Views\\VendingMachinesView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-20T21:57:39.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T21:57:39.379Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 13,
               "Title": "VendingMachinesViewModel.cs",
               "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
               "RelativeDocumentMoniker": "DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
@@ -62,12 +219,11 @@
               "RelativeToolTip": "DesktopAppVendingMachines\\ViewModels\\VendingMachinesViewModel.cs",
               "ViewState": "AgIAAC4BAAAAAAAAAAAAAD8BAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T21:56:03.086Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T21:56:03.086Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "CompaniesViewModel.cs",
               "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\CompaniesViewModel.cs",
               "RelativeDocumentMoniker": "DesktopAppVendingMachines\\ViewModels\\CompaniesViewModel.cs",
@@ -75,36 +231,33 @@
               "RelativeToolTip": "DesktopAppVendingMachines\\ViewModels\\CompaniesViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T21:28:26.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T21:28:26.119Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "CompaniesView.axaml",
               "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\CompaniesView.axaml",
               "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\CompaniesView.axaml",
               "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\CompaniesView.axaml",
               "RelativeToolTip": "DesktopAppVendingMachines\\Views\\CompaniesView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-20T21:28:04.309Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T21:28:04.309Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "AddCompanyView.axaml",
               "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\AddCompanyView.axaml",
               "RelativeDocumentMoniker": "DesktopAppVendingMachines\\Views\\AddCompanyView.axaml",
               "ToolTip": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\Views\\AddCompanyView.axaml",
               "RelativeToolTip": "DesktopAppVendingMachines\\Views\\AddCompanyView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-20T21:16:38.387Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T21:16:38.387Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 15,
               "Title": "AddCompanyViewModel.cs",
               "DocumentMoniker": "E:\\DesktopAppVendingMachines\\DesktopAppVendingMachines\\ViewModels\\AddCompanyViewModel.cs",
               "RelativeDocumentMoniker": "DesktopAppVendingMachines\\ViewModels\\AddCompanyViewModel.cs",
@@ -112,8 +265,7 @@
               "RelativeToolTip": "DesktopAppVendingMachines\\ViewModels\\AddCompanyViewModel.cs",
               "ViewState": "AgIAAE8AAAAAAAAAAAAcwGwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T21:16:32.643Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T21:16:32.643Z"
             }
           ]
         }

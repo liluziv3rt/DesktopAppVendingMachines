@@ -12,6 +12,9 @@
         <converters:IsNotNullConverter x:Key="IsNotNull"/>
         <converters:IsGreaterThanOneConverter x:Key="IsGreaterThanOne"/>
         <converters:IsLessThanTotalPagesConverter x:Key="IsLessThanTotalPages"/>
+        <converters:BoolToBorderBrushConverter x:Key="BoolToBorderBrushConverter"/>
+        <converters:BoolToCharConverter x:Key="BoolToCharConverter"/>
+        <converters:BoolToEyeConverter x:Key="BoolToEyeConverter"/>
     </Application.Resources>
 
     <Application.DataTemplates>

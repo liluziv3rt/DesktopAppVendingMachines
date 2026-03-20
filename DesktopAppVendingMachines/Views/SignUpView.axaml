@@ -2,54 +2,165 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:DesktopAppVendingMachines.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
              x:Class="DesktopAppVendingMachines.Views.SignUpView"
              x:DataType="vm:SignUpViewModel">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
-        <TextBlock Text="Регистрация" 
-                   FontSize="24" 
-                   FontWeight="Bold" 
-                   TextAlignment="Center" 
-                   Margin="0 0 0 20"/>
-
-        <TextBlock Text="Email" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Email}" Watermark="Введите email"/>
-
-        <TextBlock Text="Surname" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Surname}" Watermark="Введите фамилию"/>
-
-        <TextBlock Text="Firstname" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Firstname}" Watermark="Введите имя"/>
-
-        <TextBlock Text="Patronymic" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Patronymic}" Watermark="Введите отчество"/>
-
-        <TextBlock Text="Пароль" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding Password}" 
-                 PasswordChar="*" 
-                 Watermark="Введите пароль"/>
-
-        <TextBlock Text="Подтверждение пароля" Margin="0 10 0 0"/>
-        <TextBox Text="{Binding ConfirmPassword}" 
-                 PasswordChar="*" 
-                 Watermark="Подтвердите пароль"/>
-
-        <Button Content="Зарегистрироваться" 
-                HorizontalAlignment="Center" 
-                Margin="0 20 0 0" 
-                Command="{Binding Register}"/>
-
-        <Button Content="Назад к авторизации" 
-                HorizontalAlignment="Center" 
-                Margin="0 10 0 0" 
-                Command="{Binding GoToSignIn}"
-                Background="Gray"/>
-
-        <TextBlock Text="{Binding Message}" 
-                   Foreground="Red" 
-                   TextWrapping="Wrap"
-                   Margin="0 10 0 0"/>
-    </StackPanel>
+    <Grid Background="White">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="50" MaxWidth="500" HorizontalAlignment="Center" Spacing="15">
+                
+                <TextBlock Text="Регистрация" 
+                           FontSize="28" 
+                           FontWeight="Bold" 
+                           Foreground="#2C3E50"
+                           HorizontalAlignment="Center"
+                           Margin="0 0 0 20"/>
+                
+                <!-- Личные данные -->
+                <TextBlock Text="Личные данные" 
+                           FontSize="16" 
+                           FontWeight="SemiBold" 
+                           Foreground="#2C3E50"
+                           Margin="0 10 0 0"/>
+                
+                <!-- Фамилия -->
+                <TextBox Watermark="Фамилия *" 
+                         Text="{Binding Surname}"
+                         Padding="12"/>
+                
+                <!-- Имя -->
+                <TextBox Watermark="Имя *" 
+                         Text="{Binding Firstname}"
+                         Padding="12"/>
+                
+                <!-- Отчество -->
+                <TextBox Watermark="Отчество *" 
+                         Text="{Binding Patronymic}"
+                         Padding="12"/>
+                
+                <!-- Данные для входа -->
+                <TextBlock Text="Данные для входа" 
+                           FontSize="16" 
+                           FontWeight="SemiBold" 
+                           Foreground="#2C3E50"
+                           Margin="0 10 0 0"/>
+                
+                <!-- Email -->
+                <TextBox Watermark="Email *" 
+                         Text="{Binding Email}"
+                         Padding="12"/>
+                
+                <!-- Пароль с возможностью показать/скрыть -->
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox Grid.Column="0" 
+                             Watermark="Пароль *" 
+                             Text="{Binding Password}"
+                             PasswordChar="{Binding ShowPassword, Converter={StaticResource BoolToCharConverter}, ConverterParameter='*'}"
+                             Padding="12"/>
+                    <Button Grid.Column="1" 
+                            Content="{Binding ShowPassword, Converter={StaticResource BoolToEyeConverter}}"
+                            Command="{Binding ToggleShowPasswordCommand}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="40"
+                            Margin="5"/>
+                </Grid>
+                
+                <!-- Подтверждение пароля -->
+                <TextBox Watermark="Подтверждение пароля *" 
+                         Text="{Binding ConfirmPassword}"
+                         PasswordChar="{Binding ShowPassword, Converter={StaticResource BoolToCharConverter}, ConverterParameter='*'}"
+                         Padding="12"/>
+                
+                <!-- CAPTCHA (обязательна перед отправкой кода) -->
+                <TextBlock Text="Подтверждение" 
+                           FontSize="16" 
+                           FontWeight="SemiBold" 
+                           Foreground="#2C3E50"
+                           Margin="0 10 0 0"/>
+                
+                <Border Background="#F5F7FA" 
+                        CornerRadius="8" 
+                        Padding="15">
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                        <TextBlock Grid.Column="0" 
+                                   Text="{Binding CaptchaQuestion}"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="#2C3E50"
+                                   VerticalAlignment="Center"/>
+                        
+                    </Grid>
+                </Border>
+                
+                <TextBox Watermark="Введите ответ" 
+                         Text="{Binding CaptchaAnswer}"
+                         Padding="12">
+                    <TextBox.Styles>
+                        <Style Selector="TextBox">
+                            <Setter Property="BorderBrush" Value="{Binding IsCaptchaValid, Converter={StaticResource BoolToBorderBrushConverter}}"/>
+                        </Style>
+                    </TextBox.Styles>
+                </TextBox>
+                
+                <TextBlock Text="✓ CAPTCHA решена" 
+                           Foreground="#27AE60" 
+                           FontSize="12"
+                           IsVisible="{Binding IsCaptchaValid}"
+                           Margin="5 0 0 0"/>
+                
+                <!-- Код подтверждения (появляется после решения CAPTCHA и нажатия кнопки) -->
+                <TextBlock Text="Подтверждение email" 
+                           FontSize="16" 
+                           FontWeight="SemiBold" 
+                           Foreground="#2C3E50"
+                           Margin="0 10 0 0"/>
+                
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                    <TextBox Grid.Column="0" 
+                             Watermark="Код подтверждения" 
+                             Text="{Binding VerificationCode}"
+                             IsEnabled="{Binding IsVerificationCodeSent}"
+                             Padding="12"/>
+                    <Button Grid.Column="1" 
+                            Content="Отправить код"
+                            Command="{Binding SendVerificationCodeCommand}"
+                            Background="#3498DB"
+                            Foreground="White"
+                            Padding="15 8"
+                            CornerRadius="5"
+                            IsEnabled="{Binding IsCaptchaValid}"/>
+                </Grid>
+                
+                
+                <!-- Сообщение об ошибке -->
+                <TextBlock Text="{Binding Message}" 
+                           Foreground="#E74C3C" 
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center"
+                           Margin="0 5"/>
+                
+                <!-- Кнопки -->
+                <Button Content="Зарегистрироваться" 
+                        Command="{Binding RegisterCommand}"
+                        Background="#27AE60"
+                        Foreground="White"
+                        Padding="20 12"
+                        CornerRadius="8"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"/>
+                
+                <Button Content="Уже есть аккаунт? Войти" 
+                        Command="{Binding GoToSignInCommand}"
+                        Background="Transparent"
+                        Foreground="#3498DB"
+                        BorderThickness="0"
+                        Padding="10"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

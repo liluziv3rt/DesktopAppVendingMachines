@@ -21,9 +21,9 @@
                 <!-- Логотип слева -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                     <Image Source="/Assets/Logo.png" 
-                                   Width="160" Height="60" 
-                                   Stretch="Fill"/>
-                    </StackPanel>
+                           Width="160" Height="60" 
+                           Stretch="Fill"/>
+                </StackPanel>
                 
                 <!-- Пустое место по центру -->
                 <TextBlock Grid.Column="1" Text=""/>
@@ -58,140 +58,162 @@
             </Grid>
         </Border>
         
-        <!-- Левое меню (темное) -->
+        <!-- Левое меню (темно-синий) -->
         <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Background="#1E2A3A">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="25" Spacing="20">
+                <StackPanel Margin="0" Spacing="0">
                     
                     <!-- Заголовок Навигация -->
                     <TextBlock Text="Навигация" 
-                               FontSize="14" 
+                               FontSize="12" 
                                FontWeight="SemiBold"
                                Foreground="#BDC3C7" 
-                               Margin="0 10 0 0"/>
+                               Margin="25 20 0 10"/>
 
                     <!-- Пункты меню -->
-                    <StackPanel Spacing="8">
+                    <StackPanel Spacing="0">
                         <!-- Главная -->
                         <Button Content="🏠 Главная" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Main"
-                                Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Главная}"
+                                Background="Transparent"
                                 Foreground="White" 
                                 HorizontalAlignment="Stretch" 
                                 HorizontalContentAlignment="Left" 
-                                Padding="20 12" 
-                                CornerRadius="8" 
+                                Padding="25 12" 
+                                CornerRadius="0" 
                                 BorderThickness="0"/>
                         
                         <!-- Монитор ТА -->
                         <Button Content="📊 Монитор ТА" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Monitor"
-                                Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Монитор ТА}"
+                                Background="Transparent"
                                 Foreground="White" 
                                 HorizontalAlignment="Stretch" 
                                 HorizontalContentAlignment="Left" 
-                                Padding="20 12" 
-                                CornerRadius="8" 
+                                Padding="25 12" 
+                                CornerRadius="0" 
                                 BorderThickness="0"/>
                         
                         <!-- Детальные отчеты -->
                         <Button Content="📈 Детальные отчеты" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Reports"
-                                Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Детальные отчеты}"
+                                Background="Transparent"
                                 Foreground="White" 
                                 HorizontalAlignment="Stretch" 
                                 HorizontalContentAlignment="Left" 
-                                Padding="20 12" 
-                                CornerRadius="8" 
+                                Padding="25 12" 
+                                CornerRadius="0" 
                                 BorderThickness="0"/>
                         
                         <!-- Учет ТМЦ -->
                         <Button Content="📦 Учет ТМЦ" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Inventory"
-                                Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Учет ТМЦ}"
+                                Background="Transparent"
                                 Foreground="White" 
                                 HorizontalAlignment="Stretch" 
                                 HorizontalContentAlignment="Left" 
-                                Padding="20 12" 
-                                CornerRadius="8" 
+                                Padding="25 12" 
+                                CornerRadius="0" 
                                 BorderThickness="0"/>
                         
                         <!-- Администрирование с подпунктами -->
                         <Expander Header="⚙️ Администрирование" 
-                                  Foreground="#BDC3C7"
                                   Background="Transparent"
                                   BorderThickness="0"
-                                  IsExpanded="{Binding IsAdminMenuExpanded}">
-                            <StackPanel Margin="20 10 0 0" Spacing="5">
+                                  IsExpanded="{Binding IsAdminMenuExpanded}"
+                                  Padding="25 12">
+                            <Expander.Styles>
+                                <Style Selector="Expander">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                                <Style Selector="Expander /template/ ToggleButton">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                                <Style Selector="Expander /template/ Border">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                            </Expander.Styles>
+                            <Expander.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="⚙️ Администрирование" 
+                                               Foreground="White"
+                                               FontSize="14"/>
+                                </DataTemplate>
+                            </Expander.HeaderTemplate>
+                            <StackPanel Margin="25 5 0 10" Spacing="5">
                                 
                                 <!-- Торговые автоматы -->
                                 <Button Content="📋 Торговые автоматы" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="VendingMachines"
-                                        Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Торговые автоматы}"
+                                        Background="Transparent"
                                         Foreground="White" 
                                         HorizontalAlignment="Stretch" 
                                         HorizontalContentAlignment="Left" 
-                                        Padding="15 10" 
-                                        CornerRadius="8" 
+                                        Padding="15 8" 
+                                        CornerRadius="0" 
                                         BorderThickness="0"
-                                        FontSize="14"/>
+                                        FontSize="13"/>
                                 
                                 <!-- Компании -->
                                 <Button Content="🏢 Компании" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Companies"
-                                        Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Компании}"
+                                        Background="Transparent"
                                         Foreground="White" 
                                         HorizontalAlignment="Stretch" 
                                         HorizontalContentAlignment="Left" 
-                                        Padding="15 10" 
-                                        CornerRadius="8" 
+                                        Padding="15 8" 
+                                        CornerRadius="0" 
                                         BorderThickness="0"
-                                        FontSize="14"/>
+                                        FontSize="13"/>
                                 
                                 <!-- Пользователи -->
                                 <Button Content="👥 Пользователи" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Users"
-                                        Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Пользователи}"
+                                        Background="Transparent"
                                         Foreground="White" 
                                         HorizontalAlignment="Stretch" 
                                         HorizontalContentAlignment="Left" 
-                                        Padding="15 10" 
-                                        CornerRadius="8" 
+                                        Padding="15 8" 
+                                        CornerRadius="0" 
                                         BorderThickness="0"
-                                        FontSize="14"/>
+                                        FontSize="13"/>
                                 
                                 <!-- Модемы -->
                                 <Button Content="📡 Модемы" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Modems"
-                                        Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Модемы}"
+                                        Background="Transparent"
                                         Foreground="White" 
                                         HorizontalAlignment="Stretch" 
                                         HorizontalContentAlignment="Left" 
-                                        Padding="15 10" 
-                                        CornerRadius="8" 
+                                        Padding="15 8" 
+                                        CornerRadius="0" 
                                         BorderThickness="0"
-                                        FontSize="14"/>
+                                        FontSize="13"/>
                                 
                                 <!-- Дополнительные -->
                                 <Button Content="➕ Дополнительные" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Additional"
-                                        Background="{Binding CurrentPageTitle, Converter={StaticResource PageToColorConverter}, ConverterParameter=Дополнительные}"
+                                        Background="Transparent"
                                         Foreground="White" 
                                         HorizontalAlignment="Stretch" 
                                         HorizontalContentAlignment="Left" 
-                                        Padding="15 10" 
-                                        CornerRadius="8" 
+                                        Padding="15 8" 
+                                        CornerRadius="0" 
                                         BorderThickness="0"
-                                        FontSize="14"/>
+                                        FontSize="13"/>
                             </StackPanel>
                         </Expander>
                         
@@ -202,8 +224,8 @@
                                 Foreground="#E74C3C" 
                                 HorizontalAlignment="Stretch" 
                                 HorizontalContentAlignment="Left" 
-                                Padding="20 12" 
-                                CornerRadius="8" 
+                                Padding="25 12" 
+                                CornerRadius="0" 
                                 BorderThickness="0" 
                                 Margin="0 20 0 0"/>
                     </StackPanel>
@@ -211,18 +233,18 @@
             </ScrollViewer>
         </Border>
 
+        <!-- Верхняя панель с названием компании -->
         <Border Grid.Row="1" Grid.Column="1" Background="#2C3E50" Padding="20 0">
-            <Grid ColumnDefinitions="Auto, Auto, *">
+            <Grid ColumnDefinitions="Auto, *">
                 <TextBlock Text="ООО Торговые Автоматы" 
-                           FontSize="23" 
-                           FontWeight="Normal"
+                           FontSize="18" 
+                           FontWeight="SemiBold"
                            Foreground="White" 
                            VerticalAlignment="Center"/>
                 
-                
-                <TextBlock Grid.Column="2" 
+                <TextBlock Grid.Column="1" 
                            Text="{Binding CurrentPageTitle}" 
-                           FontSize="16"
+                           FontSize="14"
                            Foreground="#BDC3C7" 
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"/>
