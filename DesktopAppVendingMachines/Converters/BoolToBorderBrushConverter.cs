@@ -11,9 +11,9 @@ namespace DesktopAppVendingMachines.Converters
         {
             if (value is bool isValid && isValid)
             {
-                return new SolidColorBrush(Color.Parse("#27AE60")); // зеленый
+                return new SolidColorBrush(Color.Parse("#27AE60")); 
             }
-            return new SolidColorBrush(Color.Parse("#E74C3C")); // красный
+            return new SolidColorBrush(Color.Parse("#E74C3C")); 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

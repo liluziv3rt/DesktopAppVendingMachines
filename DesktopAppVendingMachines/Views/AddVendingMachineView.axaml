@@ -10,22 +10,17 @@
     <Grid Background="#F5F7FA" Margin="20">
         <ScrollViewer>
             <StackPanel Spacing="20">
-                <!-- Заголовок -->
                 <TextBlock Text="Создание торгового автомата" 
                            FontSize="28" FontWeight="SemiBold" Foreground="#2C3E50"/>
 
-                <!-- Основная форма (такая же, как в редактировании) -->
                 <Border Background="White" CornerRadius="16" Padding="20" BoxShadow="0 4 12 #14000000">
                     <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="30">
-                        <!-- Левая колонка -->
                         <StackPanel Grid.Column="0" Spacing="15">
-                            <!-- Название ТА -->
                             <StackPanel>
                                 <TextBlock Text="Название ТА *" FontSize="14" Foreground="#2C3E50"/>
                                 <TextBox Text="{Binding Name}" Watermark="Введите название"/>
                             </StackPanel>
 
-                            <!-- Производитель и модель -->
                             <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="10">
                                 <StackPanel>
                                     <TextBlock Text="Производитель ТА *" FontSize="14" Foreground="#2C3E50"/>
@@ -41,33 +36,28 @@
                                 </StackPanel>
                             </Grid>
 
-                            <!-- Режим работы -->
                             <StackPanel>
                                 <TextBlock Text="Режим работы *" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding WorkModes}" 
                                           SelectedItem="{Binding SelectedWorkMode}"/>
                             </StackPanel>
 
-                            <!-- Адрес -->
                             <StackPanel>
                                 <TextBlock Text="Адрес *" FontSize="14" Foreground="#2C3E50"/>
                                 <TextBox Text="{Binding Location}" Watermark="Введите адрес"/>
                             </StackPanel>
 
-                            <!-- Место -->
                             <StackPanel>
                                 <TextBlock Text="Место *" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Places}" 
                                           SelectedItem="{Binding SelectedPlace}"/>
                             </StackPanel>
 
-                            <!-- Координаты -->
                             <StackPanel>
                                 <TextBlock Text="Координаты" FontSize="14" Foreground="#2C3E50"/>
                                 <TextBox Text="{Binding Coordinates}" Watermark="54.5191,36.2802"/>
                             </StackPanel>
 
-                            <!-- Номер автомата и время работы -->
                             <Grid ColumnDefinitions="1*, 1*" ColumnSpacing="10">
                                 <StackPanel>
                                     <TextBlock Text="Номер автомата *" FontSize="14" Foreground="#2C3E50"/>
@@ -79,21 +69,18 @@
                                 </StackPanel>
                             </Grid>
 
-                            <!-- Часовой пояс -->
                             <StackPanel>
                                 <TextBlock Text="Часовой пояс *" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Timezones}" 
                                           SelectedItem="{Binding SelectedTimezone}"/>
                             </StackPanel>
 
-                            <!-- Шаблон крит. значений -->
                             <StackPanel>
                                 <TextBlock Text="Шаблон крит. значений" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding CriticalThresholdTemplates}" 
                                           SelectedItem="{Binding SelectedCriticalThresholdTemplate}"/>
                             </StackPanel>
 
-                            <!-- Шаблон уведомлений -->
                             <StackPanel>
                                 <TextBlock Text="Шаблон уведомлений" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding NotificationTemplates}" 
@@ -101,9 +88,7 @@
                             </StackPanel>
                         </StackPanel>
 
-                        <!-- Правая колонка -->
                         <StackPanel Grid.Column="1" Spacing="15">
-                            <!-- Клиент -->
                             <StackPanel>
                                 <TextBlock Text="Клиент" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Clients}"
@@ -116,7 +101,6 @@
                                 </ComboBox>
                             </StackPanel>
 
-                            <!-- Менеджер -->
                             <StackPanel>
                                 <TextBlock Text="Менеджер" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Managers}"
@@ -129,7 +113,6 @@
                                 </ComboBox>
                             </StackPanel>
 
-                            <!-- Инженер -->
                             <StackPanel>
                                 <TextBlock Text="Инженер" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Engineers}"
@@ -142,7 +125,6 @@
                                 </ComboBox>
                             </StackPanel>
 
-                            <!-- Техник-оператор -->
                             <StackPanel>
                                 <TextBlock Text="Техник-оператор" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Technicians}"
@@ -155,7 +137,6 @@
                                 </ComboBox>
                             </StackPanel>
 
-                            <!-- Платежные системы -->
                             <StackPanel>
                                 <TextBlock Text="Платежные системы *" FontSize="14" Foreground="#2C3E50"/>
                                 <CheckBox Content="Монетоприемник" IsChecked="{Binding CoinAcceptorEnabled}"/>
@@ -164,7 +145,6 @@
                                 <CheckBox Content="QR-платежи" IsChecked="{Binding QrPaymentsEnabled}"/>
                             </StackPanel>
 
-                            <!-- RFID карты -->
                             <StackPanel>
                                 <TextBlock Text="RFID карты обслуживания" FontSize="14" Foreground="#2C3E50"/>
                                 <TextBox Text="{Binding RfidService}"/>
@@ -178,27 +158,23 @@
                                 <TextBox Text="{Binding RfidLoading}"/>
                             </StackPanel>
 
-                            <!-- Id кассы Kit Online -->
                             <StackPanel>
                                 <TextBlock Text="Id кассы Kit Online" FontSize="14" Foreground="#2C3E50"/>
                                 <TextBox Text="{Binding KitOnlineId}"/>
                             </StackPanel>
 
-                            <!-- Приоритет обслуживания -->
                             <StackPanel>
                                 <TextBlock Text="Приоритет обслуживания *" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding ServicePriorities}" 
                                           SelectedItem="{Binding SelectedServicePriority}"/>
                             </StackPanel>
 
-                            <!-- Модем -->
                             <StackPanel>
                                 <TextBlock Text="Модем *" FontSize="14" Foreground="#2C3E50"/>
                                 <ComboBox ItemsSource="{Binding Modems}" 
                                           SelectedItem="{Binding SelectedModem}"/>
                             </StackPanel>
 
-                            <!-- Примечания -->
                             <StackPanel>
                                 <TextBlock Text="Примечания" FontSize="14" Foreground="#2C3E50"/>
                                 <TextBox Text="{Binding Notes}" AcceptsReturn="True" Height="80" TextWrapping="Wrap"/>
@@ -207,7 +183,6 @@
                     </Grid>
                 </Border>
 
-                <!-- Кнопки -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
                     <Button Content="Сохранить" Command="{Binding SaveCommand}"
                             Background="#27AE60" Foreground="White" Padding="20 10" CornerRadius="5"/>

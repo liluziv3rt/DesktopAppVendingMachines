@@ -11,24 +11,20 @@
 
     <Grid RowDefinitions="70, 50, *" ColumnDefinitions="280, *">
         
-        <!-- Верхний бар (белый) с логотипом и пользователем -->
         <Border Grid.Row="0" Grid.ColumnSpan="2" 
                 Background="White" 
                 BoxShadow="0 2 8 #1A000000"
                 Padding="20 0">
             <Grid ColumnDefinitions="Auto, *, Auto">
                 
-                <!-- Логотип слева -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                     <Image Source="/Assets/Logo.png" 
                            Width="160" Height="60" 
                            Stretch="Fill"/>
                 </StackPanel>
                 
-                <!-- Пустое место по центру -->
                 <TextBlock Grid.Column="1" Text=""/>
                 
-                <!-- Блок пользователя справа -->
                 <Border Grid.Column="2" 
                         Background="#F5F7FA" 
                         CornerRadius="30" 
@@ -57,22 +53,17 @@
                 </Border>
             </Grid>
         </Border>
-        
-        <!-- Левое меню (темно-синий) -->
         <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Background="#1E2A3A">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="0" Spacing="0">
                     
-                    <!-- Заголовок Навигация -->
                     <TextBlock Text="Навигация" 
                                FontSize="12" 
                                FontWeight="SemiBold"
                                Foreground="#BDC3C7" 
                                Margin="25 20 0 10"/>
 
-                    <!-- Пункты меню -->
                     <StackPanel Spacing="0">
-                        <!-- Главная -->
                         <Button Content="🏠 Главная" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Main"
@@ -84,7 +75,6 @@
                                 CornerRadius="0" 
                                 BorderThickness="0"/>
                         
-                        <!-- Монитор ТА -->
                         <Button Content="📊 Монитор ТА" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Monitor"
@@ -96,7 +86,6 @@
                                 CornerRadius="0" 
                                 BorderThickness="0"/>
                         
-                        <!-- Детальные отчеты -->
                         <Button Content="📈 Детальные отчеты" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Reports"
@@ -108,7 +97,6 @@
                                 CornerRadius="0" 
                                 BorderThickness="0"/>
                         
-                        <!-- Учет ТМЦ -->
                         <Button Content="📦 Учет ТМЦ" 
                                 Command="{Binding NavigateToCommand}"
                                 CommandParameter="Inventory"
@@ -120,7 +108,6 @@
                                 CornerRadius="0" 
                                 BorderThickness="0"/>
                         
-                        <!-- Администрирование с подпунктами -->
                         <Expander Header="⚙️ Администрирование" 
                                   Background="Transparent"
                                   BorderThickness="0"
@@ -150,7 +137,6 @@
                             </Expander.HeaderTemplate>
                             <StackPanel Margin="25 5 0 10" Spacing="5">
                                 
-                                <!-- Торговые автоматы -->
                                 <Button Content="📋 Торговые автоматы" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="VendingMachines"
@@ -163,7 +149,6 @@
                                         BorderThickness="0"
                                         FontSize="13"/>
                                 
-                                <!-- Компании -->
                                 <Button Content="🏢 Компании" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Companies"
@@ -176,7 +161,6 @@
                                         BorderThickness="0"
                                         FontSize="13"/>
                                 
-                                <!-- Пользователи -->
                                 <Button Content="👥 Пользователи" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Users"
@@ -189,7 +173,6 @@
                                         BorderThickness="0"
                                         FontSize="13"/>
                                 
-                                <!-- Модемы -->
                                 <Button Content="📡 Модемы" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Modems"
@@ -202,7 +185,6 @@
                                         BorderThickness="0"
                                         FontSize="13"/>
                                 
-                                <!-- Дополнительные -->
                                 <Button Content="➕ Дополнительные" 
                                         Command="{Binding NavigateToCommand}"
                                         CommandParameter="Additional"
@@ -217,7 +199,6 @@
                             </StackPanel>
                         </Expander>
                         
-                        <!-- Выход -->
                         <Button Content="🚪 Выход" 
                                 Command="{Binding LogoutCommand}"
                                 Background="Transparent" 
@@ -233,7 +214,6 @@
             </ScrollViewer>
         </Border>
 
-        <!-- Верхняя панель с названием компании -->
         <Border Grid.Row="1" Grid.Column="1" Background="#2C3E50" Padding="20 0">
             <Grid ColumnDefinitions="Auto, *">
                 <TextBlock Text="ООО Торговые Автоматы" 
@@ -251,12 +231,9 @@
             </Grid>
         </Border>
 
-        <!-- Основная область с динамической загрузкой страниц -->
         <Grid Grid.Row="2" Grid.Column="1" Background="#F5F7FA">
-            <!-- Если CurrentPage = null, показываем MainViewContent -->
             <views:MainViewContent IsVisible="{Binding CurrentPage, Converter={StaticResource IsNull}}"/>
             
-            <!-- Если CurrentPage не null, показываем его -->
             <ContentControl Content="{Binding CurrentPage}"
                             IsVisible="{Binding CurrentPage, Converter={StaticResource IsNotNull}}"/>
         </Grid>

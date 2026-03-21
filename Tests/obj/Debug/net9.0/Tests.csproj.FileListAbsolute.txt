@@ -1,0 +1,6 @@
+E:\DesktopAppVendingMachines\Tests\obj\Debug\net9.0\Tests.csproj.AssemblyReference.cache
+E:\DesktopAppVendingMachines\Tests\obj\Debug\net9.0\Tests.GeneratedMSBuildEditorConfig.editorconfig
+E:\DesktopAppVendingMachines\Tests\obj\Debug\net9.0\Tests.AssemblyInfoInputs.cache
+E:\DesktopAppVendingMachines\Tests\obj\Debug\net9.0\Tests.AssemblyInfo.cs
+E:\DesktopAppVendingMachines\Tests\obj\Debug\net9.0\Tests.csproj.CoreCompileInputs.cache
+E:\DesktopAppVendingMachines\Tests\obj\Debug\net9.0\Tests.sourcelink.json

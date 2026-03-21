@@ -65,7 +65,6 @@ namespace DesktopAppVendingMachines.Services
                 }
             };
 
-            // Подписываемся на события кнопок
             foreach (var child in ((StackPanel)((StackPanel)dialog.Content).Children[1]).Children)
             {
                 if (child is Button button)
@@ -117,7 +116,6 @@ namespace DesktopAppVendingMachines.Services
                 }
             };
 
-            // Находим кнопку и подписываемся
             var okButton = ((StackPanel)dialog.Content).Children[1] as Button;
             if (okButton != null)
             {

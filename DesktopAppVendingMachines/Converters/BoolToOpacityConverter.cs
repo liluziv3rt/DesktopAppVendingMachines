@@ -14,7 +14,6 @@ namespace DesktopAppVendingMachines.Converters
         {
             if (value is bool boolValue)
             {
-                // Если параметр передан, то инвертируем логику
                 if (parameter != null && bool.TryParse(parameter.ToString(), out bool invert) && invert)
                 {
                     return boolValue ? 0.5 : 1.0;

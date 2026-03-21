@@ -20,9 +20,9 @@ namespace DesktopAppVendingMachines.Converters
             var targetPage = parameter.ToString();
 
             if (currentPage?.Contains(targetPage) == true)
-                return new SolidColorBrush(Color.Parse("#3498DB")); // Активный цвет
+                return new SolidColorBrush(Color.Parse("#3498DB"));
 
-            return new SolidColorBrush(Color.Parse("#BDC3C7")); // Неактивный цвет
+            return new SolidColorBrush(Color.Parse("#BDC3C7")); 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -83,10 +83,8 @@ namespace DesktopAppVendingMachines.Converters
                 return currentPage < totalPages;
             }
 
-            // Если параметр пришел как Binding, он может быть не int
             if (value is int currentPage2 && parameter != null)
             {
-                // Пытаемся распарсить
                 if (int.TryParse(parameter.ToString(), out int totalPages2))
                 {
                     return currentPage2 < totalPages2;

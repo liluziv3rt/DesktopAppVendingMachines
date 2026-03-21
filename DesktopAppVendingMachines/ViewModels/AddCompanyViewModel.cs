@@ -36,7 +36,6 @@ namespace DesktopAppVendingMachines.ViewModels
         private void LoadParentCompanies()
         {
             ParentCompanies.Clear();
-            // Добавляем пустой вариант для отсутствия родительской компании
             ParentCompanies.Add(null);
 
             foreach (var company in db.Companies.OrderBy(c => c.Name))
@@ -53,7 +52,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 return false;
             }
 
-            // Проверяем уникальность названия
             if (db.Companies.Any(c => c.Name == Name.Trim()))
             {
                 ShowMessage("Ошибка", $"Компания с названием '{Name}' уже существует");
@@ -82,7 +80,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 db.Companies.Add(company);
                 await db.SaveChangesAsync();
 
-                // Добавляем компанию в Dictionary
                 var dictEntry = new Dictionary
                 {
                     Key = "company",

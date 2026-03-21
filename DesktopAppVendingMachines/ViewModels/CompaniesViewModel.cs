@@ -173,7 +173,6 @@ namespace DesktopAppVendingMachines.ViewModels
                     db.Companies.Remove(company);
                     await db.SaveChangesAsync();
 
-                    // Удаляем связанные записи из Dictionary
                     var dictEntries = db.Dictionaries.Where(d => d.Key == "company" && d.Value == company.Name).ToList();
                     if (dictEntries.Any())
                     {
@@ -203,7 +202,6 @@ namespace DesktopAppVendingMachines.ViewModels
             {
                 IsLoading = true;
 
-                // Получаем все компании (без пагинации)
                 var allCompanies = await db.Companies
                     .Include(c => c.IdParentCompanyNavigation)
                     .OrderBy(c => c.Name)
@@ -215,7 +213,6 @@ namespace DesktopAppVendingMachines.ViewModels
                     return;
                 }
 
-                // Создаем диалог выбора места сохранения
                 var saveFileDialog = new Avalonia.Controls.SaveFileDialog
                 {
                     Title = "Сохранить CSV файл",
@@ -231,7 +228,6 @@ namespace DesktopAppVendingMachines.ViewModels
                     InitialFileName = $"Компании_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
                 };
 
-                // Получаем главное окно через Application.Current
                 Avalonia.Controls.Window? mainWindow = null;
 
                 if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -249,13 +245,11 @@ namespace DesktopAppVendingMachines.ViewModels
 
                 if (string.IsNullOrEmpty(filePath))
                 {
-                    return; // Пользователь отменил сохранение
+                    return;
                 }
 
-                // Генерируем CSV
                 var csv = GenerateCsv(allCompanies);
 
-                // Сохраняем файл с BOM для корректного отображения кириллицы
                 var encoding = new UTF8Encoding(true);
                 await File.WriteAllTextAsync(filePath, csv, encoding);
 

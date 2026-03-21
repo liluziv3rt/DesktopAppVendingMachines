@@ -13,7 +13,6 @@ namespace DesktopAppVendingMachines.ViewModels
 {
     public partial class AddVendingMachineViewModel : ViewModelBase
     {
-        // Основные поля (все обязательные)
         [ObservableProperty]
         private string name;
 
@@ -33,13 +32,13 @@ namespace DesktopAppVendingMachines.ViewModels
         private string selectedPlace;
 
         [ObservableProperty]
-        private string coordinates = ""; // по умолчанию пустая строка
+        private string coordinates = "";
 
         [ObservableProperty]
         private int serialNumber;
 
         [ObservableProperty]
-        private string workingHours = ""; // по умолчанию пустая строка
+        private string workingHours = ""; 
 
         [ObservableProperty]
         private string selectedTimezone;
@@ -50,7 +49,6 @@ namespace DesktopAppVendingMachines.ViewModels
         [ObservableProperty]
         private string selectedNotificationTemplate;
 
-        // Пользователи (обязательны к выбору)
         [ObservableProperty]
         private User selectedClient;
 
@@ -93,7 +91,6 @@ namespace DesktopAppVendingMachines.ViewModels
         [ObservableProperty]
         private string notes = "";
 
-        // Коллекции
         public ObservableCollection<Manufacture> Manufactures { get; } = new();
         public ObservableCollection<Model> Models { get; } = new();
         public ObservableCollection<string> WorkModes { get; } = new();
@@ -115,17 +112,14 @@ namespace DesktopAppVendingMachines.ViewModels
 
         private void LoadReferenceData()
         {
-            // Производители
             Manufactures.Clear();
             foreach (var m in db.Manufactures.OrderBy(x => x.Name))
                 Manufactures.Add(m);
 
-            // Модели
             Models.Clear();
             foreach (var m in db.Models.Include(x => x.IdManufactureNavigation).OrderBy(x => x.Model1))
                 Models.Add(m);
 
-            // Словари
             var dicts = db.Dictionaries.ToList();
             foreach (var d in dicts)
             {
@@ -155,7 +149,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 }
             }
 
-            // Пользователи
             var users = db.Users.ToList();
             Clients.Clear();
             Managers.Clear();
@@ -175,7 +168,6 @@ namespace DesktopAppVendingMachines.ViewModels
         {
             try
             {
-                // Добавляем статус "Работает" через SQL
                 await db.Database.ExecuteSqlRawAsync(@"
             INSERT INTO praktika.machine_dictionary (id_machine, id_value)
             SELECT {0}, id 
@@ -234,14 +226,11 @@ namespace DesktopAppVendingMachines.ViewModels
                 if (!existingUserIds.Contains(machine.IdTechnician))
                     throw new Exception($"IdTechnician {machine.IdTechnician} не существует");
 
-                // Сохраняем машину
                 db.VendingMachines.Add(machine);
                 await db.SaveChangesAsync();
 
-                // Добавляем статус "Работает"
                 await AddMachineStatus(machine.Id);
 
-                // Добавляем остальные параметры
                 await AddMachineDictionaries(machine.Id);
 
                 await ShowMessage("Успешно", "Торговый автомат создан");
@@ -301,7 +290,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
         private async Task<bool> ValidateAllFields()
         {
-            // Основные поля
             if (string.IsNullOrWhiteSpace(Name))
             {
                 await ShowMessage("Ошибка", "Поле 'Название ТА' обязательно");
@@ -332,7 +320,7 @@ namespace DesktopAppVendingMachines.ViewModels
                 await ShowMessage("Ошибка", "Поле 'Место' обязательно");
                 return false;
             }
-            if (SerialNumber <= 0)  // <-- проверка номера автомата
+            if (SerialNumber <= 0)  
             {
                 await ShowMessage("Ошибка", "Поле 'Номер автомата' обязательно и должно быть положительным числом");
                 return false;
@@ -343,7 +331,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 return false;
             }
 
-            // Пользователи
             if (SelectedClient == null)
             {
                 await ShowMessage("Ошибка", "Необходимо выбрать Клиента");
@@ -365,28 +352,24 @@ namespace DesktopAppVendingMachines.ViewModels
                 return false;
             }
 
-            // Платежные системы (хотя бы одна)
             if (!CoinAcceptorEnabled && !BillAcceptorEnabled && !CashlessModuleEnabled && !QrPaymentsEnabled)
             {
                 await ShowMessage("Ошибка", "Необходимо выбрать хотя бы одну платежную систему");
                 return false;
             }
 
-            // Приоритет обслуживания
             if (string.IsNullOrWhiteSpace(SelectedServicePriority))
             {
                 await ShowMessage("Ошибка", "Необходимо выбрать приоритет обслуживания");
                 return false;
             }
 
-            // Модем
             if (string.IsNullOrWhiteSpace(SelectedModem))
             {
                 await ShowMessage("Ошибка", "Необходимо выбрать модем");
                 return false;
             }
 
-            // Проверка существования пользователей в БД
             var existingIds = db.Users.Select(u => u.Id).ToHashSet();
             if (!existingIds.Contains(SelectedClient.Id))
             {

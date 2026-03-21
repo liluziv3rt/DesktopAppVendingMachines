@@ -23,7 +23,6 @@
                            Foreground="#2C3E50"
                            HorizontalAlignment="Center"/>
                 
-                <!-- Название компании -->
                 <StackPanel Spacing="5">
                     <TextBlock Text="Название компании *" 
                                Foreground="#2C3E50"
@@ -33,7 +32,6 @@
                              Padding="10"/>
                 </StackPanel>
                 
-                <!-- Вышестоящая компания -->
                 <StackPanel Spacing="5">
                     <TextBlock Text="Вышестоящая компания" 
                                Foreground="#2C3E50"
@@ -49,7 +47,6 @@
                     </ComboBox>
                 </StackPanel>
                 
-                <!-- Адрес -->
                 <StackPanel Spacing="5">
                     <TextBlock Text="Адрес" 
                                Foreground="#2C3E50"
@@ -62,7 +59,6 @@
                              Height="80"/>
                 </StackPanel>
                 
-                <!-- Контакты -->
                 <StackPanel Spacing="5">
                     <TextBlock Text="Контакты" 
                                Foreground="#2C3E50"
@@ -75,7 +71,6 @@
                              Height="80"/>
                 </StackPanel>
                 
-                <!-- Кнопки -->
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
                     <Button Grid.Column="0" 
                             Content="Сохранить"

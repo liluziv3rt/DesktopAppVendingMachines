@@ -8,7 +8,6 @@
              x:DataType="vm:CompaniesViewModel">
 
     <Grid RowDefinitions="Auto, *, Auto" Background="#F5F7FA" Margin="20" RowSpacing="20">
-        <!-- Верхняя панель с заголовком и поиском -->
         <Border Grid.Row="0" 
                 Background="White" 
                 CornerRadius="16" 
@@ -26,33 +25,28 @@
                            Foreground="#7F8C8D"/>
         
                 <Grid ColumnDefinitions="Auto, Auto, Auto, *, Auto, Auto" ColumnSpacing="10" Margin="0 10 0 0">
-                    <!-- Показать -->
                     <TextBlock Grid.Column="0" 
                                Text="Показать" 
                                VerticalAlignment="Center"
                                Foreground="#7F8C8D"/>
             
-                    <!-- ComboBox выбора количества -->
                     <ComboBox Grid.Column="1" 
                               Width="80"
                               ItemsSource="{Binding PageSizes}"
                               SelectedItem="{Binding PageSize}"
                               VerticalAlignment="Center"/>
             
-                    <!-- надпись "записей" -->
                     <TextBlock Grid.Column="2" 
                                Text="записей" 
                                VerticalAlignment="Center"
                                Foreground="#7F8C8D"
                                Margin="0 0 10 0"/>
             
-                    <!-- Поле поиска -->
                     <TextBox Grid.Column="3" 
                              Watermark="Поиск по названию..."
                              Text="{Binding SearchText}"
                              VerticalAlignment="Center"/>
             
-                    <!-- Кнопка Экспорт -->
                     <Button Grid.Column="4" 
                             Content="📊 Экспорт"
                             Command="{Binding ExportCommand}"
@@ -62,7 +56,6 @@
                             CornerRadius="5"
                             Margin="0 0 5 0"/>
                     
-                    <!-- Кнопка Добавить компанию -->
                     <Button Grid.Column="5" 
                             Content="+ Добавить"
                             Command="{Binding AddCompanyCommand}"
@@ -74,7 +67,6 @@
             </StackPanel>
         </Border>
 
-        <!-- Таблица с компаниями -->
         <Border Grid.Row="1" 
                 Background="White" 
                 CornerRadius="16" 
@@ -92,22 +84,18 @@
                           Margin="0">
                     
                     <DataGrid.Columns>
-                        <!-- ID -->
                         <DataGridTextColumn Header="ID" 
                                            Binding="{Binding Id}"
                                            Width="80"/>
                         
-                        <!-- Название -->
                         <DataGridTextColumn Header="Название" 
                                            Binding="{Binding Name}"
                                            Width="250"/>
                         
-                        <!-- Вышестоящая компания -->
                         <DataGridTextColumn Header="Вышестоящая" 
                                            Binding="{Binding ParentCompanyName}"
                                            Width="250"/>
                         
-                        <!-- Адрес -->
                         <DataGridTemplateColumn Header="Адрес" Width="300">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -118,7 +106,6 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         
-                        <!-- Контакты -->
                         <DataGridTemplateColumn Header="Контакты" Width="250">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -129,12 +116,10 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         
-                        <!-- В работе с -->
                         <DataGridTextColumn Header="В работе с" 
                                            Binding="{Binding CreatedDate}"
                                            Width="120"/>
                         
-                        <!-- Действия -->
                         <DataGridTemplateColumn Header="Действия" Width="140">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

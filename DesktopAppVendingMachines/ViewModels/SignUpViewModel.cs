@@ -70,7 +70,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
         partial void OnCaptchaAnswerChanged(string value)
         {
-            // Проверяем CAPTCHA при каждом изменении поля
             IsCaptchaValid = ValidateCaptcha(value);
         }
 
@@ -95,17 +94,14 @@ namespace DesktopAppVendingMachines.ViewModels
                 return;
             }
 
-            // Проверка CAPTCHA перед отправкой кода
             if (!IsCaptchaValid)
             {
                 Message = "Сначала решите математический пример";
                 return;
             }
 
-            // Генерируем 6-значный код
             GeneratedCode = _random.Next(100000, 999999).ToString();
 
-            // Показываем код в модальном окне
             await ShowMessageDialog("Код подтверждения", $"Ваш код подтверждения: {GeneratedCode}\n\nВведите этот код в поле ниже для завершения регистрации.");
 
             ShowVerificationField = true;
@@ -115,7 +111,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
         private async Task ShowMessageDialog(string title, string message)
         {
-            // Используем существующий метод из ViewModelBase
             await ShowMessage(title, message);
         }
 
@@ -134,23 +129,19 @@ namespace DesktopAppVendingMachines.ViewModels
 
         private bool IsValidPassword(string password)
         {
-            // Пароль должен содержать минимум 8 символов
+            
             if (password.Length < 8)
                 return false;
 
-            // Должен содержать хотя бы одну цифру
             if (!password.Any(char.IsDigit))
                 return false;
 
-            // Должен содержать хотя бы один спецсимвол
             if (!password.Any(ch => !char.IsLetterOrDigit(ch)))
                 return false;
 
-            // Должен содержать хотя бы одну заглавную букву
             if (!password.Any(char.IsUpper))
                 return false;
 
-            // Должен содержать хотя бы одну строчную букву
             if (!password.Any(char.IsLower))
                 return false;
 
@@ -159,7 +150,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
         private void GenerateCaptcha()
         {
-            // Простой пример: 2 + 2 - 2 * 2 = ?
             CaptchaQuestion = "2 + 2 - 2 × 2 = ?";
         }
 
@@ -168,17 +158,14 @@ namespace DesktopAppVendingMachines.ViewModels
             if (string.IsNullOrWhiteSpace(userAnswer))
                 return false;
 
-            // Правильный ответ: 0
             return userAnswer.Trim() == "0";
         }
 
         [RelayCommand]
         private async Task Register()
         {
-            // Очищаем предыдущее сообщение
             Message = "";
 
-            // Проверка всех полей
             if (string.IsNullOrWhiteSpace(Email) ||
                 string.IsNullOrWhiteSpace(Password) ||
                 string.IsNullOrWhiteSpace(ConfirmPassword) ||
@@ -190,28 +177,24 @@ namespace DesktopAppVendingMachines.ViewModels
                 return;
             }
 
-            // Проверка email
             if (!IsValidEmail(Email))
             {
                 Message = "Введите корректный email";
                 return;
             }
 
-            // Проверка пароля
             if (!IsValidPassword(Password))
             {
                 Message = "Пароль должен содержать минимум 8 символов, включая:\n- хотя бы одну цифру\n- хотя бы один спецсимвол\n- хотя бы одну заглавную букву\n- хотя бы одну строчную букву";
                 return;
             }
 
-            // Проверка совпадения паролей
             if (Password != ConfirmPassword)
             {
                 Message = "Пароли не совпадают";
                 return;
             }
 
-            // Проверка кода подтверждения
             if (!IsVerificationCodeSent)
             {
                 Message = "Сначала отправьте код подтверждения на email";
@@ -224,14 +207,12 @@ namespace DesktopAppVendingMachines.ViewModels
                 return;
             }
 
-            // Проверка CAPTCHA
             if (!IsCaptchaValid)
             {
                 Message = "Неверный ответ на CAPTCHA";
                 return;
             }
 
-            // Проверка существующего пользователя
             var existingUser = db.Users.FirstOrDefault(x => x.Email == Email);
             if (existingUser != null)
             {
@@ -241,7 +222,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
             try
             {
-                // Создание нового пользователя
                 var newUser = new User
                 {
                     Id = Guid.NewGuid(),
@@ -260,7 +240,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
                 await ShowMessage("Успешно", "Регистрация успешно завершена!");
 
-                // Переход на страницу входа
                 MainWindowViewModel.Instance.PageSwitcher = new SignInViewModel();
             }
             catch (Exception ex)

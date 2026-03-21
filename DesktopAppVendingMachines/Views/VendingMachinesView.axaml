@@ -8,7 +8,6 @@
              x:DataType="vm:VendingMachinesViewModel">
 
     <Grid RowDefinitions="Auto, *, Auto" Background="#F5F7FA" Margin="20" RowSpacing="20">
-       <!-- Верхняя панель с заголовком и поиском -->
             <Border Grid.Row="0" 
                     Background="White" 
                     CornerRadius="16" 
@@ -26,33 +25,28 @@
                                Foreground="#7F8C8D"/>
         
                     <Grid ColumnDefinitions="Auto, Auto, Auto, *, Auto, Auto" ColumnSpacing="10" Margin="0 10 0 0">
-                        <!-- Показать -->
+                       
                         <TextBlock Grid.Column="0" 
                                    Text="Показать" 
                                    VerticalAlignment="Center"
                                    Foreground="#7F8C8D"/>
             
-                        <!-- ComboBox выбора количества -->
                         <ComboBox Grid.Column="1" 
                                   Width="80"
                                   ItemsSource="{Binding PageSizes}"
                                   SelectedItem="{Binding PageSize}"
                                   VerticalAlignment="Center"/>
             
-                        <!-- надпись "записей" -->
                         <TextBlock Grid.Column="2" 
                                    Text="записей" 
                                    VerticalAlignment="Center"
                                    Foreground="#7F8C8D"
                                    Margin="0 0 10 0"/>
-            
-                        <!-- Поле поиска (live search) -->
                         <TextBox Grid.Column="3" 
                                  Watermark="Поиск по названию или адресу..."
                                  Text="{Binding SearchText}"
                                  VerticalAlignment="Center"/>
             
-                        <!-- Кнопка Экспорт -->
                         <Button Grid.Column="4" 
                                 Content="📊 Экспорт"
                                 Command="{Binding ExportCommand}"
@@ -62,7 +56,6 @@
                                 CornerRadius="5"
                                 Margin="0 0 5 0"/>
                         
-                        <!-- Кнопка Добавить автомат -->
                         <Button Grid.Column="5" 
                                 Content="+ Добавить автомат"
                                 Command="{Binding AddMachineCommand}"
@@ -74,7 +67,6 @@
                 </StackPanel>
             </Border>
 
-        <!-- Таблица с автоматами -->
         <Border Grid.Row="1" 
                 Background="White" 
                 CornerRadius="16" 
@@ -92,32 +84,26 @@
                           Margin="0">
                     
                     <DataGrid.Columns>
-                        <!-- ID -->
                         <DataGridTextColumn Header="ID" 
                                            Binding="{Binding DisplayId}"
                                            Width="80"/>
                         
-                        <!-- Название автомата -->
                         <DataGridTextColumn Header="Название автомата" 
                                            Binding="{Binding Name}"
                                            Width="200"/>
                         
-                        <!-- Модель -->
                         <DataGridTextColumn Header="Модель" 
                                            Binding="{Binding ModelName}"
                                            Width="180"/>
                         
-                        <!-- Компания -->
                         <DataGridTextColumn Header="Компания" 
                                            Binding="{Binding Company}"
                                            Width="300"/>
                         
-                        <!-- Модем -->
                         <DataGridTextColumn Header="Модем" 
                                            Binding="{Binding Modem}"
                                            Width="120"/>
                         
-                        <!-- Адрес / Место -->
                         <DataGridTemplateColumn Header="Адрес / Место" Width="250">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -128,7 +114,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         
-                        <!-- В работе с -->
                         <DataGridTemplateColumn Header="В работе с" Width="120">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -138,7 +123,6 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         
-                        <!-- Действия -->
                         <DataGridTemplateColumn Header="Действия" Width="140">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -220,7 +204,6 @@
                            IsEnabled="{Binding CanGoNext}"/>
                 </StackPanel>
                 
-                <!-- Пустое место справа -->
                 <TextBlock Grid.Column="2" Text=""/>
             </Grid>
         </Border>

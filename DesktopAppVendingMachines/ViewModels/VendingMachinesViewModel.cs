@@ -41,7 +41,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
         public List<int> PageSizes { get; } = new() { 10, 25, 50, 100 };
 
-        // Кэши
         private Dictionary<string, Dictionary<int, string>> _dictionaryCache = new();
         private Dictionary<Guid, List<MachineDictionary>> _machineDictionaryCache = new();
 
@@ -67,7 +66,7 @@ namespace DesktopAppVendingMachines.ViewModels
                 if (t.IsCanceled) return;
                 Avalonia.Threading.Dispatcher.UIThread.Post(() =>
                 {
-                    CurrentPage = 1; // сбрасываем на первую страницу
+                    CurrentPage = 1; 
                     LoadVendingMachines();
                 });
             }, token);
@@ -215,18 +214,15 @@ namespace DesktopAppVendingMachines.ViewModels
             {
                 IsLoading = true;
 
-                // Удаляем через SQL запросы
                 await db.Database.ExecuteSqlRawAsync(
                     "DELETE FROM praktika.machine_dictionary WHERE id_machine = {0}", id);
 
                 await db.Database.ExecuteSqlRawAsync(
                     "DELETE FROM praktika.maintenance WHERE id_vending_machine = {0}", id);
 
-                // Удаляем сам автомат
                 await db.Database.ExecuteSqlRawAsync(
                     "DELETE FROM praktika.vending_machines WHERE id = {0}", id);
 
-                // Обновляем кэш
                 if (_machineDictionaryCache.ContainsKey(id))
                     _machineDictionaryCache.Remove(id);
 
@@ -254,7 +250,6 @@ namespace DesktopAppVendingMachines.ViewModels
             {
                 IsLoading = true;
 
-                // Получаем все автоматы с нужными включениями
                 var allMachines = await db.VendingMachines
                     .Include(v => v.IdModelNavigation)
                         .ThenInclude(m => m.IdManufactureNavigation)
@@ -271,7 +266,6 @@ namespace DesktopAppVendingMachines.ViewModels
                     return;
                 }
 
-                // Создаем диалог выбора места сохранения
                 var saveFileDialog = new Avalonia.Controls.SaveFileDialog
                 {
                     Title = "Сохранить CSV файл",
@@ -287,7 +281,6 @@ namespace DesktopAppVendingMachines.ViewModels
                     InitialFileName = $"Торговые_автоматы_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
                 };
 
-                // Получаем главное окно
                 Avalonia.Controls.Window? mainWindow = null;
 
                 if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -308,10 +301,8 @@ namespace DesktopAppVendingMachines.ViewModels
                     return;
                 }
 
-                // Генерируем CSV
                 var csv = GenerateMachinesCsv(allMachines);
 
-                // Сохраняем файл
                 var encoding = new UTF8Encoding(true);
                 await File.WriteAllTextAsync(filePath, csv, encoding);
 
@@ -337,7 +328,6 @@ namespace DesktopAppVendingMachines.ViewModels
                 Encoding = Encoding.UTF8
             });
 
-            // Заголовки
             csv.WriteField("ID");
             csv.WriteField("Название");
             csv.WriteField("Модель");
@@ -351,7 +341,6 @@ namespace DesktopAppVendingMachines.ViewModels
             csv.WriteField("Техник");
             csv.NextRecord();
 
-            // Данные
             foreach (var machine in machines)
             {
                 var modelName = machine.IdModelNavigation?.Model1 ?? "";
@@ -362,7 +351,7 @@ namespace DesktopAppVendingMachines.ViewModels
                 csv.WriteField(modelName);
                 csv.WriteField(manufactureName);
                 csv.WriteField(machine.Location);
-                csv.WriteField(""); // Компания - нужно получить из MachineDictionary
+                csv.WriteField(""); 
                 csv.WriteField(machine.KitOnlineId);
                 csv.WriteField(machine.InstallDate.ToString("dd.MM.yyyy"));
                 csv.WriteField(machine.IdManagerNavigation?.Family ?? "");
@@ -395,7 +384,6 @@ public class VendingMachineViewModel
 
         public Guid Id => _machine.Id;
 
-        // ID для отображения (SerialNumber)
         public string DisplayId => _machine.SerialNumber.ToString();
 
         public string Name => _machine.Name;
@@ -426,7 +414,6 @@ public class VendingMachineViewModel
         }
 
 
-        // Получаем модем из MachineDictionary
         public string Modem
         {
             get
@@ -445,7 +432,6 @@ public class VendingMachineViewModel
 
         public string WorkingSince => _machine.InstallDate.ToString("dd.MM.yyyy");
 
-        // Дополнительные свойства из Dictionary
         public string Status => GetDictionaryValue("status");
         public string WorkMode => GetDictionaryValue("work_mode");
         public string PaymentType => GetDictionaryValue("payment_type");
@@ -470,7 +456,6 @@ public class VendingMachineViewModel
 
 
 
-        // Информация о менеджере, инженере, технике
         public string Manager => _machine.IdManagerNavigation?.Family ?? "";
         public string Engineer => _machine.IdEngineerNavigation?.Family ?? "";
         public string Technician => _machine.IdTechnicianNavigation?.Family ?? "";

@@ -41,14 +41,12 @@ namespace DesktopAppVendingMachines.ViewModels
         [ObservableProperty]
         private int totalMachinesCount;
 
-        // --- Серии для круговых диаграмм ---
         [ObservableProperty]
         private IEnumerable<ISeries> efficiencySeries;
 
         [ObservableProperty]
         private IEnumerable<ISeries> stateSeries;
 
-        // --- Для столбчатого графика продаж ---
         [ObservableProperty]
         private bool isSumMode = true;
 
@@ -58,12 +56,10 @@ namespace DesktopAppVendingMachines.ViewModels
         [ObservableProperty]
         private Axis[] xAxes;
 
-        // Поля для хранения количеств
         private int _workingCount;
         private int _servicingCount;
         private int _brokenCount;
 
-        // Данные для сводки
         [ObservableProperty]
         private string moneyInMachines;
 
@@ -489,19 +485,16 @@ namespace DesktopAppVendingMachines.ViewModels
                     break;
 
                 case "Monitor":
-                    // CurrentPage = new MonitorViewModel();
                     CurrentPageTitle = "Монитор ТА";
                     IsAdminMenuExpanded = false;
                     break;
 
                 case "Reports":
-                    // CurrentPage = new ReportsViewModel();
                     CurrentPageTitle = "Детальные отчеты";
                     IsAdminMenuExpanded = false;
                     break;
 
                 case "Inventory":
-                    // CurrentPage = new InventoryViewModel();
                     CurrentPageTitle = "Учет ТМЦ";
                     IsAdminMenuExpanded = false;
                     break;
@@ -517,19 +510,16 @@ namespace DesktopAppVendingMachines.ViewModels
                     break;
 
                 case "Users":
-                    // CurrentPage = new UsersViewModel();
                     CurrentPageTitle = "Пользователи";
                     IsAdminMenuExpanded = true;
                     break;
 
                 case "Modems":
-                    // CurrentPage = new ModemsViewModel();
                     CurrentPageTitle = "Модемы";
                     IsAdminMenuExpanded = true;
                     break;
 
                 case "Additional":
-                    // CurrentPage = new AdditionalViewModel();
                     CurrentPageTitle = "Дополнительные";
                     IsAdminMenuExpanded = true;
                     break;

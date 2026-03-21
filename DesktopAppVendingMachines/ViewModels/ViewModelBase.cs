@@ -12,7 +12,6 @@ namespace DesktopAppVendingMachines.ViewModels
 
         protected async Task<bool> ShowConfirmationDialog(string title, string message, string confirm, string cancel)
         {
-            // Используем статическое свойство DialogService из App
             return await App.DialogService.ShowConfirmationAsync(title, message, confirm, cancel);
         }
 
