@@ -11,7 +11,7 @@ using Tmds.DBus.Protocol;
 
 namespace DesktopAppVendingMachines.ViewModels
 {
-    internal partial class SignInViewModel : ViewModelBase
+    public partial class SignInViewModel : ViewModelBase
     {
         [ObservableProperty]
         private string email;

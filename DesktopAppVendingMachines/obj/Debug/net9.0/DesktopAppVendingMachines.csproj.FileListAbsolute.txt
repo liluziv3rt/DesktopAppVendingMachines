@@ -711,3 +711,5 @@ E:\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\DesktopA
 E:\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\DesktopAppVendingMachines.genruntimeconfig.cache
 E:\DesktopAppVendingMachines\DesktopAppVendingMachines\obj\Debug\net9.0\ref\DesktopAppVendingMachines.dll
 E:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\CsvHelper.dll
+C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\CsvHelper.dll
+C:\DesktopAppVendingMachines\DesktopAppVendingMachines\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll

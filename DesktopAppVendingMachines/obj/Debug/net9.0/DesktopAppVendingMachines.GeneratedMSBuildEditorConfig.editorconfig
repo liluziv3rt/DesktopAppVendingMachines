@@ -23,44 +23,44 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DesktopAppVendingMachines
-build_property.ProjectDir = E:\DesktopAppVendingMachines\DesktopAppVendingMachines\
+build_property.ProjectDir = C:\DesktopAppVendingMachines\DesktopAppVendingMachines\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/App.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/AddCompanyView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/AddCompanyView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/AddVendingMachineView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/AddVendingMachineView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/CompaniesView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/CompaniesView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/EditCompanyView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/EditCompanyView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/EditVendingMachineView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/EditVendingMachineView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainViewContent.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainViewContent.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainWindow.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/SignInView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/SignInView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/SignUpView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/SignUpView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/VendingMachinesView.axaml]
+[C:/DesktopAppVendingMachines/DesktopAppVendingMachines/Views/VendingMachinesView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
