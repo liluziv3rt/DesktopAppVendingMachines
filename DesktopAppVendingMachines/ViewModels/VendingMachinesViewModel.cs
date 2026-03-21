@@ -214,20 +214,19 @@ namespace DesktopAppVendingMachines.ViewModels
             try
             {
                 IsLoading = true;
-                using var transaction = await db.Database.BeginTransactionAsync();
 
-                var machineDicts = db.MachineDictionaries.Where(md => md.IdMachine == id).ToList();
-                db.MachineDictionaries.RemoveRange(machineDicts);
+                // Удаляем через SQL запросы
+                await db.Database.ExecuteSqlRawAsync(
+                    "DELETE FROM praktika.machine_dictionary WHERE id_machine = {0}", id);
 
-                var maintenances = db.Maintenances.Where(m => m.IdVendingMachine == id).ToList();
-                db.Maintenances.RemoveRange(maintenances);
+                await db.Database.ExecuteSqlRawAsync(
+                    "DELETE FROM praktika.maintenance WHERE id_vending_machine = {0}", id);
 
-                var machine = db.VendingMachines.Find(id);
-                if (machine != null) db.VendingMachines.Remove(machine);
+                // Удаляем сам автомат
+                await db.Database.ExecuteSqlRawAsync(
+                    "DELETE FROM praktika.vending_machines WHERE id = {0}", id);
 
-                await db.SaveChangesAsync();
-                await transaction.CommitAsync();
-
+                // Обновляем кэш
                 if (_machineDictionaryCache.ContainsKey(id))
                     _machineDictionaryCache.Remove(id);
 

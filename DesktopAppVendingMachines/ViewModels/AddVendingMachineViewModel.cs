@@ -171,110 +171,37 @@ namespace DesktopAppVendingMachines.ViewModels
             }
         }
 
-        private bool ValidateRequiredFields()
+        private async Task AddMachineStatus(Guid machineId)
         {
-            if (string.IsNullOrWhiteSpace(Name))
+            try
             {
-                ShowMessage("Ошибка", "Поле 'Название ТА' обязательно");
-                return false;
+                // Добавляем статус "Работает" через SQL
+                await db.Database.ExecuteSqlRawAsync(@"
+            INSERT INTO praktika.machine_dictionary (id_machine, id_value)
+            SELECT {0}, id 
+            FROM praktika.dictionary 
+            WHERE key = 'status' AND value = 'Работает'",
+                    machineId);
             }
-            if (SelectedManufacture == null)
+            catch (Exception ex)
             {
-                ShowMessage("Ошибка", "Поле 'Производитель ТА' обязательно");
-                return false;
+                System.Diagnostics.Debug.WriteLine($"Ошибка при добавлении статуса: {ex.Message}");
             }
-            if (SelectedModel == null)
-            {
-                ShowMessage("Ошибка", "Поле 'Модель ТА' обязательно");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(SelectedWorkMode))
-            {
-                ShowMessage("Ошибка", "Поле 'Режим работы' обязательно");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(Location))
-            {
-                ShowMessage("Ошибка", "Поле 'Адрес' обязательно");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(SelectedPlace))
-            {
-                ShowMessage("Ошибка", "Поле 'Место' обязательно");
-                return false;
-            }
-            if (SerialNumber <= 0)
-            {
-                ShowMessage("Ошибка", "Поле 'Номер автомата' обязательно и должно быть положительным числом");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(SelectedTimezone))
-            {
-                ShowMessage("Ошибка", "Поле 'Часовой пояс' обязательно");
-                return false;
-            }
-            // Пользователи обязательны
-            if (SelectedClient == null)
-            {
-                ShowMessage("Ошибка", "Необходимо выбрать Клиента");
-                return false;
-            }
-            if (SelectedManager == null)
-            {
-                ShowMessage("Ошибка", "Необходимо выбрать Менеджера");
-                return false;
-            }
-            if (SelectedEngineer == null)
-            {
-                ShowMessage("Ошибка", "Необходимо выбрать Инженера");
-                return false;
-            }
-            if (SelectedTechnician == null)
-            {
-                ShowMessage("Ошибка", "Необходимо выбрать Техника-оператора");
-                return false;
-            }
-            // Проверка существования выбранных пользователей в БД (на случай, если список устарел)
-            var existingIds = db.Users.Select(u => u.Id).ToHashSet();
-            if (!existingIds.Contains(SelectedClient.Id))
-            {
-                ShowMessage("Ошибка", "Выбранный клиент не найден в базе данных");
-                return false;
-            }
-            if (!existingIds.Contains(SelectedManager.Id))
-            {
-                ShowMessage("Ошибка", "Выбранный менеджер не найден в базе данных");
-                return false;
-            }
-            if (!existingIds.Contains(SelectedEngineer.Id))
-            {
-                ShowMessage("Ошибка", "Выбранный инженер не найден в базе данных");
-                return false;
-            }
-            if (!existingIds.Contains(SelectedTechnician.Id))
-            {
-                ShowMessage("Ошибка", "Выбранный техник не найден в базе данных");
-                return false;
-            }
-            return true;
         }
 
         [RelayCommand]
         private async Task Save()
         {
-            // 1. Валидация всех обязательных полей
             if (!await ValidateAllFields()) return;
 
             try
             {
-                // 2. Проверка уникальности серийного номера
                 if (db.VendingMachines.Any(v => v.SerialNumber == SerialNumber))
                 {
                     await ShowMessage("Ошибка", $"Автомат с номером {SerialNumber} уже существует");
                     return;
                 }
 
-                // 3. Подготовка объекта машины
                 var machine = new VendingMachine
                 {
                     Id = Guid.NewGuid(),
@@ -291,40 +218,30 @@ namespace DesktopAppVendingMachines.ViewModels
                     InstallDate = DateTime.Now,
                     LastMaintenanceDate = DateTime.Now,
                     TotalIncome = 0,
-                    // ID пользователей (уже проверены, что не null и существуют)
                     UserId = SelectedClient!.Id,
                     IdManager = SelectedManager!.Id,
                     IdEngineer = SelectedEngineer!.Id,
                     IdTechnician = SelectedTechnician!.Id
                 };
 
-                // 4. Отладка – выводим все ID
-                System.Diagnostics.Debug.WriteLine($"=== Создание автомата ===");
-                System.Diagnostics.Debug.WriteLine($"Name: {machine.Name}");
-                System.Diagnostics.Debug.WriteLine($"IdModel: {machine.IdModel}");
-                System.Diagnostics.Debug.WriteLine($"Location: {machine.Location}");
-                System.Diagnostics.Debug.WriteLine($"SerialNumber: {machine.SerialNumber}");
-                System.Diagnostics.Debug.WriteLine($"UserId: {machine.UserId}");
-                System.Diagnostics.Debug.WriteLine($"IdManager: {machine.IdManager}");
-                System.Diagnostics.Debug.WriteLine($"IdEngineer: {machine.IdEngineer}");
-                System.Diagnostics.Debug.WriteLine($"IdTechnician: {machine.IdTechnician}");
-
-                // 5. Проверка существования всех ID пользователей в БД прямо перед вставкой
                 var existingUserIds = db.Users.Select(u => u.Id).ToHashSet();
                 if (!existingUserIds.Contains(machine.UserId))
-                    throw new Exception($"UserId {machine.UserId} не существует в таблице users");
+                    throw new Exception($"UserId {machine.UserId} не существует");
                 if (!existingUserIds.Contains(machine.IdManager))
-                    throw new Exception($"IdManager {machine.IdManager} не существует в таблице users");
+                    throw new Exception($"IdManager {machine.IdManager} не существует");
                 if (!existingUserIds.Contains(machine.IdEngineer))
-                    throw new Exception($"IdEngineer {machine.IdEngineer} не существует в таблице users");
+                    throw new Exception($"IdEngineer {machine.IdEngineer} не существует");
                 if (!existingUserIds.Contains(machine.IdTechnician))
-                    throw new Exception($"IdTechnician {machine.IdTechnician} не существует в таблице users");
+                    throw new Exception($"IdTechnician {machine.IdTechnician} не существует");
 
-                // 6. Сохраняем машину
+                // Сохраняем машину
                 db.VendingMachines.Add(machine);
                 await db.SaveChangesAsync();
 
-                // 7. Добавляем MachineDictionary (платежные системы и т.д.)
+                // Добавляем статус "Работает"
+                await AddMachineStatus(machine.Id);
+
+                // Добавляем остальные параметры
                 await AddMachineDictionaries(machine.Id);
 
                 await ShowMessage("Успешно", "Торговый автомат создан");
@@ -333,43 +250,54 @@ namespace DesktopAppVendingMachines.ViewModels
             catch (Exception ex)
             {
                 var inner = ex.InnerException?.Message ?? ex.Message;
-                var fullError = ex.ToString();
-                System.Diagnostics.Debug.WriteLine(fullError);
-                await ShowMessage("Ошибка", $"Не удалось создать автомат: {inner}\n\nПодробности в отладке (Output)");
+                System.Diagnostics.Debug.WriteLine($"Ошибка: {ex}");
+                await ShowMessage("Ошибка", $"Не удалось создать автомат: {inner}");
             }
         }
+
 
         private async Task AddMachineDictionaries(Guid machineId)
         {
-            void AddDictEntry(string key, string value)
+            try
             {
-                if (string.IsNullOrEmpty(value)) return;
-                var dictEntry = db.Dictionaries.FirstOrDefault(d => d.Key == key && d.Value == value);
-                if (dictEntry != null)
+                var entries = new List<(string key, string value)>();
+
+                void AddDictEntry(string key, string value)
                 {
-                    db.MachineDictionaries.Add(new MachineDictionary
-                    {
-                        IdMachine = machineId,
-                        IdValue = dictEntry.Id
-                    });
+                    if (string.IsNullOrEmpty(value)) return;
+                    entries.Add((key, value));
+                }
+
+                AddDictEntry("work_mode", SelectedWorkMode);
+                AddDictEntry("place", SelectedPlace);
+                AddDictEntry("timezone", SelectedTimezone);
+                AddDictEntry("critical_threshold_template", SelectedCriticalThresholdTemplate);
+                AddDictEntry("notification_template", SelectedNotificationTemplate);
+                AddDictEntry("service_priority", SelectedServicePriority);
+                AddDictEntry("operator", SelectedModem);
+
+                if (CoinAcceptorEnabled) AddDictEntry("payment_type", "Монетоприемник");
+                if (BillAcceptorEnabled) AddDictEntry("payment_type", "Купюроприемник");
+                if (CashlessModuleEnabled) AddDictEntry("payment_type", "Модуль б/н оплаты");
+                if (QrPaymentsEnabled) AddDictEntry("payment_type", "QR-платежи");
+
+                foreach (var entry in entries)
+                {
+                    await db.Database.ExecuteSqlRawAsync(@"
+                INSERT INTO praktika.machine_dictionary (id_machine, id_value)
+                SELECT {0}, id 
+                FROM praktika.dictionary 
+                WHERE key = {1} AND value = {2}",
+                        machineId, entry.key, entry.value);
                 }
             }
-
-            AddDictEntry("work_mode", SelectedWorkMode);
-            AddDictEntry("place", SelectedPlace);
-            AddDictEntry("timezone", SelectedTimezone);
-            AddDictEntry("critical_threshold_template", SelectedCriticalThresholdTemplate);
-            AddDictEntry("notification_template", SelectedNotificationTemplate);
-            AddDictEntry("service_priority", SelectedServicePriority);
-            AddDictEntry("operator", SelectedModem);
-
-            if (CoinAcceptorEnabled) AddDictEntry("payment_type", "Монетоприемник");
-            if (BillAcceptorEnabled) AddDictEntry("payment_type", "Купюроприемник");
-            if (CashlessModuleEnabled) AddDictEntry("payment_type", "Модуль б/н оплаты");
-            if (QrPaymentsEnabled) AddDictEntry("payment_type", "QR-платежи");
-
-            await db.SaveChangesAsync();
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при добавлении MachineDictionary: {ex.Message}");
+                throw;
+            }
         }
+
 
         private async Task<bool> ValidateAllFields()
         {
